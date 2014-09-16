@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/headline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="15dp"
+        android:text="@string/action_add"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/text_subject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/headline"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/subject"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/homework"
+        android:layout_alignTop="@+id/text_subject"
+        android:entries="@array/subjects" />
+
+    <EditText
+        android:id="@+id/homework"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/text_homework"
+        android:layout_toRightOf="@+id/text_homework"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/text_until"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_homework"
+        android:layout_below="@+id/subject"
+        android:layout_marginTop="15dp"
+        android:text="@string/until"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/until"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/subject"
+        android:layout_alignTop="@+id/text_until"
+        android:entries="@array/days" />
+
+    <TextView
+        android:id="@+id/text_homework"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_subject"
+        android:layout_below="@+id/until"
+        android:layout_marginTop="15dp"
+        android:text="@string/homework"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <CheckBox
+        android:id="@+id/urgent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/homework"
+        android:layout_below="@+id/homework"
+        android:layout_marginTop="15dp"
+        android:text="@string/urgent" />
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/urgent"
+        android:layout_below="@+id/urgent"
+        android:layout_marginTop="50dp"
+        android:onClick="add"
+        android:text="@string/action_add" />
+
+</RelativeLayout>

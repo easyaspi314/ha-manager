@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HW-Manager</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_add">Add</string>
+    <string name="action_imprint">Imprint</string>
+    <string name="subject">Subject:</string>
+    <string name="homework">Homework:</string>
+    <string name="until">Until:</string>
+    <string name="developed">Developed by Nerasto (2014)</string>
+    <string name="enter">You have to enter something!</string>
+    <string name="delete">Delete old homework</string>
+    <string name="how">Do you like the app? Then....</string>
+    <string name="action_urgent">Urgent!</string>
+    <string name="urgent">Urgent?</string>
+    <string name="update">Update</string>
+    <string name="really">Do you really want to delete all the old homework?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="review">..review it in the play store!</string>
+    <string name="share">..share it!</string>
+    <string name="email">Send a mail to the developer</string>
+    <string name="textshare">Hey, don´t you want to test the HW-Manager? You can download it here: https://play.google.com/store/apps/details?id=de.nico.ha_manager</string>
+    
+    <string-array name="subjects">
+        <item>Art</item>
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>English</item>
+        <item>Ethics</item>
+        <item>Geographics</item>
+        <item>German</item>
+        <item>France</item>
+        <item>History</item>
+        <item>Latin</item>
+        <item>Mathematics</item>
+        <item>Music</item>
+        <item>Physics</item>
+        <item>Politics and Economics</item>
+        <item>Religion</item>
+        <item>Spanish</item>
+        <item>Sports</item>
+    </string-array>
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Mo²</item>
+        <item>Tu²</item>
+        <item>We²</item>
+        <item>Th²</item>
+        <item>Fr²</item>
+        <item>Mo³</item>
+        <item>Tu³</item>
+        <item>We³</item>
+        <item>Th³</item>
+        <item>Fr³</item>
+    </string-array>
+
+</resources>
