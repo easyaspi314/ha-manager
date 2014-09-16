@@ -1,3 +1,5 @@
+//Copyright (c) 2014 Nico Alt GPLv2
+
 package de.nico.ha_manager;
 
 import java.util.ArrayList;
