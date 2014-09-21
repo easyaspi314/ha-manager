@@ -4,8 +4,11 @@ package de.nico.ha_manager;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -65,8 +68,7 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //datasource.remove(id);//create remove method in database class
-            	setContentView(R.layout.activity_delete);
-	        	mainisopen = false;
+            	delete_all();
 
             }
         });
@@ -106,9 +108,7 @@ public class MainActivity extends Activity {
 	        	 }
 	            return true;
 	        case R.id.action_delete:
-	        	setContentView(R.layout.activity_delete);
-	        	setTitle(getString(R.string.delete));
-	        	mainisopen = false;
+	        	delete_all();
 	            return true;
 	        case R.id.action_imprint:
 	        	setContentView(R.layout.activity_imprint);
@@ -178,6 +178,8 @@ public class MainActivity extends Activity {
 		
 		//switch to main activity
 		setContentView(R.layout.activity_main);
+		setTitle(getString(R.string.homework));
+		mainisopen = true;
 		
 		//update list view
 		HomeworkList.clear();
@@ -197,43 +199,48 @@ public class MainActivity extends Activity {
 		
 	}
 	
-	public void delete (View view) {
-		setContentView(R.layout.activity_main);
-		mainisopen = true;
-		datasource.delete_item("HOMEWORK", null, null);	//second null can be place_id
-		/* //add text nothing (when add + deleted works)
-		subject = getString(R.string.everything);
-		homework = getString(R.string.nothing);
-		until = getString(R.string.until_next);
-		urgent = getString(R.string.action_urgent) + " ";
-		try {
-			datasource.open();
-			datasource.createEntry(urgent, subject, homework, until);
-			datasource.close();
-		}
-		catch (Exception ex){
-			Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
-		}*/
-		
-		   datasource.open();
-		   HomeworkList = datasource.getAllEntries();
-		   datasource.close();
-	  ArrayAdapter<Entry> adapterHomework = 
-			  new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-	ListView lHomework = (ListView) findViewById(R.id.listView1);
-    lHomework.setAdapter(adapterHomework);
-    deleted = true;
-	}
-	
-	public void dont_delete (View view) {
-		setContentView(R.layout.activity_main);
-		mainisopen = true;
-		datasource.open();
-		   HomeworkList = datasource.getAllEntries();
-		   datasource.close();
-	  ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-	ListView lHomework = (ListView) findViewById(R.id.listView1);
- lHomework.setAdapter(adapterHomework);
+	public void delete_all() {
+		AlertDialog.Builder delete_it = new AlertDialog.Builder(this);
+		delete_it.setTitle(getString(R.string.delete));
+		delete_it.setMessage(getString(R.string.really));
+		delete_it.setPositiveButton((getString(R.string.yes)),
+		   new DialogInterface.OnClickListener() {
+			 
+		      public void onClick(DialogInterface dialog, int which) {
+		  		setContentView(R.layout.activity_main);
+				setTitle(getString(R.string.homework));
+				mainisopen = true;
+				datasource.delete_item("HOMEWORK", null, null);	//second null can be place_id
+				datasource.open();
+				HomeworkList = datasource.getAllEntries();
+				datasource.close();
+				
+				ArrayAdapter<Entry> adapterHomework =
+						new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
+				ListView lHomework = (ListView) findViewById(R.id.listView1);
+				lHomework.setAdapter(adapterHomework);
+				deleted = true;
+		    }
+		   });
+
+		delete_it.setNegativeButton((getString(R.string.no)),
+		   new DialogInterface.OnClickListener() {
+			 
+		      public void onClick(DialogInterface dialog, int which) {
+		  		setContentView(R.layout.activity_main);
+				setTitle(getString(R.string.homework));
+				mainisopen = true;
+				datasource.open();
+				HomeworkList = datasource.getAllEntries();
+				datasource.close();
+				ArrayAdapter<Entry> adapterHomework =
+						new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
+				ListView lHomework = (ListView) findViewById(R.id.listView1);
+				lHomework.setAdapter(adapterHomework);
+		    }
+		   });
+		AlertDialog delete_dialog = delete_it.create();
+		delete_dialog.show();
 	}
 	
 	@Override
