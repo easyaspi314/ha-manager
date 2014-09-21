@@ -4,21 +4,10 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/headline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="15dp"
-        android:text="@string/action_add"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center" />
-
-    <TextView
         android:id="@+id/text_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/headline"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="15dp"
         android:text="@string/subject"

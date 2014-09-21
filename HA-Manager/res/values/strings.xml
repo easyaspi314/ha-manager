@@ -6,9 +6,9 @@
     <string name="action_add">Add</string>
     <string name="action_imprint">Imprint</string>
     <string name="subject">Subject:</string>
-    <string name="homework">Homework:</string>
+    <string name="homework">Homework</string>
     <string name="until">Until:</string>
-    <string name="developed">Developed by Nerasto (2014)</string>
+    <string name="developed">Developed by Nico Alt (2014)</string>
     <string name="enter">You have to enter something!</string>
     <string name="delete">Delete old homework</string>
     <string name="how">Do you like the app? Then....</string>

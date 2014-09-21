@@ -4,9 +4,9 @@
     <string name="action_imprint">Impressum</string>
     <string name="action_settings">Einstellungen</string>
     <string name="app_name">HA-Manager</string>
-    <string name="developed">Entwickelt von Nerasto (2014)</string>
+    <string name="developed">Entwickelt von Nico Alt (2014)</string>
     <string name="enter">Du musst etwas eingeben!</string>
-    <string name="homework">Hausaufgaben:</string>
+    <string name="homework">Hausaufgaben</string>
     <string name="subject">Fach:</string>
     <string name="until">Bis:</string>
     <string name="delete">Alte Hausaufgaben löschen</string>

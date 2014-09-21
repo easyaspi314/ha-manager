@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		setTitle(getString(R.string.homework));
 		//update list view
 		datasource = new HomeworkDataSource(this);
 		
@@ -84,6 +85,7 @@ public class MainActivity extends Activity {
 	    switch (item.getItemId()) {
 	        case R.id.action_settings:
 	        	setContentView(R.layout.activity_settings);
+	        	setTitle(getString(R.string.action_settings));
 	        	mainisopen = false;
 	            return true;
 	        case R.id.action_update:
@@ -105,14 +107,17 @@ public class MainActivity extends Activity {
 	            return true;
 	        case R.id.action_delete:
 	        	setContentView(R.layout.activity_delete);
+	        	setTitle(getString(R.string.delete));
 	        	mainisopen = false;
 	            return true;
 	        case R.id.action_imprint:
 	        	setContentView(R.layout.activity_imprint);
+	        	setTitle(getString(R.string.action_imprint));
 	        	mainisopen = false;
 	            return true;
 	        case R.id.action_add:
 	        	setContentView(R.layout.activity_add);
+	        	setTitle(getString(R.string.action_add));
 	        	mainisopen = false;
 	            return true;
 	        default:
@@ -237,6 +242,7 @@ public class MainActivity extends Activity {
 		if (keyCode == KeyEvent.KEYCODE_BACK && mainisopen == false){
 			mainisopen = true;
 			setContentView(R.layout.activity_main);
+			setTitle(getString(R.string.homework));
 			
             //update list view			
 			HomeworkList.clear();
@@ -279,11 +285,11 @@ public class MainActivity extends Activity {
 		//share to other
 		
 		String textshare = getString(R.string.textshare);
-		String share = getString(R.string.share);
+		//String share = getString(R.string.share);
 		Intent intent=new Intent(android.content.Intent.ACTION_SEND);
 		intent.setType("text/plain");
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-		intent.putExtra(Intent.EXTRA_SUBJECT, share);
+		//intent.putExtra(Intent.EXTRA_SUBJECT, share);
 		intent.putExtra(Intent.EXTRA_TEXT, textshare);
 		
 		startActivity(Intent.createChooser(intent, "How do you want to share?"));
