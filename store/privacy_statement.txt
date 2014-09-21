@@ -1,1 +1,2 @@
+<!--Copyright (c) 2014 Nico Alt GPLv2 or later -->
 empty at the moment

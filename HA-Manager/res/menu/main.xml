@@ -1,3 +1,4 @@
+<!--Copyright (c) 2014 Nico Alt GPLv2 or later -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@+id/action_settings"
