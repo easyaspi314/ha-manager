@@ -53,8 +53,7 @@ public class Entry {
 	
 	@Override
 	public String toString() {
-		
-		return String.format("%sIn %s %s bis %s" , urgent, subject, homework, until);
+		return String.format("%s%s (%s): %s" , urgent, subject, until, homework);
 	}
 	
 }
