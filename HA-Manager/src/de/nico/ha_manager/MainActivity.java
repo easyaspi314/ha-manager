@@ -17,8 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -46,22 +44,9 @@ public class MainActivity extends Activity {
 		setTitle(getString(R.string.homework));
 		//update list view
 		datasource = new HomeworkDataSource(this);
+		update();
 		
-		try {
-			datasource.open();
-			HomeworkList = datasource.getAllEntries();
-			datasource.close();			
-		}
-		catch (Exception ex){
-			Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
-		}
-		
-		ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-		
-		ListView lHomework = (ListView) findViewById(R.id.listView1);
-        lHomework.setAdapter(adapterHomework);
-        
-                
+        /*
         lHomework.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
@@ -71,7 +56,7 @@ public class MainActivity extends Activity {
             	delete_all();
 
             }
-        });
+        });*/
 	}
 
 	@Override
@@ -92,19 +77,7 @@ public class MainActivity extends Activity {
 	            return true;
 	        case R.id.action_update:
 	        	if (mainisopen == true) {
-	        		 try {
-	        	
-	    			 datasource.open();
-	    			 HomeworkList = datasource.getAllEntries();
-	    			 datasource.close();			
-	    		 }
-	    		  catch (Exception ex){
-	    			  Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
-	    		  }
-	        	  ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-	    		
-	    		  ListView lHomework = (ListView) findViewById(R.id.listView1);
-	              lHomework.setAdapter(adapterHomework);
+	        		update();
 	        	 }
 	            return true;
 	        case R.id.action_delete:
@@ -123,8 +96,26 @@ public class MainActivity extends Activity {
 	        default:
 	            return super.onOptionsItemSelected(item); 
 	    }
-	}	
+	}
 	
+	public void update () {
+		try {
+			datasource.open();
+			HomeworkList = datasource.getAllEntries();
+			datasource.close();
+			}
+		catch (Exception ex){
+			Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
+			}
+		
+		ArrayAdapter<Entry> adapterHomework = new
+				ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
+		
+		ListView lHomework = (ListView) findViewById(R.id.listView1);
+		lHomework.setAdapter(adapterHomework);
+        
+	}
+
 	public void add (View view) {	
 		
 		/*if (deleted = true) {
@@ -183,20 +174,7 @@ public class MainActivity extends Activity {
 		
 		//update list view
 		HomeworkList.clear();
-		try {
-			datasource.open();
-			HomeworkList = datasource.getAllEntries();
-			datasource.close();			
-		}
-		catch (Exception ex){
-			Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
-		}
-		
-		ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-		
-		ListView lHomework = (ListView) findViewById(R.id.listView1);
-        lHomework.setAdapter(adapterHomework);			
-		
+		update();
 	}
 	
 	public void delete_all() {
@@ -211,14 +189,7 @@ public class MainActivity extends Activity {
 				setTitle(getString(R.string.homework));
 				mainisopen = true;
 				datasource.delete_item("HOMEWORK", null, null);	//second null can be place_id
-				datasource.open();
-				HomeworkList = datasource.getAllEntries();
-				datasource.close();
-				
-				ArrayAdapter<Entry> adapterHomework =
-						new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-				ListView lHomework = (ListView) findViewById(R.id.listView1);
-				lHomework.setAdapter(adapterHomework);
+				update();
 				deleted = true;
 		    }
 		   });
@@ -230,13 +201,7 @@ public class MainActivity extends Activity {
 		  		setContentView(R.layout.activity_main);
 				setTitle(getString(R.string.homework));
 				mainisopen = true;
-				datasource.open();
-				HomeworkList = datasource.getAllEntries();
-				datasource.close();
-				ArrayAdapter<Entry> adapterHomework =
-						new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-				ListView lHomework = (ListView) findViewById(R.id.listView1);
-				lHomework.setAdapter(adapterHomework);
+				update();
 		    }
 		   });
 		AlertDialog delete_dialog = delete_it.create();
@@ -253,19 +218,7 @@ public class MainActivity extends Activity {
 			
             //update list view			
 			HomeworkList.clear();
-			try {
-				datasource.open();
-				HomeworkList = datasource.getAllEntries();
-				datasource.close();			
-			}
-			catch (Exception ex){
-				Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
-			}
-			
-			ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
-			
-			ListView lHomework = (ListView) findViewById(R.id.listView1);
-	        lHomework.setAdapter(adapterHomework);
+			update();
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
