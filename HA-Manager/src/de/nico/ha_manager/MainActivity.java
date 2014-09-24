@@ -75,11 +75,6 @@ public class MainActivity extends Activity {
 	        	setTitle(getString(R.string.action_settings));
 	        	mainisopen = false;
 	            return true;
-	        case R.id.action_update:
-	        	if (mainisopen == true) {
-	        		update();
-	        	 }
-	            return true;
 	        case R.id.action_delete:
 	        	delete_all();
 	            return true;
