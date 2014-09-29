@@ -75,14 +75,21 @@ public class MainActivity extends Activity {
 	        	setTitle(getString(R.string.action_settings));
 	        	mainisopen = false;
 	            return true;
+	            
 	        case R.id.action_delete:
 	        	delete_all();
 	            return true;
+	            
+	        case R.id.action_subject_add:
+	        	subject_add();
+	            return true;
+	            
 	        case R.id.action_imprint:
 	        	setContentView(R.layout.activity_imprint);
 	        	setTitle(getString(R.string.action_imprint));
 	        	mainisopen = false;
 	            return true;
+	            
 	        case R.id.action_add:
 	        	setContentView(R.layout.activity_add);
 	        	setTitle(getString(R.string.action_add));
@@ -201,6 +208,29 @@ public class MainActivity extends Activity {
 		   });
 		AlertDialog delete_dialog = delete_it.create();
 		delete_dialog.show();
+	}
+	
+	public void subject_add () {
+		AlertDialog.Builder delete_it = new AlertDialog.Builder(this);
+		delete_it.setTitle("Fach hinzufügen");
+		delete_it.setMessage("Welches Fach möchtest du hinzufügen?");
+		delete_it.setPositiveButton("Hinzufügen",
+		   new DialogInterface.OnClickListener() {
+			 
+		      public void onClick(DialogInterface dialog, int which) {
+		  		//TODO:add to Shared Preferences
+		    }
+		   });
+
+		delete_it.setNegativeButton("Abbrechen",
+		   new DialogInterface.OnClickListener() {
+			 
+		      public void onClick(DialogInterface dialog, int which) {
+		  		//do nothing
+		    }
+		   });
+		AlertDialog delete_dialog = delete_it.create();
+		delete_dialog.show();		
 	}
 	
 	@Override
