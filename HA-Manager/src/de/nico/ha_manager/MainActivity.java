@@ -200,10 +200,7 @@ public class MainActivity extends Activity {
 		   new DialogInterface.OnClickListener() {
 			 
 		      public void onClick(DialogInterface dialog, int which) {
-		  		setContentView(R.layout.activity_main);
-				setTitle(getString(R.string.homework));
-				mainisopen = true;
-				update();
+		  		//do nothing
 		    }
 		   });
 		AlertDialog delete_dialog = delete_it.create();
