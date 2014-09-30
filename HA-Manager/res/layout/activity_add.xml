@@ -74,7 +74,7 @@
         android:layout_alignLeft="@+id/urgent"
         android:layout_below="@+id/urgent"
         android:layout_marginTop="50dp"
-        android:onClick="add"
+        android:onClick="add_homework"
         android:text="@string/action_add" />
 
 </RelativeLayout>

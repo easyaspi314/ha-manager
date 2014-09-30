@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
 		lSubjects.setAdapter(adapterSubjects);
 	}
 
-	public void add (View view) {	
+	public void add_homework (View view) {	
 		
 		/*if (deleted = true) {
 			this.deleteDatabase("Homework.db");
