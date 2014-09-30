@@ -10,6 +10,8 @@
     <string name="enter">Du musst etwas eingeben!</string>
     <string name="homework">Hausaufgaben</string>
     <string name="subject">Fach:</string>
+    <string name="subjects">Fächer</string>
+    <string name="subjects2">Fächer:</string>
     <string name="until">Bis:</string>
     <string name="delete">Alles löschen</string>
     <string name="how">Gefällt dir die App? Dann....</string>
