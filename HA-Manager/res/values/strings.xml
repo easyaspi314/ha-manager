@@ -7,6 +7,8 @@
     <string name="action_subject_add">Add Subject</string>
     <string name="action_imprint">Imprint</string>
     <string name="subject">Subject:</string>
+    <string name="subjects">Subjects</string>
+    <string name="subjects2">Subjects:</string>
     <string name="homework">Homework</string>
     <string name="until">Until:</string>
     <string name="developed">Developed by Nico Alt (2014)</string>

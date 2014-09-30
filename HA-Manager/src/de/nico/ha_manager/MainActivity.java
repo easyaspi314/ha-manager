@@ -80,8 +80,8 @@ public class MainActivity extends Activity {
 	        	delete_all();
 	            return true;
 	            
-	        case R.id.action_subject_add:
-	        	subject_add();
+	        case R.id.menu_subjects:
+	        	setSubjects();
 	            return true;
 	            
 	        case R.id.action_imprint:
@@ -113,9 +113,22 @@ public class MainActivity extends Activity {
 		ArrayAdapter<Entry> adapterHomework = new
 				ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
 		
-		ListView lHomework = (ListView) findViewById(R.id.listView1);
+		ListView lHomework = (ListView) findViewById(R.id.listView_main);
 		lHomework.setAdapter(adapterHomework);
         
+	}
+	
+	public void setSubjects() {
+    	setContentView(R.layout.activity_subjects);
+    	setTitle(getString(R.string.subjects));
+    	mainisopen = false;
+    	//TODO: get subjects from SharedPrefs to be able to add/delete some
+    	String [] subjects_array = getResources().getStringArray(R.array.subjects);
+    	ArrayAdapter<String> adapterSubjects = new
+				ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, subjects_array);
+		
+		ListView lSubjects = (ListView) findViewById(R.id.listView_subjects);
+		lSubjects.setAdapter(adapterSubjects);
 	}
 
 	public void add (View view) {	
@@ -127,7 +140,7 @@ public class MainActivity extends Activity {
 		
 		Spinner subject_sp = (Spinner) findViewById(R.id.subject);
 		Spinner until_sp = (Spinner) findViewById(R.id.until);
-		EditText homework_edit = (EditText) findViewById(R.id.homework);
+		EditText homework_edit = (EditText) findViewById(R.id.edit_text_subject_add);
 		
 		//close keyboard
 		InputMethodManager imm = (InputMethodManager)getSystemService(

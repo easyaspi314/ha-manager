@@ -17,16 +17,16 @@
         android:id="@+id/subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/homework"
+        android:layout_alignLeft="@+id/edit_text_subject_add"
         android:layout_alignTop="@+id/text_subject"
         android:entries="@array/subjects" />
 
     <EditText
-        android:id="@+id/homework"
+        android:id="@+id/edit_text_subject_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_homework"
-        android:layout_toRightOf="@+id/text_homework"
+        android:layout_alignTop="@+id/text_subject_add"
+        android:layout_toRightOf="@+id/text_subject_add"
         android:ems="10"
         android:inputType="text" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/text_until"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_homework"
+        android:layout_alignLeft="@+id/text_subject_add"
         android:layout_below="@+id/subject"
         android:layout_marginTop="15dp"
         android:text="@string/until"
@@ -49,7 +49,7 @@
         android:entries="@array/days" />
 
     <TextView
-        android:id="@+id/text_homework"
+        android:id="@+id/text_subject_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_subject"
@@ -62,13 +62,13 @@
         android:id="@+id/urgent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/homework"
-        android:layout_below="@+id/homework"
+        android:layout_alignLeft="@+id/edit_text_subject_add"
+        android:layout_below="@+id/edit_text_subject_add"
         android:layout_marginTop="15dp"
         android:text="@string/urgent" />
 
     <Button
-        android:id="@+id/button_add"
+        android:id="@+id/button_add_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/urgent"

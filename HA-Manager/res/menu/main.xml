@@ -10,9 +10,9 @@
           android:orderInCategory="90"
           android:title="@string/action_imprint" ></item>
     
-    <item android:id="@+id/action_subject_add" 
+    <item android:id="@+id/menu_subjects" 
           android:orderInCategory="80"
-          android:title="@string/action_subject_add"
+          android:title="@string/subjects"
           android:visible="false"></item>
     
     <item android:id="@+id/action_delete" 
