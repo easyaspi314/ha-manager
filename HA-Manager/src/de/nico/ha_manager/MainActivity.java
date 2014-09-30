@@ -10,8 +10,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,31 +34,29 @@ public class MainActivity extends Activity {
 	String subject;
 	String until;
 	String urgent;
+	String[] subjects;
 	boolean deleted = false;
 	boolean mainisopen = true;
 	List<Entry> HomeworkList = new ArrayList<Entry>();
 	private HomeworkDataSource datasource;
+	SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTitle(getString(R.string.homework));
+		
 		//update list view
 		datasource = new HomeworkDataSource(this);
 		update();
 		
-        /*
-        lHomework.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //datasource.remove(id);//create remove method in database class
-            	delete_all();
-
-            }
-        });*/
+		//check subjects
+		getSubjects();
+		
+		if (!(subjects.length > 0)) {
+			setDefaultSubjects();
+		}
 	}
 
 	@Override
@@ -122,10 +122,9 @@ public class MainActivity extends Activity {
     	setContentView(R.layout.activity_subjects);
     	setTitle(getString(R.string.subjects));
     	mainisopen = false;
-    	//TODO: get subjects from SharedPrefs to be able to add/delete some
-    	String [] subjects_array = getResources().getStringArray(R.array.subjects);
+    	
     	ArrayAdapter<String> adapterSubjects = new
-				ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, subjects_array);
+				ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, subjects);
 		
 		ListView lSubjects = (ListView) findViewById(R.id.listView_subjects);
 		lSubjects.setAdapter(adapterSubjects);
@@ -220,27 +219,45 @@ public class MainActivity extends Activity {
 		delete_dialog.show();
 	}
 	
-	public void subject_add () {
-		AlertDialog.Builder delete_it = new AlertDialog.Builder(this);
-		delete_it.setTitle("Fach hinzufügen");
-		delete_it.setMessage("Welches Fach möchtest du hinzufügen?");
-		delete_it.setPositiveButton("Hinzufügen",
-		   new DialogInterface.OnClickListener() {
-			 
-		      public void onClick(DialogInterface dialog, int which) {
-		  		//TODO:add to Shared Preferences
-		    }
-		   });
-
-		delete_it.setNegativeButton("Abbrechen",
-		   new DialogInterface.OnClickListener() {
-			 
-		      public void onClick(DialogInterface dialog, int which) {
-		  		//do nothing
-		    }
-		   });
-		AlertDialog delete_dialog = delete_it.create();
-		delete_dialog.show();		
+	public void getSubjects () {
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		int size = prefs.getInt("subjects" + "_size", 0);
+		subjects = new String[size];
+		for(int i=0;i<size;i++) {
+			subjects[i] = prefs.getString("subjects" + "_" + i, null);
+		}
+	}
+	
+	public void addSubject (View v) {
+		// DOES NOT WORK!!! LISTVIEW CRASHES...
+		//TODO: add subject (sub to subjects)
+		EditText new_sub = (EditText) findViewById(R.id.edit_text_subject_add);
+		String sub = new_sub.getText().toString();
+		
+    	String [] subjects = getResources().getStringArray(R.array.subjects);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("subjects" +"_size", subjects.length);
+		for(int i = 0; i < subjects.length; i++) {
+			editor.putString("subjects" + "_" + i, subjects[i]);
+		}
+		int size = prefs.getInt("subjects" + "_size", 0);
+		size = size + 1;
+		editor.putString("subjects" + "_" + size, sub);
+		editor.putInt("subjects" +"_size", subjects.length + 1);
+		editor.commit();
+		getSubjects();
+		setSubjects();
+	}
+	
+	public void setDefaultSubjects () {
+    	String [] subjects = getResources().getStringArray(R.array.subjects);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("subjects" +"_size", subjects.length);
+		for(int i = 0; i < subjects.length; i++) {
+			editor.putString("subjects" + "_" + i, subjects[i]);
+		}
+		editor.commit();
+		getSubjects();
 	}
 	
 	@Override
