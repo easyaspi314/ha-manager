@@ -7,6 +7,7 @@
 - delete (single) homework
 - import/export homework
 - sort homework
+- mark homework as completed
 
 ### In the future: ###
 - Synchronize to server
