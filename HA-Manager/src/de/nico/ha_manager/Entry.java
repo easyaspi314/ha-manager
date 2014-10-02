@@ -3,6 +3,7 @@
 package de.nico.ha_manager;
 
 public class Entry {
+	
 	private long id;
 	private String urgent;
 	private String subject;
@@ -42,8 +43,7 @@ public class Entry {
 		this.homework = homework;
 	}
 	
-	public String getUntil () {
-		
+	public String getUntil () {		
 		return until;
 	}
 		
@@ -53,6 +53,11 @@ public class Entry {
 	
 	@Override
 	public String toString() {
+		/* This is the output of the homework in the ListView, for example:
+		 * 
+		 * Urgent! French (Monday): Learn for test
+		 * 
+		 */
 		return String.format("%s%s (%s): %s" , urgent, subject, until, homework);
 	}
 	
