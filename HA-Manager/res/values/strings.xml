@@ -19,12 +19,15 @@
     <string name="urgent">Urgent?</string>
     <string name="update">Update</string>
     <string name="really">Do you really want to delete all the old homework?</string>
+    <string name="really_subs">Do you really want to delete all subjects?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="review">..review it in the play store!</string>
     <string name="share">..share it!</string>
     <string name="email">Send a mail to the developer</string>
     <string name="textshare">Hey, don´t you want to test the HW-Manager? You can download it here: https://play.google.com/store/apps/details?id=de.nico.ha_manager</string>
+    <string name="added">added</string>
+    <string name="action_resetsubjects">Reset Subjects</string>
     
     <string-array name="subjects">
         <item>Art</item>

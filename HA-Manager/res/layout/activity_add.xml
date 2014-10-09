@@ -9,17 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="15dp"
         android:text="@string/subject"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
-        android:id="@+id/subject"
+        android:id="@+id/spinsubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/edit_text_subject_add"
-        android:layout_alignTop="@+id/text_subject"
-        android:entries="@array/subjects" />
+        android:layout_alignStart="@+id/edit_text_subject_add"
+        android:layout_alignTop="@+id/text_subject" />
 
     <EditText
         android:id="@+id/edit_text_subject_add"
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/text_subject_add"
         android:layout_toRightOf="@+id/text_subject_add"
+        android:layout_toEndOf="@+id/text_subject_add"
         android:ems="10"
         android:inputType="text" />
 
@@ -35,7 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_subject_add"
-        android:layout_below="@+id/subject"
+        android:layout_alignStart="@+id/text_subject_add"
+        android:layout_below="@+id/spinsubject"
         android:layout_marginTop="15dp"
         android:text="@string/until"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -44,7 +47,8 @@
         android:id="@+id/until"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/subject"
+        android:layout_alignLeft="@+id/spinsubject"
+        android:layout_alignStart="@+id/spinsubject"
         android:layout_alignTop="@+id/text_until"
         android:entries="@array/days" />
 
@@ -53,6 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/text_subject"
+        android:layout_alignStart="@+id/text_subject"
         android:layout_below="@+id/until"
         android:layout_marginTop="15dp"
         android:text="@string/homework"
@@ -63,6 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/edit_text_subject_add"
+        android:layout_alignStart="@+id/edit_text_subject_add"
         android:layout_below="@+id/edit_text_subject_add"
         android:layout_marginTop="15dp"
         android:text="@string/urgent" />
@@ -72,6 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/urgent"
+        android:layout_alignStart="@+id/urgent"
         android:layout_below="@+id/urgent"
         android:layout_marginTop="50dp"
         android:onClick="add_homework"
