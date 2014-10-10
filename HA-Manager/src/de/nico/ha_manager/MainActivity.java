@@ -3,6 +3,7 @@
 package de.nico.ha_manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
@@ -281,6 +282,7 @@ public class MainActivity extends Activity {
 		}
     	SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("subjects" +"_size", subjects.length);
+		Arrays.sort(subjects);
 		for(int i = 0; i < subjects.length; i++) {
 			editor.putString("subjects" + "_" + i, subjects[i]);
 		}
