@@ -270,28 +270,26 @@ public class MainActivity extends Activity {
 		String sub = new_sub.getText().toString();
 		
 		//close keyboard
-				InputMethodManager imm = (InputMethodManager)getSystemService(
-			  		      Context.INPUT_METHOD_SERVICE);
-			  		imm.hideSoftInputFromWindow(new_sub.getWindowToken(), 0);
+		InputMethodManager imm = (InputMethodManager)getSystemService(
+				Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(new_sub.getWindowToken(), 0);
 				
 			  	
-		int size = prefs.getInt("subjects" + "_size", 0);
-		subjects = new String[size];
-		for(int i=0;i<size;i++) {
+		int size = prefs.getInt("subjects_size", 0);
+		subjects = new String[size + 1];
+		for(int i=0; i < size; i++) {
 			subjects[i] = prefs.getString("subjects" + "_" + i, null);
 		}
+		subjects[size] = sub;
     	SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("subjects" +"_size", subjects.length);
 		Arrays.sort(subjects);
 		for(int i = 0; i < subjects.length; i++) {
 			editor.putString("subjects" + "_" + i, subjects[i]);
 		}
-		editor.putString("subjects" + "_" + size, sub);
-		editor.putInt("subjects" +"_size", subjects.length + 1);
+		editor.putInt("subjects" +"_size", subjects.length);
 		editor.commit();
 		getSubjects();
 		setSubjects();
-		goHome();
 		
 		//Toast
 		String sAdded = getString(R.string.added);
@@ -300,6 +298,7 @@ public class MainActivity extends Activity {
 	
 	public void setDefaultSubjects () {
     	String [] subjects = getResources().getStringArray(R.array.subjects);
+		Arrays.sort(subjects);
 		SharedPreferences.Editor editor = prefs.edit();
 		editor.putInt("subjects" +"_size", subjects.length);
 		for(int i = 0; i < subjects.length; i++) {
