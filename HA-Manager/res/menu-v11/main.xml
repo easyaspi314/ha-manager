@@ -1,0 +1,30 @@
+<!--Copyright (c) 2014 Nico Alt GPLv2 or later -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/action_settings"
+          android:orderInCategory="100"
+          android:title="@string/action_settings"
+          android:visible="false"/>
+    
+    <item android:id="@+id/action_imprint"
+          android:orderInCategory="90"
+          android:title="@string/action_imprint" ></item>
+    
+    <item android:id="@+id/action_resetsubjects"
+          android:orderInCategory="80"
+          android:title="@string/action_resetsubjects"/>
+    
+    <item android:id="@+id/menu_subjects" 
+          android:orderInCategory="70"
+          android:title="@string/subjects"></item>
+    
+    <item android:id="@+id/action_delete" 
+          android:orderInCategory="60"
+          android:title="@string/delete"></item>
+    
+    <item android:id="@+id/action_add"
+          android:showAsAction="always|withText"
+          android:icon="@android:drawable/ic_menu_add"
+          android:orderInCategory="10"
+          android:title="@string/action_add"/>
+</menu>
