@@ -345,6 +345,7 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void share (View v) {
 		//share to other
 		
