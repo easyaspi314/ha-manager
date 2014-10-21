@@ -4,11 +4,9 @@
     <string name="app_name">HW-Manager</string>
     <string name="action_settings">Settings</string>
     <string name="action_add">Add</string>
-    <string name="action_subject_add">Add Subject</string>
     <string name="action_imprint">Imprint</string>
     <string name="subject">Subject:</string>
     <string name="subjects">Subjects</string>
-    <string name="subjects2">Subjects:</string>
     <string name="homework">Homework</string>
     <string name="until">Until:</string>
     <string name="developed">Developed by Nico Alt (2014)</string>
@@ -17,7 +15,6 @@
     <string name="how">Do you like the app? Then....</string>
     <string name="action_urgent">Urgent!</string>
     <string name="urgent">Urgent?</string>
-    <string name="update">Update</string>
     <string name="really">Do you really want to delete all the old homework?</string>
     <string name="really_subs">Do you really want to delete all subjects?</string>
     <string name="yes">Yes</string>

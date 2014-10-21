@@ -2,7 +2,6 @@
 <resources>
 
     <string name="action_add">Hinzufügen</string>
-    <string name="action_subject_add">Fach hinzufügen</string>
     <string name="action_imprint">Impressum</string>
     <string name="action_settings">Einstellungen</string>
     <string name="app_name">HA-Manager</string>
@@ -11,13 +10,11 @@
     <string name="homework">Hausaufgaben</string>
     <string name="subject">Fach:</string>
     <string name="subjects">Fächer</string>
-    <string name="subjects2">Fächer:</string>
     <string name="until">Bis:</string>
     <string name="delete">Alles löschen</string>
     <string name="how">Gefällt dir die App? Dann....</string>
     <string name="action_urgent">Dringend!</string>
     <string name="urgent">Dringend?</string>
-    <string name="update">Aktualisieren</string>
     <string name="review">..bewerte sie im Play Store!</string>
     <string name="share">..teile sie!</string>
     <string name="email">Sende eine E-Mail an den Entwickler</string>
