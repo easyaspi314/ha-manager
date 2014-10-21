@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <PreferenceCategory 
+        android:title="@string/pref_subjects"
+        android:key="pref_key_storage_settings">
+        
+        <Preference
+            android:key="subjects_add"
+            android:title="@string/pref_subjects_add"
+            android:summary="@string/pref_subjects_add_summary"
+            android:onClick="addsubject" />
+        
+        <Preference
+            android:key="subjects_overview"
+            android:title="@string/pref_subjects_overview"
+            android:summary="@string/pref_subjects_overview_summary" />
+        
+        <Preference
+            android:key="subjects_reset"
+            android:title="@string/pref_subjects_reset"
+            android:summary="@string/pref_subjects_reset_summary" />
+        
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="@string/pref_feedback"
+        android:key="pref_key_storage_settings">
+        <!-- 
+        <PreferenceScreen
+            android:title="@string/pref_feedback_share"
+            android:summary="@string/pref_feedback_share_summary">
+            <intent android:action="android.intent.action.VIEW" >
+                <extra android:name="android.intent.extra.Text" android:value="@string/intent_share" />
+                </intent>
+        </PreferenceScreen>
+        -->
+        <PreferenceScreen
+            android:title="@string/pref_feedback_playstore"
+            android:summary="@string/pref_feedback_playstore_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/details?id=de.nico.ha_manager"
+                />
+        </PreferenceScreen>
+        
+        <PreferenceScreen
+            android:title="@string/pref_feedback_mail"
+            android:summary="@string/pref_feedback_mail_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="mailto:nicoalt@gmx.de">
+                <extra android:name="android.intent.extra.SUBJECT" android:value="@string/app_name" />
+                <extra android:name="android.intent.extra.TITLE" android:value="@string/intent_mail" />
+                </intent>
+        </PreferenceScreen>        
+        
+    </PreferenceCategory>
+    
+    <PreferenceCategory 
+        android:title="@string/pref_about"
+        android:key="pref_key_storage_settings">
+        
+        <Preference
+            android:key="developed_by"
+            android:title="@string/pref_about_credits"
+            android:summary="@string/pref_about_credits_summary" />
+        
+        <Preference
+            android:key="current_version"
+            android:title="@string/pref_about_current_version"
+            android:summary="@string/app_current_version" />
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

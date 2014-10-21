@@ -11,7 +11,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="15dp"
-        android:text="@string/subject"
+        android:text="@string/hw_subject"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
@@ -40,7 +40,7 @@
         android:layout_alignStart="@+id/text_subject_add"
         android:layout_below="@+id/spinsubject"
         android:layout_marginTop="15dp"
-        android:text="@string/until"
+        android:text="@string/hw_until"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Spinner
@@ -60,7 +60,7 @@
         android:layout_alignStart="@+id/text_subject"
         android:layout_below="@+id/until"
         android:layout_marginTop="15dp"
-        android:text="@string/homework"
+        android:text="@string/hw_homework"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <CheckBox
@@ -71,7 +71,7 @@
         android:layout_alignStart="@+id/edit_text_subject_add"
         android:layout_below="@+id/edit_text_subject_add"
         android:layout_marginTop="15dp"
-        android:text="@string/urgent" />
+        android:text="@string/hw_urgent" />
 
     <Button
         android:id="@+id/button_add_subject"
@@ -82,6 +82,6 @@
         android:layout_below="@+id/urgent"
         android:layout_marginTop="50dp"
         android:onClick="add_homework"
-        android:text="@string/action_add" />
+        android:text="@string/hw_add" />
 
 </RelativeLayout>

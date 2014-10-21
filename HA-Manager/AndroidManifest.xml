@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.nico.ha_manager"
-    android:versionCode="12"
-    android:versionName="0.65" >
+    android:versionCode="13"
+    android:versionName="0.7" >
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -23,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity
+            android:name="de.nico.ha_manager.PreferencesActivity"
+            android:label="@string/action_settings" />
+        
+        <activity
+            android:name="de.nico.ha_manager.SubjectsActivity"
+            android:label="@string/title_subjects" />
+        
     </application>
 
 </manifest>
