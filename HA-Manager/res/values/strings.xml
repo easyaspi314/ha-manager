@@ -58,7 +58,7 @@
     <!-- Intents -->
     <string name="intent_mail">Send a mail to the developer</string>
     <string name="intent_share_title">Share</string>
-    <string name="intent_share_text">Hey, don´t you want to test the HW-Manager? You can download it here: https://play.google.com/store/apps/details?id=de.nico.ha_manager</string>
+    <string name="intent_share_text">Hey, don´t you want to test the HW-Manager? You can download it here: http://goo.gl/GT99iV</string>
     
     <!-- Toasts -->
     <string name="toast_have2enter">You have to enter something!</string>
