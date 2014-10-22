@@ -3,7 +3,7 @@
     
     <PreferenceCategory 
         android:title="@string/pref_subjects"
-        android:key="pref_key_storage_settings">
+        android:key="subjects">
         
         <Preference
             android:key="subjects_add"
@@ -26,15 +26,12 @@
     <PreferenceCategory 
         android:title="@string/pref_feedback"
         android:key="pref_key_storage_settings">
-        <!-- 
-        <PreferenceScreen
+        
+        <Preference
+            android:key="feedback_share"
             android:title="@string/pref_feedback_share"
-            android:summary="@string/pref_feedback_share_summary">
-            <intent android:action="android.intent.action.VIEW" >
-                <extra android:name="android.intent.extra.Text" android:value="@string/intent_share" />
-                </intent>
-        </PreferenceScreen>
-        -->
+            android:summary="@string/pref_feedback_share_summary" />
+        
         <PreferenceScreen
             android:title="@string/pref_feedback_playstore"
             android:summary="@string/pref_feedback_playstore_summary">
@@ -61,15 +58,23 @@
         android:title="@string/pref_about"
         android:key="pref_key_storage_settings">
         
-        <Preference
-            android:key="developed_by"
+        <PreferenceScreen
             android:title="@string/pref_about_credits"
-            android:summary="@string/pref_about_credits_summary" />
+            android:summary="@string/pref_about_credits_summary">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://nicoalt.pfweb.eu/projekte/android/ha-manager/"
+                />
+        </PreferenceScreen>
         
-        <Preference
-            android:key="current_version"
+        <PreferenceScreen
             android:title="@string/pref_about_current_version"
-            android:summary="@string/app_current_version" />
+            android:summary="@string/app_current_version">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/AltNico/ha-manager/releases/tag/0.65"
+                />
+        </PreferenceScreen>        
         
     </PreferenceCategory>
 

@@ -4,84 +4,89 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/text_subject"
+        android:id="@+id/textView_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="15dp"
-        android:text="@string/hw_subject"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/hw_subject" />
 
     <Spinner
-        android:id="@+id/spinsubject"
+        android:id="@+id/spinner_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edit_text_subject_add"
-        android:layout_alignStart="@+id/edit_text_subject_add"
-        android:layout_alignTop="@+id/text_subject" />
-
-    <EditText
-        android:id="@+id/edit_text_subject_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_subject_add"
-        android:layout_toRightOf="@+id/text_subject_add"
-        android:layout_toEndOf="@+id/text_subject_add"
-        android:ems="10"
-        android:inputType="text" />
+        android:layout_alignLeft="@+id/editText_homework"
+        android:layout_alignStart="@+id/editText_homework"
+        android:layout_alignTop="@+id/textView_subject"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/text_until"
+        android:id="@+id/textView_until"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_subject_add"
-        android:layout_alignStart="@+id/text_subject_add"
-        android:layout_below="@+id/spinsubject"
-        android:layout_marginTop="15dp"
-        android:text="@string/hw_until"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignLeft="@+id/textView_homework"
+        android:layout_alignStart="@+id/textView_homework"
+        android:layout_below="@+id/spinner_subject"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/hw_until" />
 
     <Spinner
-        android:id="@+id/until"
+        android:id="@+id/spinner_until"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/spinsubject"
-        android:layout_alignStart="@+id/spinsubject"
-        android:layout_alignTop="@+id/text_until"
+        android:layout_alignLeft="@+id/spinner_subject"
+        android:layout_alignStart="@+id/spinner_subject"
+        android:layout_alignTop="@+id/textView_until"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
         android:entries="@array/days" />
 
     <TextView
-        android:id="@+id/text_subject_add"
+        android:id="@+id/textView_homework"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_subject"
-        android:layout_alignStart="@+id/text_subject"
-        android:layout_below="@+id/until"
-        android:layout_marginTop="15dp"
-        android:text="@string/hw_homework"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignLeft="@+id/textView_subject"
+        android:layout_alignStart="@+id/textView_subject"
+        android:layout_below="@+id/spinner_until"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/hw_homework" />
+
+    <EditText
+        android:id="@+id/editText_homework"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView_homework"
+        android:layout_toRightOf="@+id/textView_homework"
+        android:layout_toEndOf="@+id/textView_homework"
+        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="text" />
 
     <CheckBox
-        android:id="@+id/urgent"
+        android:id="@+id/checkBox_urgent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edit_text_subject_add"
-        android:layout_alignStart="@+id/edit_text_subject_add"
-        android:layout_below="@+id/edit_text_subject_add"
-        android:layout_marginTop="15dp"
+        android:layout_alignLeft="@+id/editText_homework"
+        android:layout_alignStart="@+id/editText_homework"
+        android:layout_below="@+id/editText_homework"
+        android:layout_marginTop="8dp"
         android:text="@string/hw_urgent" />
 
     <Button
-        android:id="@+id/button_add_subject"
+        android:id="@+id/button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/urgent"
-        android:layout_alignStart="@+id/urgent"
-        android:layout_below="@+id/urgent"
-        android:layout_marginTop="50dp"
-        android:onClick="add_homework"
-        android:text="@string/hw_add" />
+        android:layout_alignLeft="@+id/checkBox_urgent"
+        android:layout_alignStart="@+id/checkBox_urgent"
+        android:layout_below="@+id/checkBox_urgent"
+        android:layout_marginTop="8dp"
+        android:text="@string/hw_add"
+        android:onClick="add_homework" />
 
 </RelativeLayout>

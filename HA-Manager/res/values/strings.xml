@@ -2,11 +2,12 @@
 <resources>
     
     <string name="app_name">HW-Manager</string>
-    <string name="app_current_version">0.7 (21.10.2014)</string>
+    <string name="app_current_version">0.7 (22.10.2014)</string>
     
     <!-- Titles -->
     <string name="title_subjects">Subjects</string>
     <string name="title_homework">Homework</string>
+    <string name="title_addhomework">Add Homework</string>
     
     <!-- Menu Items -->
     <string name="action_add">Add</string>
@@ -22,10 +23,10 @@
     
     <!-- Preferences Page -->    
     <string name="pref_subjects">Subjects</string>
-    <string name="pref_subjects_overview">Overview</string>
-    <string name="pref_subjects_overview_summary"><!-- Empty --></string>
     <string name="pref_subjects_add">Add a subject</string>
     <string name="pref_subjects_add_summary"><!-- Empty --></string>
+    <string name="pref_subjects_overview">Overview</string>
+    <string name="pref_subjects_overview_summary">A list containing all subjects</string>
     <string name="pref_subjects_reset">Reset</string>
     <string name="pref_subjects_reset_summary">Reset the subjects list to the default value</string>
     
@@ -36,26 +37,32 @@
     
     <string name="pref_feedback">Feedback</string>
     <string name="pref_feedback_share">Share</string>
-    <string name="pref_feedback_share_summary"><!-- Empty --></string>
+    <string name="pref_feedback_share_summary">Share this app with a friend</string>
     <string name="pref_feedback_playstore">Play Store</string>
     <string name="pref_feedback_playstore_summary">Review the app in the Google Play Store</string>
     <string name="pref_feedback_mail">Mail</string>
     <string name="pref_feedback_mail_summary">Send a mail to the developer</string>
     
     <!-- Dialogs -->
+    <string name="dialog_addSubject">Add Subject</string>
+    <string name="dialog_addSubject_message">Which subject do you want to add?</string>
+    
     <string name="dialog_delete">Delete</string>
-    <string name="really">Do you really want to delete all the old homework?</string>
-    <string name="really_subs">Do you really want to delete all subjects?</string>
+    <string name="dialog_really_delete_hw">Do you really want to delete all homework?</string>
+    <string name="dialog_really_delete_subs">Do you really want to delete all subjects?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     
     <!-- Intents -->
     <string name="intent_mail">Send a mail to the developer</string>
-    <string name="intent_share">Hey, don´t you want to test the HW-Manager? You can download it here: https://play.google.com/store/apps/details?id=de.nico.ha_manager</string>
+    <string name="intent_share_title">Share</string>
+    <string name="intent_share_text">Hey, don´t you want to test the HW-Manager? You can download it here: https://play.google.com/store/apps/details?id=de.nico.ha_manager</string>
     
     <!-- Toasts -->
-    <string name="enter">You have to enter something!</string>
-    <string name="added">added</string><!-- [Subject] %s -->
+    <string name="toast_have2enter">You have to enter something!</string>
+    <string name="added">added</string>
     
     <!-- Homework String Items -->
     <string name="action_urgent">Urgent!</string>

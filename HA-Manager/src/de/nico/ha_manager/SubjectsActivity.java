@@ -1,3 +1,5 @@
+//Copyright (c) 2014 Nico Alt GPLv2 or later
+
 package de.nico.ha_manager;
 
 import android.app.Activity;
@@ -7,21 +9,24 @@ import android.widget.ListView;
 
 public class SubjectsActivity extends Activity {
 	
+	//String array containing the subjects
 	String[] subjects;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_list);
 		
-		int size = 10;
-		subjects = new String[size];
-		for(int i=0;i<size;i++) {
-			subjects[i] = "Eintrag #" + i;
-		}
+		MainActivity ma = new MainActivity ();
+		subjects = ma.getSubjects(this);
 		
-		ArrayAdapter<String> adapterSubjects = new
-				ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, subjects);
+		setSubjects();
+	}
+	
+	public void setSubjects () {
+		// Make simple list containing subjects
+		ArrayAdapter<String> adapterSubjects =
+				new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, subjects);
 		
 		ListView lSubjects = (ListView) findViewById(R.id.listView_main);
 		lSubjects.setAdapter(adapterSubjects);

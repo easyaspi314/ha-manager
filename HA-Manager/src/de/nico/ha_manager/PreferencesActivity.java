@@ -2,11 +2,19 @@
 
 package de.nico.ha_manager;
 
+import java.util.Arrays;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class PreferencesActivity extends PreferenceActivity {
 
@@ -14,16 +22,37 @@ public class PreferencesActivity extends PreferenceActivity {
 	Preference subjects_overview;
 	Preference subjects_reset;
 	
+	Preference feedback_share;
+	
+	//Default SharedPreferences of the application
+	SharedPreferences prefs;
+	
     @SuppressWarnings("deprecation")
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        
         subjects_add = (Preference) findPreference("subjects_add");
         subjects_add.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                      public boolean onPreferenceClick(Preference preference) {
-                    	 //do something
+                    	 final EditText input = new EditText(PreferencesActivity.this);
+                    	 new AlertDialog.Builder(PreferencesActivity.this)
+                    	    .setTitle(getString(R.string.dialog_addSubject))
+                    	    .setMessage(getString(R.string.dialog_addSubject_message))
+                    	    .setView(input)
+                    	    .setPositiveButton(getString(R.string.ok),
+                    	    		new DialogInterface.OnClickListener() {
+                    	        public void onClick(DialogInterface dialog, int whichButton) {
+                    	        	addSubject(input.getText().toString());
+                    	        }
+                    	    }).setNegativeButton(getString(R.string.cancel),
+                    	    		new DialogInterface.OnClickListener() {
+                    	        public void onClick(DialogInterface dialog, int whichButton) {
+                    	            return;
+                    	        }
+                    	    }).show();
                     	 return true;
                      }
                  });
@@ -39,47 +68,86 @@ public class PreferencesActivity extends PreferenceActivity {
         subjects_reset = (Preference) findPreference("subjects_reset");
         subjects_reset.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                      public boolean onPreferenceClick(Preference preference) {
-                    	 //do something
+                    	 AlertDialog.Builder delete_subjects = new AlertDialog.Builder(PreferencesActivity.this);
+                    	 delete_subjects.setTitle(getString(R.string.dialog_delete));
+                    	 delete_subjects.setMessage(getString(R.string.dialog_really_delete_subs));
+                    	 
+                    	 delete_subjects.setPositiveButton((getString(R.string.yes)),
+                    			 new DialogInterface.OnClickListener() {
+                    		 
+                    		 public void onClick(DialogInterface dialog, int which) {
+                    			 resetSubjects();
+                    		 }
+                    		 
+                    	 });
+                    	 
+                    	 delete_subjects.setNegativeButton((getString(R.string.no)),
+                    			 new DialogInterface.OnClickListener() {
+                    		 
+                    		 public void onClick(DialogInterface dialog, int which) {
+                    			 return;
+                    		 }
+                    		 
+                    	 });
+                    	 
+                    	 AlertDialog delete_dialog = delete_subjects.create();
+                    	 delete_dialog.show();
                     	 return true;
                      }
                  });
+        
+        feedback_share = (Preference) findPreference("feedback_share");
+        feedback_share.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                     public boolean onPreferenceClick(Preference preference) {
+                    	 String share_title = getString(R.string.intent_share_title);
+                    	 String app_name = getString(R.string.app_name);
+                    	 
+                    	 Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+                    	 intent.setType("text/plain");
+                    	 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                    	 intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.intent_share_text));
+                    	 startActivity(Intent.createChooser(intent, share_title + " " + app_name));
+                    	 return true;
+                     }
+                 });
+        
     }
-	/*
-	public void setSubjects() {
-		ArrayAdapter<String> adapterSubjects = new
-				ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, subjects);
-		
-		ListView lSubjects = (ListView) findViewById(R.id.listView_subjects);
-		lSubjects.setAdapter(adapterSubjects);
-	}
-	
-	public void addSubject (View v) {
-		EditText new_sub = (EditText) findViewById(R.id.edit_text_subject_add);
-		String sub = new_sub.getText().toString();
-		
-		//close keyboard
-		InputMethodManager imm = (InputMethodManager)getSystemService(
-				Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(new_sub.getWindowToken(), 0);
-				
-			  	
-		int size = prefs.getInt("subjects_size", 0);
-		subjects = new String[size + 1];
-		for(int i=0; i < size; i++) {
-			subjects[i] = prefs.getString("subjects" + "_" + i, null);
-		}
-		subjects[size] = sub;
-    	SharedPreferences.Editor editor = prefs.edit();
+    
+    public void resetSubjects () {
+		//Get subjects from strings.xml
+    	String [] subjects = getResources().getStringArray(R.array.subjects);
+    	
+    	//Sort subjects array alphabetically
 		Arrays.sort(subjects);
+		
+		//Add subjects to SharedPreferences
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("subjects" +"_size", subjects.length);
 		for(int i = 0; i < subjects.length; i++) {
 			editor.putString("subjects" + "_" + i, subjects[i]);
 		}
-		editor.putInt("subjects" +"_size", subjects.length);
 		editor.commit();
-		getSubjects();
-		
-		//Toast
-		String sAdded = getString(R.string.added);
-		Toast.makeText(MainActivity.this, sub + " " + sAdded, Toast.LENGTH_SHORT).show();
-	}*/
+	}
+    
+    public void addSubject (String subject) {
+    	int size = prefs.getInt("subjects_size", 0);
+    	String [] subjects = new String[size + 1];
+    	
+    	for(int i = 0; i < size; i++) {
+    		subjects[i] = prefs.getString("subjects" + "_" + i, null);    		
+    	}
+    	subjects[size] = subject;
+    	
+    	SharedPreferences.Editor editor = prefs.edit();
+    	Arrays.sort(subjects);
+    	
+    	for(int i = 0; i < subjects.length; i++) {
+    		editor.putString("subjects" + "_" + i, subjects[i]);
+    	}
+    	editor.putInt("subjects" +"_size", subjects.length);
+    	editor.commit();
+    	
+    	String sAdded = getString(R.string.added);
+    	Toast.makeText(PreferencesActivity.this, subject + " " + sAdded, Toast.LENGTH_SHORT).show();
+    	}
 }

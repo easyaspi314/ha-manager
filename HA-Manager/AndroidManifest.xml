@@ -32,6 +32,10 @@
             android:name="de.nico.ha_manager.SubjectsActivity"
             android:label="@string/title_subjects" />
         
+        <activity
+            android:name="de.nico.ha_manager.AddHomeworkActivity"
+            android:label="@string/title_addhomework" />
+        
     </application>
 
 </manifest>
