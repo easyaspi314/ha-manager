@@ -55,10 +55,11 @@ public class Entry {
 	public String toString() {
 		/* This is the output of the homework in the ListView, for example:
 		 * 
-		 * Urgent! French (Monday): Learn for test
+		 * Urgent! French (Thursday, 01.01.):
+		 * Learn for test
 		 * 
 		 */
-		return String.format("%s%s (%s): %s" , urgent, subject, until, homework);
+		return String.format("%s%s (%s):\n%s" , urgent, subject, until, homework);
 	}
 	
 }

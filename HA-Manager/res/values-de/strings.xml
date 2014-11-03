@@ -86,24 +86,5 @@
         <item>Spanisch</item>
         <item>Sport</item>
     </string-array>
-    
-    <!-- Days Array -->
-    <string-array name="days">
-        <item>Montag</item>
-        <item>Dienstag</item>
-        <item>Mittwoch</item>
-        <item>Donnerstag</item>
-        <item>Freitag</item>
-        <item>Mo²</item>
-        <item>Di²</item>
-        <item>Mi²</item>
-        <item>Do²</item>
-        <item>Fr²</item>
-        <item>Mo³</item>
-        <item>Di³</item>
-        <item>Mi³</item>
-        <item>Do³</item>
-        <item>Fr³</item>
-    </string-array>
 
 </resources>
