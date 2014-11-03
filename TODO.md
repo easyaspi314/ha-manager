@@ -7,9 +7,8 @@
 4. mark homework as completed
 5. sort homework
 6. notifications
-7. delete subjects
-8. exactly until date
-9. homework to calendar
+7. exactly until date
+8. homework to calendar
 
 ### In the future: ###
 - Synchronize to server
