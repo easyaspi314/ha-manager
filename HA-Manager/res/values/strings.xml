@@ -18,7 +18,7 @@
     <string name="hw_subject">Subject:</string>
     <string name="hw_until">Until:</string>
     <string name="hw_urgent">Urgent?</string>
-    <string name="hw_homework">Homework:</string>
+    <string name="hw_homework">Homework</string>
     <string name="hw_add">Add</string>
     
     <!-- Preferences Page -->    

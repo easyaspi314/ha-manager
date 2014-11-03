@@ -20,7 +20,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 @SuppressLint("SimpleDateFormat")
 public class AddHomeworkActivity extends Activity {
@@ -130,8 +129,7 @@ public class AddHomeworkActivity extends Activity {
 	  	//If nothing filled in -> cancel
 		if (homework_edit.getText().toString().length() == 0)  {
 			final String enter = getString(R.string.toast_have2enter);
-				Toast.makeText(getApplicationContext(), 
-		                enter, Toast.LENGTH_SHORT).show();
+			homework_edit.setError(enter);
 				return;
 		}
 		
