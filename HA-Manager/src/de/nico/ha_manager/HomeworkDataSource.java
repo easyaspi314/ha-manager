@@ -92,9 +92,4 @@ public class HomeworkDataSource {
 		return entry;
 	}
 	
-	/*public void remove(long id){
-        String string = String.valueOf(id);
-        database.execSQL("DELETE FROM favorite WHERE _id = '" + string + "'");
-    }*/
-	
 }
