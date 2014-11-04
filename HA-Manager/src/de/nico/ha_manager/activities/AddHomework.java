@@ -1,11 +1,14 @@
 //Copyright (c) 2014 Nico Alt GPLv2 or later
 
-package de.nico.ha_manager;
+package de.nico.ha_manager.activities;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import de.nico.ha_manager.Main;
+import de.nico.ha_manager.R;
+import de.nico.ha_manager.database.HomeworkDataSource;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -22,7 +25,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 @SuppressLint("SimpleDateFormat")
-public class AddHomeworkActivity extends Activity {
+public class AddHomework extends Activity {
 	
 	//String array containing the subjects
 	String[] subjects;
@@ -51,7 +54,7 @@ public class AddHomeworkActivity extends Activity {
 		setContentView(R.layout.activity_add);
 		
 		datasource = new HomeworkDataSource(this);
-		MainActivity ma = new MainActivity();
+		Main ma = new Main();
 		
 		//Button to open DatePicker
 		b_until = (Button) findViewById(R.id.button_until);

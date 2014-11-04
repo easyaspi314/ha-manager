@@ -1,9 +1,10 @@
 //Copyright (c) 2014 Nico Alt GPLv2 or later
 
-package de.nico.ha_manager;
+package de.nico.ha_manager.activities;
 
 import java.util.Arrays;
 
+import de.nico.ha_manager.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,7 +17,7 @@ import android.preference.PreferenceManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class PreferencesActivity extends PreferenceActivity {
+public class Preferences extends PreferenceActivity {
 
 	Preference subjects_add;
 	Preference subjects_overview;
@@ -37,8 +38,8 @@ public class PreferencesActivity extends PreferenceActivity {
         subjects_add = (Preference) findPreference("subjects_add");
         subjects_add.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                      public boolean onPreferenceClick(Preference preference) {
-                    	 final EditText input = new EditText(PreferencesActivity.this);
-                    	 new AlertDialog.Builder(PreferencesActivity.this)
+                    	 final EditText input = new EditText(Preferences.this);
+                    	 new AlertDialog.Builder(Preferences.this)
                     	    .setTitle(getString(R.string.dialog_addSubject))
                     	    .setMessage(getString(R.string.dialog_addSubject_message))
                     	    .setView(input)
@@ -60,7 +61,7 @@ public class PreferencesActivity extends PreferenceActivity {
         subjects_overview = (Preference) findPreference("subjects_overview");
         subjects_overview.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                      public boolean onPreferenceClick(Preference preference) {
-                    	 startActivityForResult(new Intent(getApplicationContext(), SubjectsActivity.class), 1);
+                    	 startActivityForResult(new Intent(getApplicationContext(), Subjects.class), 1);
                     	 return true;
                      }
                  });
@@ -68,7 +69,7 @@ public class PreferencesActivity extends PreferenceActivity {
         subjects_reset = (Preference) findPreference("subjects_reset");
         subjects_reset.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                      public boolean onPreferenceClick(Preference preference) {
-                    	 AlertDialog.Builder delete_subjects = new AlertDialog.Builder(PreferencesActivity.this);
+                    	 AlertDialog.Builder delete_subjects = new AlertDialog.Builder(Preferences.this);
                     	 delete_subjects.setTitle(getString(R.string.dialog_delete));
                     	 delete_subjects.setMessage(getString(R.string.dialog_really_delete_subs));
                     	 
@@ -148,6 +149,6 @@ public class PreferencesActivity extends PreferenceActivity {
     	editor.commit();
     	
     	String sAdded = getString(R.string.added);
-    	Toast.makeText(PreferencesActivity.this, subject + " " + sAdded, Toast.LENGTH_SHORT).show();
+    	Toast.makeText(Preferences.this, subject + " " + sAdded, Toast.LENGTH_SHORT).show();
     	}
 }

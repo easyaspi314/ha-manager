@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import de.nico.ha_manager.activities.AddHomework;
+import de.nico.ha_manager.activities.Preferences;
+import de.nico.ha_manager.database.Entry;
+import de.nico.ha_manager.database.HomeworkDataSource;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,7 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class Main extends Activity {
 	
 	//String array containing the subjects
 	String[] subjects;
@@ -65,7 +69,7 @@ public class MainActivity extends Activity {
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_settings:
-                startActivityForResult(new Intent(getApplicationContext(), PreferencesActivity.class), 1);
+                startActivityForResult(new Intent(getApplicationContext(), Preferences.class), 1);
 	            return true;
 	            
 	        case R.id.action_delete:
@@ -73,7 +77,7 @@ public class MainActivity extends Activity {
 	            return true;
 	            
 	        case R.id.action_add:
-	        	startActivityForResult(new Intent(getApplicationContext(), AddHomeworkActivity.class), 1);
+	        	startActivityForResult(new Intent(getApplicationContext(), AddHomework.class), 1);
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item); 
@@ -93,7 +97,7 @@ public class MainActivity extends Activity {
 			}
 		
 		ArrayAdapter<Entry> adapterHomework = new
-				ArrayAdapter<Entry>(MainActivity.this, android.R.layout.simple_list_item_1, HomeworkList);
+				ArrayAdapter<Entry>(Main.this, android.R.layout.simple_list_item_1, HomeworkList);
 		
 		ListView lHomework = (ListView) findViewById(R.id.listView_main);
 		lHomework.setAdapter(adapterHomework);

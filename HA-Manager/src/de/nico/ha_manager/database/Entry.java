@@ -1,6 +1,6 @@
 //Copyright (c) 2014 Nico Alt GPLv2 or later
 
-package de.nico.ha_manager;
+package de.nico.ha_manager.database;
 
 public class Entry {
 	

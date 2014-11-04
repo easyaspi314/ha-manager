@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="de.nico.ha_manager.MainActivity"
+            android:name="de.nico.ha_manager.Main"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,15 +25,15 @@
         </activity>
         
         <activity
-            android:name="de.nico.ha_manager.PreferencesActivity"
+            android:name="de.nico.ha_manager.activities.Preferences"
             android:label="@string/action_settings" />
         
         <activity
-            android:name="de.nico.ha_manager.SubjectsActivity"
+            android:name="de.nico.ha_manager.activities.Subjects"
             android:label="@string/title_subjects" />
         
         <activity
-            android:name="de.nico.ha_manager.AddHomeworkActivity"
+            android:name="de.nico.ha_manager.activities.AddHomework"
             android:label="@string/title_addhomework" />
         
     </application>

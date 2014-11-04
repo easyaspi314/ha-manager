@@ -1,12 +1,10 @@
 //Copyright (c) 2014 Nico Alt GPLv2 or later
 
-package de.nico.ha_manager;
+package de.nico.ha_manager.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.nico.ha_manager.MySQLiteHelper;
-import de.nico.ha_manager.Entry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -59,7 +57,7 @@ public class HomeworkDataSource {
 		close();
 	}
 
-	protected List<Entry> getAllEntries() {
+	public List<Entry> getAllEntries() {
 		List<Entry> EntriesList = new ArrayList<Entry>();
 		EntriesList = new ArrayList<Entry>();
 		

@@ -1,7 +1,9 @@
 //Copyright (c) 2014 Nico Alt GPLv2 or later
 
-package de.nico.ha_manager;
+package de.nico.ha_manager.activities;
 
+import de.nico.ha_manager.Main;
+import de.nico.ha_manager.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class SubjectsActivity extends Activity {
+public class Subjects extends Activity {
 	
 	//String array containing the subjects
 	String[] subjects;
@@ -33,7 +35,7 @@ public class SubjectsActivity extends Activity {
 	}
 	
 	public void setSubjects () {
-		MainActivity ma = new MainActivity ();
+		Main ma = new Main ();
 		subjects = ma.getSubjects(this);
 		
 		// Make simple list containing subjects
@@ -50,7 +52,7 @@ public class SubjectsActivity extends Activity {
 				
 				String item = ((TextView)view).getText().toString();
 				
-				AlertDialog.Builder delete_it = new AlertDialog.Builder(SubjectsActivity.this);
+				AlertDialog.Builder delete_it = new AlertDialog.Builder(Subjects.this);
 				delete_it.setTitle(getString(R.string.dialog_delete) + ": " + item);
 				delete_it.setPositiveButton((getString(R.string.yes)),
 				   new DialogInterface.OnClickListener() {
