@@ -8,6 +8,7 @@
 5. sort homework
 6. notifications
 7. homework to calendar
+8. add subject-offers page
 
 ### In the future: ###
 - Synchronize to server
