@@ -79,9 +79,12 @@
     
     <!-- Subject Offers Array -->
     <string-array name="subject_offers">
+        <item>Afrikanisch</item>
         <item>Deutsch</item>
+        <item>Drama</item>
         <item>Erdkunde</item>
         <item>Ethik</item>
+        <item>Fotografie</item>
         <item>Französisch</item>
         <item>Kunst</item>
         <item>Latein</item>

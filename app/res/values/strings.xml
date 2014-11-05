@@ -80,13 +80,16 @@
     
     <!-- Subject Offers Array -->
     <string-array name="subject_offers">
+        <item>Afrikaans</item>
         <item>Art</item>
+        <item>Drama</item>
         <item>Ethics</item>
         <item>Geographics</item>
         <item>German</item>
         <item>French</item>
         <item>Latin</item>
         <item>Music</item>
+        <item>Photography</item>
         <item>Politics and Economics</item>
         <item>Religion</item>
         <item>Spanish</item>
