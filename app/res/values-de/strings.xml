@@ -70,21 +70,25 @@
     <string-array name="subjects">
         <item>Biologie</item>
         <item>Chemie</item>
-        <item>Deutsch</item>
         <item>Englisch</item>
+        <item>Geschichte</item>
+        <item>Mathematik</item>
+        <item>Physik</item>
+        <item>Sport</item>
+    </string-array>
+    
+    <!-- Subject Offers Array -->
+    <string-array name="subject_offers">
+        <item>Deutsch</item>
         <item>Erdkunde</item>
         <item>Ethik</item>
-        <item>Geschichte</item>
         <item>Französisch</item>
         <item>Kunst</item>
         <item>Latein</item>
-        <item>Mathematik</item>
         <item>Musik</item>
-        <item>Physik</item>
         <item>Politik und Wirtschaft</item>
         <item>Religion</item>
         <item>Spanisch</item>
-        <item>Sport</item>
     </string-array>
 
 </resources>

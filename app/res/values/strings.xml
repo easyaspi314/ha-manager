@@ -69,23 +69,27 @@
     
     <!-- Default Subject Array -->
     <string-array name="subjects">
-        <item>Art</item>
         <item>Biology</item>
         <item>Chemistry</item>
         <item>English</item>
+        <item>History</item>
+        <item>Mathematics</item>
+        <item>Physics</item>
+        <item>Sports</item>
+    </string-array>
+    
+    <!-- Subject Offers Array -->
+    <string-array name="subject_offers">
+        <item>Art</item>
         <item>Ethics</item>
         <item>Geographics</item>
         <item>German</item>
         <item>French</item>
-        <item>History</item>
         <item>Latin</item>
-        <item>Mathematics</item>
         <item>Music</item>
-        <item>Physics</item>
         <item>Politics and Economics</item>
         <item>Religion</item>
         <item>Spanish</item>
-        <item>Sports</item>
     </string-array>
 
 </resources>
