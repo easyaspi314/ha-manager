@@ -59,7 +59,6 @@ public class HomeworkDataSource {
 
 	public List<Entry> getAllEntries() {
 		List<Entry> EntriesList = new ArrayList<Entry>();
-		EntriesList = new ArrayList<Entry>();
 		
 		Cursor cursor = database.query("HOMEWORK", allColumns, null, null, null, null, null);
 		cursor.moveToFirst();

@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import de.nico.ha_manager.activities.AddHomework;
-import de.nico.ha_manager.activities.Preferences;
-import de.nico.ha_manager.database.Entry;
-import de.nico.ha_manager.database.HomeworkDataSource;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,9 +16,15 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import de.nico.ha_manager.activities.AddHomework;
+import de.nico.ha_manager.activities.Preferences;
+import de.nico.ha_manager.database.Entry;
+import de.nico.ha_manager.database.HomeworkDataSource;
 
 public class Main extends Activity {
 	
@@ -99,9 +101,50 @@ public class Main extends Activity {
 		ArrayAdapter<Entry> adapterHomework = new
 				ArrayAdapter<Entry>(Main.this, android.R.layout.simple_list_item_1, HomeworkList);
 		
-		ListView lHomework = (ListView) findViewById(R.id.listView_main);
+		final ListView lHomework = (ListView) findViewById(R.id.listView_main);
 		lHomework.setAdapter(adapterHomework);
+		lHomework.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+				String item = lHomework.getItemAtPosition(position).toString();
+				AlertDialog.Builder delete_it = (new AlertDialog.Builder(Main.this))
+						.setTitle(getString(R.string.dialog_delete))
+						.setMessage(item)
+						.setPositiveButton((getString(R.string.yes)),
+								new DialogInterface.OnClickListener() {
+							
+							public void onClick(DialogInterface dialog, int which) {
+								//deleteItem(position);
+								update();
+								
+							}
+							
+						});
+				
+				delete_it.setNegativeButton((getString(R.string.no)),
+						new DialogInterface.OnClickListener() {
+					
+					public void onClick(DialogInterface dialog, int which) {
+						return;
+						
+					}
+					
+				});
+				
+				AlertDialog delete_dialog = delete_it.create();
+				delete_dialog.show();
+				
+			}
+			
+		});
         
+	}
+	
+	public void deleteItem (int pos) {
+		//TODO: get ID from database
+		String item = "ID = " + pos;
+		datasource.delete_item("HOMEWORK", item, null);
+		
 	}
 	
 	public void delete_all() {
