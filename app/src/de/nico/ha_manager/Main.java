@@ -194,6 +194,7 @@ public class Main extends Activity {
 		}
 		
 		editor.putInt("hwid" +"_size", IdList.length);
+		editor.remove("hwid" + "_" + IdList.length);
 		editor.commit();
 		
 	}
