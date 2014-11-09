@@ -48,11 +48,27 @@ public class Main extends Activity {
 		
 		con = this;
 		
-        //Update ListView
+		//Update ListView
 		update();
 		
 		//Check if a subject list is in SharedPreferences
 		checkSubjects();
+		
+		//Check if list is available
+		SharedPreferences.Editor editor = prefs.edit();
+		ListView lHomework = (ListView) findViewById(R.id.listView_main);
+		int listSize = lHomework.getCount();
+		if (prefs.getInt("hwid" + "_list", 0) == 0) {
+			editor.putInt("hwid" + "_list", 1);
+			editor.putInt("hwid" + "_size", listSize);
+			for(int i = 0; i < listSize + 1; i++) {
+				int id = i + 1;
+				editor.putString("hwid" + "_" + i, "ID = " + id);
+				
+			}
+			editor.commit();
+			
+		}
 		
 	}
 	
@@ -118,8 +134,7 @@ public class Main extends Activity {
 								new DialogInterface.OnClickListener() {
 							
 							public void onClick(DialogInterface dialog, int which) {
-								int listSize = lHomework.getCount();
-								deleteItem(position, listSize);
+								deleteItem(position);
 								update();
 								
 							}
@@ -145,18 +160,8 @@ public class Main extends Activity {
         
 	}
 	
-	public void deleteItem (int pos, int listSize) {
+	public void deleteItem (int pos) {
 		SharedPreferences.Editor editor = prefs.edit();
-		
-		//Check if list is available
-		if (prefs.getInt("hwid" + "_list", 0) == 0) {
-			editor.putInt("hwid" +"_size", listSize);
-			for(int i = 0; i < listSize; i++) {
-				editor.putString("hwid" + "_" + i, "ID = " + i);
-				
-			}
-			
-		}
 		
 		//Get IDs
 		prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
