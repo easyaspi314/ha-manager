@@ -5,11 +5,14 @@ package de.nico.ha_manager.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.nico.ha_manager.Main;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 
 
 public class HomeworkDataSource {
@@ -19,8 +22,6 @@ public class HomeworkDataSource {
 	private MySQLiteHelper dbHelper;
 	private String[] allColumns = { "ID", "URGENT", "SUBJECT",
 			"HOMEWORK", "UNTIL"};
-
-	
 	
 	public HomeworkDataSource(Context context) {
 		dbHelper = new MySQLiteHelper(context);
@@ -41,14 +42,38 @@ public class HomeworkDataSource {
 		values.put("HOMEWORK", homework);
 		values.put("UNTIL", until);
 
-		long insertId = database.insert("HOMEWORK", null,
+		String insertId = "ID = " + database.insert("HOMEWORK", null,
 				values);
 		
+		addID(insertId);
 		
-		Cursor cursor = database.query("HOMEWORK",allColumns, "ID = " + insertId, null, null, null, null);
+		Cursor cursor = database.query("HOMEWORK",allColumns, insertId, null, null, null, null);
 		cursor.moveToFirst();
 	
 		return cursorToEntry(cursor);
+	}
+	
+	public void addID (String id) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
+		int size = prefs.getInt("hwid" + "_size", 0);
+		String [] IdList = new String[size + 1];
+		
+		for(int i = 0; i < size; i++) {
+			IdList[i] = prefs.getString("hwid" + "_" + i, null);
+			
+		}
+		IdList[size] = id;
+		
+		SharedPreferences.Editor editor = prefs.edit();
+		for(int i = 0; i < IdList.length; i++) {
+			editor.putString("hwid" + "_" + i, IdList[i]);
+			
+		}
+		
+		editor.putInt("hwid" + "_size", IdList.length);
+		editor.putInt("hwid" + "_list", 1);
+		editor.commit();
+		
 	}
 	
 	public void delete_item(String s1, String s2, String[] s3) {

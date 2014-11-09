@@ -37,12 +37,16 @@ public class Main extends Activity {
 	
 	//Default SharedPreferences of the application
 	SharedPreferences prefs;
+	
+	public static Context con;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
 		setTitle(getString(R.string.title_homework));
+		
+		con = this;
 		
         //Update ListView
 		update();
@@ -114,7 +118,8 @@ public class Main extends Activity {
 								new DialogInterface.OnClickListener() {
 							
 							public void onClick(DialogInterface dialog, int which) {
-								//deleteItem(position);
+								int listSize = lHomework.getCount();
+								deleteItem(position, listSize);
 								update();
 								
 							}
@@ -140,10 +145,51 @@ public class Main extends Activity {
         
 	}
 	
-	public void deleteItem (int pos) {
-		//TODO: get ID from database
-		String item = "ID = " + pos;
-		datasource.delete_item("HOMEWORK", item, null);
+	public void deleteItem (int pos, int listSize) {
+		SharedPreferences.Editor editor = prefs.edit();
+		
+		//Check if list is available
+		if (prefs.getInt("hwid" + "_list", 0) == 0) {
+			editor.putInt("hwid" +"_size", listSize);
+			for(int i = 0; i < listSize; i++) {
+				editor.putString("hwid" + "_" + i, "ID = " + i);
+				
+			}
+			
+		}
+		
+		//Get IDs
+		prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
+		int size = prefs.getInt("hwid" + "_size", 0);
+		String [] IdList = new String[size];
+		
+		for(int i = 0; i < size; i++) {
+			IdList[i] = prefs.getString("hwid" + "_" + i, null);
+			
+		}
+		
+		//Delete it in database
+		datasource.delete_item("HOMEWORK", IdList[pos], null);
+		
+		//Delete item from SharedPreferences
+		IdList = new String[size - 1];
+		
+		for(int i = 0; i < size; i++) {
+			if (i < pos)
+				IdList[i] = prefs.getString("hwid" + "_" + i, null);
+			
+			if (i > pos)
+				IdList[i - 1] = prefs.getString("hwid" + "_" + i, null);
+			
+		}
+		
+		for(int i = 0; i < IdList.length; i++) {
+			editor.putString("hwid" + "_" + i, IdList[i]);
+			
+		}
+		
+		editor.putInt("hwid" +"_size", IdList.length);
+		editor.commit();
 		
 	}
 	
@@ -155,7 +201,10 @@ public class Main extends Activity {
 		   new DialogInterface.OnClickListener() {
 			 
 		      public void onClick(DialogInterface dialog, int which) {
-		  		datasource.delete_item("HOMEWORK", null, null);	//second null can be place_id
+		  		datasource.delete_item("HOMEWORK", null, null);
+		  		SharedPreferences.Editor editor = prefs.edit();
+		  		editor.putInt("hwid" +"_size", 0);
+				editor.commit();
 		  		update();
 		    }
 		   });
