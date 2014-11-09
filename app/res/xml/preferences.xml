@@ -77,7 +77,7 @@
             android:summary="@string/app_current_version">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/AltNico/ha-manager/releases/tag/0.7"
+                android:data="https://github.com/AltNico/ha-manager/releases/tag/0.8"
                 />
         </PreferenceScreen>        
         
