@@ -21,6 +21,7 @@ public class Preferences extends PreferenceActivity {
 
 	Preference subjects_add;
 	Preference subjects_overview;
+	Preference subjects_offers;
 	Preference subjects_reset;
 	
 	Preference feedback_share;
@@ -62,6 +63,14 @@ public class Preferences extends PreferenceActivity {
         subjects_overview.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                      public boolean onPreferenceClick(Preference preference) {
                     	 startActivityForResult(new Intent(getApplicationContext(), Subjects.class), 1);
+                    	 return true;
+                     }
+                 });
+        
+        subjects_offers = (Preference) findPreference("subjects_offers");
+        subjects_offers.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+                     public boolean onPreferenceClick(Preference preference) {
+                    	 startActivityForResult(new Intent(getApplicationContext(), SubjectOffers.class), 1);
                     	 return true;
                      }
                  });

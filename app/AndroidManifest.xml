@@ -29,6 +29,10 @@
             android:label="@string/action_settings" />
         
         <activity
+            android:name="de.nico.ha_manager.activities.SubjectOffers"
+            android:label="@string/title_subject_offers" />
+        
+        <activity
             android:name="de.nico.ha_manager.activities.Subjects"
             android:label="@string/title_subjects" />
         

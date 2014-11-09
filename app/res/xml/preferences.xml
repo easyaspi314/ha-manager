@@ -6,15 +6,20 @@
         android:key="subjects">
         
         <Preference
+            android:key="subjects_overview"
+            android:title="@string/pref_subjects_overview"
+            android:summary="@string/pref_subjects_overview_summary" />
+        
+        <Preference
             android:key="subjects_add"
             android:title="@string/pref_subjects_add"
             android:summary="@string/pref_subjects_add_summary"
             android:onClick="addsubject" />
         
         <Preference
-            android:key="subjects_overview"
-            android:title="@string/pref_subjects_overview"
-            android:summary="@string/pref_subjects_overview_summary" />
+            android:key="subjects_offers"
+            android:title="@string/pref_offers_overview"
+            android:summary="@string/pref_offers_overview_summary" />
         
         <Preference
             android:key="subjects_reset"
