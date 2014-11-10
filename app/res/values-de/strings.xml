@@ -52,10 +52,6 @@
     <string name="dialog_delete">Löschen</string>
     <string name="dialog_really_delete_hw">Willst du wirklich alle Hausaufgaben löschen?</string>
     <string name="dialog_really_delete_subs">Willst du wirklich alle Fächer löschen?</string>
-    <string name="yes">Ja</string>
-    <string name="no">Nein</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Abbrechen</string>
     
     <!-- Intents -->
     <string name="intent_mail">Sende eine E-Mail an den Entwickler</string>

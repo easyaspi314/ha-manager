@@ -57,7 +57,7 @@ public class SubjectOffers extends Activity {
 				
 				AlertDialog.Builder delete_it = new AlertDialog.Builder(SubjectOffers.this);
 				delete_it.setTitle(getString(R.string.action_add) + ": " + item);
-				delete_it.setPositiveButton((getString(R.string.yes)),
+				delete_it.setPositiveButton((getString(android.R.string.yes)),
 				   new DialogInterface.OnClickListener() {
 					 
 				      public void onClick(DialogInterface dialog, int which) {
@@ -65,7 +65,7 @@ public class SubjectOffers extends Activity {
 				      }
 				   });
 
-				delete_it.setNegativeButton((getString(R.string.no)),
+				delete_it.setNegativeButton((getString(android.R.string.no)),
 				   new DialogInterface.OnClickListener() {
 					 
 				      public void onClick(DialogInterface dialog, int which) {

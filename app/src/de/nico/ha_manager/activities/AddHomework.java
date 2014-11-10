@@ -2,9 +2,10 @@
 
 package de.nico.ha_manager.activities;
 
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import de.nico.ha_manager.Main;
 import de.nico.ha_manager.R;
@@ -39,10 +40,6 @@ public class AddHomework extends Activity {
 	//Until when the homework has to be finished
 	String until;
 	
-	//Format the dates to a specific format
-	SimpleDateFormat simpledateformat;
-	SimpleDateFormat dMonthformat;
-	
 	//Current date
 	int mYear;
 	int mMonth;
@@ -58,10 +55,6 @@ public class AddHomework extends Activity {
 		
 		//Button to open DatePicker
 		b_until = (Button) findViewById(R.id.button_until);
-		//E.g. "01.01."
-		simpledateformat = new SimpleDateFormat("dd.MM.");
-		//E.g "Monday"
-		dMonthformat = new SimpleDateFormat("EEEE");
 		
 		subjects = ma.getSubjects(this);
 		
@@ -84,13 +77,11 @@ public class AddHomework extends Activity {
 		mDay = c.get(Calendar.DAY_OF_MONTH) + 1;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void setTextViewUntil (int y, int m, int d) {
-		Date d_dWeek = new Date(y, m, d - 1);
-		Date d_all = new Date(y, m, d);
-		
-		until = dMonthformat.format(d_dWeek) + ", " + simpledateformat.format(d_all);
+		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL, Locale.getDefault());
+		until = f.format(new GregorianCalendar(y, m, d).getTime());
 		b_until.setText("	" + until);
+		
 	}
 	
 	public void setSpinner () {

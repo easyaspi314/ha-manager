@@ -44,12 +44,12 @@ public class Preferences extends PreferenceActivity {
                     	    .setTitle(getString(R.string.dialog_addSubject))
                     	    .setMessage(getString(R.string.dialog_addSubject_message))
                     	    .setView(input)
-                    	    .setPositiveButton(getString(R.string.ok),
+                    	    .setPositiveButton(getString(android.R.string.ok),
                     	    		new DialogInterface.OnClickListener() {
                     	        public void onClick(DialogInterface dialog, int whichButton) {
                     	        	addSubject(input.getText().toString());
                     	        }
-                    	    }).setNegativeButton(getString(R.string.cancel),
+                    	    }).setNegativeButton(getString(android.R.string.cancel),
                     	    		new DialogInterface.OnClickListener() {
                     	        public void onClick(DialogInterface dialog, int whichButton) {
                     	            return;
@@ -82,7 +82,7 @@ public class Preferences extends PreferenceActivity {
                     	 delete_subjects.setTitle(getString(R.string.dialog_delete));
                     	 delete_subjects.setMessage(getString(R.string.dialog_really_delete_subs));
                     	 
-                    	 delete_subjects.setPositiveButton((getString(R.string.yes)),
+                    	 delete_subjects.setPositiveButton((getString(android.R.string.yes)),
                     			 new DialogInterface.OnClickListener() {
                     		 
                     		 public void onClick(DialogInterface dialog, int which) {
@@ -91,7 +91,7 @@ public class Preferences extends PreferenceActivity {
                     		 
                     	 });
                     	 
-                    	 delete_subjects.setNegativeButton((getString(R.string.no)),
+                    	 delete_subjects.setNegativeButton((getString(android.R.string.no)),
                     			 new DialogInterface.OnClickListener() {
                     		 
                     		 public void onClick(DialogInterface dialog, int which) {
