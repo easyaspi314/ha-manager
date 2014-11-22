@@ -40,6 +40,7 @@ public class AddHomework extends Activity {
 	
 	//Until when the homework has to be finished
 	String until;
+	String fullDate;
 	
 	//Current date
 	int mYear;
@@ -82,9 +83,9 @@ public class AddHomework extends Activity {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL, Locale.getDefault());
 		until = f.format(new GregorianCalendar(y, m, d).getTime());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE", Locale.getDefault()); 
-        	String asWeek = dateFormat.format(new GregorianCalendar(y, m, d).getTime());              
-        	b_until.setText(asWeek + ", " + until);
-		
+        	String asWeek = dateFormat.format(new GregorianCalendar(y, m, d).getTime());
+        	fullDate = (asWeek + ", " + until);
+        	b_until.setText(fullDate);
 	}
 	
 	public void setSpinner () {
@@ -145,7 +146,7 @@ public class AddHomework extends Activity {
 		//Entry in database
 		try {
 			datasource.open();
-			datasource.createEntry(urgent, subject, homework, until);
+			datasource.createEntry(urgent, subject, homework, fullDate);
 			datasource.close();
 		}
 		catch (Exception ex){
