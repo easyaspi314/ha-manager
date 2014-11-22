@@ -3,6 +3,7 @@
 package de.nico.ha_manager.activities;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -80,7 +81,9 @@ public class AddHomework extends Activity {
 	public void setTextViewUntil (int y, int m, int d) {
 		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL, Locale.getDefault());
 		until = f.format(new GregorianCalendar(y, m, d).getTime());
-		b_until.setText("	" + until);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE", Locale.getDefault()); 
+        	String asWeek = dateFormat.format(new GregorianCalendar(y, m, d).getTime());              
+        	b_until.setText(asWeek + ", " + until);
 		
 	}
 	
