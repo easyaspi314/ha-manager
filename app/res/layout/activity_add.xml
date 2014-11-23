@@ -10,7 +10,8 @@
         android:stretchColumns="1"
         android:padding="8dp">
 
-        <TableRow>
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <TextView
                 android:id="@+id/textView_subject"
@@ -22,7 +23,8 @@
                 android:layout_height="48dp"/>
 
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <TextView
                 android:id="@+id/textView_until"
@@ -40,7 +42,8 @@
                 android:onClick="setUntil" />
 
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <EditText
                 android:layout_span="2"
@@ -58,7 +61,8 @@
                 android:text="@string/hw_urgent" />
 
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <Button
                 android:id="@+id/button_add"
