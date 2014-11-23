@@ -89,7 +89,8 @@ public class AddHomework extends Activity {
 		
 		//Tab space because else the date is too far to the left
 		until = (asWeek + ", " + until);
-		b_until.setText("	" + until);
+		b_until.setText(until);
+		
 	}
 	
 	public void setSpinner () {
