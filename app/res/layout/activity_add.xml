@@ -44,7 +44,7 @@
 
         <Button
             android:id="@+id/button_until"
-            style="@android:style/Widget.Spinner"
+            style="?android:attr/spinnerStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/spinner_subject"
