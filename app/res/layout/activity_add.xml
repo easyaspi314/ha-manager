@@ -4,91 +4,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/textView_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/hw_subject"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TableRow>
 
-        <Spinner
-            android:id="@+id/spinner_subject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/textView_subject"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_toEndOf="@+id/textView_subject"
-            android:layout_toRightOf="@+id/textView_subject" />
+            <TextView
+                android:id="@+id/textView_subject"
+                android:text="@string/hw_subject"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_until"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView_subject"
-            android:layout_alignStart="@+id/textView_subject"
-            android:layout_below="@+id/spinner_subject"
-            android:layout_marginTop="24dp"
-            android:text="@string/hw_until"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Spinner
+                android:id="@+id/spinner_subject"
+                android:layout_height="48dp"/>
 
-        <Button
-            android:id="@+id/button_until"
-            style="?android:attr/spinnerStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/spinner_subject"
-            android:layout_alignStart="@+id/spinner_subject"
-            android:layout_alignTop="@+id/textView_until"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:onClick="setUntil" />
+        </TableRow>
+        <TableRow>
 
-        <EditText
-            android:id="@+id/editText_homework"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView_subject"
-            android:layout_alignStart="@+id/textView_subject"
-            android:layout_below="@+id/button_until"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
-            android:hint="@string/hw_homework"
-            android:inputType="textMultiLine" />
+            <TextView
+                android:id="@+id/textView_until"
+                android:text="@string/hw_until"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/editText_homework"
-            android:layout_alignStart="@+id/editText_homework"
-            android:layout_below="@+id/editText_homework"
-            android:layout_marginTop="8dp"
-            android:onClick="add_homework"
-            android:text="@string/hw_add" />
+            <Button
+                android:id="@+id/button_until"
+                style="?android:attr/spinnerStyle"
+                android:layout_height="48dp"
+                android:paddingLeft="12dp"
+                android:onClick="setUntil" />
 
-        <CheckBox
-            android:id="@+id/checkBox_urgent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText_homework"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/button_add"
-            android:layout_toRightOf="@+id/button_add"
-            android:text="@string/hw_urgent" />
-    </RelativeLayout>
+        </TableRow>
+        <TableRow>
 
+            <EditText
+                android:layout_span="2"
+                android:id="@+id/editText_homework"
+                android:hint="@string/hw_homework"
+                android:layout_height="48dp"
+                android:inputType="textMultiLine" />
+
+        </TableRow>
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/checkBox_urgent"
+                android:layout_span="2"
+                android:text="@string/hw_urgent" />
+
+        </TableRow>
+        <TableRow>
+
+            <Button
+                android:id="@+id/button_add"
+                android:layout_span="2"
+                android:onClick="add_homework"
+                android:text="@string/hw_add" />
+
+        </TableRow>
+    </TableLayout>
 </ScrollView>
