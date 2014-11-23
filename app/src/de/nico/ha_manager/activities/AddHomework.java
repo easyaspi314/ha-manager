@@ -40,7 +40,6 @@ public class AddHomework extends Activity {
 	
 	//Until when the homework has to be finished
 	String until;
-	String fullDate;
 	
 	//Current date
 	int mYear;
@@ -80,12 +79,17 @@ public class AddHomework extends Activity {
 	}
 	
 	public void setTextViewUntil (int y, int m, int d) {
-		DateFormat f = DateFormat.getDateInstance(DateFormat.FULL, Locale.getDefault());
+		//Format to 31.12. or local version of that
+		DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
 		until = f.format(new GregorianCalendar(y, m, d).getTime());
-		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE", Locale.getDefault()); 
-        	String asWeek = dateFormat.format(new GregorianCalendar(y, m, d).getTime());
-        	fullDate = (asWeek + ", " + until);
-        	b_until.setText(fullDate);
+		
+		//Format to Week of Day, for example Mo. or local version of that
+		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE", Locale.getDefault());
+		String asWeek = dateFormat.format(new GregorianCalendar(y, m, d).getTime());
+		
+		//Tab space because else the date is too far to the left
+		until = ("	" + asWeek + ", " + until);
+		b_until.setText(until);
 	}
 	
 	public void setSpinner () {
@@ -146,7 +150,7 @@ public class AddHomework extends Activity {
 		//Entry in database
 		try {
 			datasource.open();
-			datasource.createEntry(urgent, subject, homework, fullDate);
+			datasource.createEntry(urgent, subject, homework, until);
 			datasource.close();
 		}
 		catch (Exception ex){
