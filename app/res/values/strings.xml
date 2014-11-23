@@ -17,7 +17,7 @@
     
     <!-- Homework Page -->
     <string name="hw_subject">Subject:</string>
-    <string name="hw_until">Due:</string>
+    <string name="hw_until">Until:</string>
     <string name="hw_urgent">Important</string>
     <string name="hw_homework">Homework</string>
     <string name="hw_add">Add</string>
@@ -60,8 +60,8 @@
     <string name="intent_share_text">Hey, do you want to try out HW-Manager? You can download it here: http://goo.gl/GT99iV</string>
     
     <!-- Toasts -->
-    <string name="toast_have2enter">One or more fields is empty.</string>
-    <string name="added">Added.</string>
+    <string name="toast_have2enter">You have to enter something!</string>
+    <string name="added">added</string>
     
     <!-- Homework String Items -->
     <string name="action_urgent">Important!</string>
