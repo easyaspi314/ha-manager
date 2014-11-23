@@ -2,7 +2,6 @@
 <resources>
     
     <string name="app_name">HW-Manager</string>
-    <string name="app_current_version">0.81 (20.11.2014)</string>
     
     <!-- Titles -->
     <string name="title_subjects">Předměty</string>
