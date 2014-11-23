@@ -88,7 +88,7 @@ public class AddHomework extends Activity {
 		String asWeek = dateFormat.format(new GregorianCalendar(y, m, d).getTime());
 		
 		//Tab space because else the date is too far to the left
-		until = ("	" + asWeek + ", " + until);
+		until = (asWeek + ", " + until);
 		b_until.setText(until);
 	}
 	
