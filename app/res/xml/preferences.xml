@@ -59,6 +59,26 @@
         
     </PreferenceCategory>
     
+    
+    
+    <PreferenceCategory 
+        android:title="Import/Export"
+        android:key="pref_importexport">
+        
+        <PreferenceScreen
+            android:title="Export Database"
+            android:summary="Export the Database to the SD"
+            android:key="pref_importexport_export">
+        </PreferenceScreen>
+        
+        <PreferenceScreen
+            android:title="Import Database"
+            android:summary="Import the Database from the SD"
+            android:key="pref_importexport_import">
+        </PreferenceScreen>
+        
+    </PreferenceCategory>
+    
     <PreferenceCategory 
         android:title="@string/pref_about"
         android:key="pref_key_storage_settings">

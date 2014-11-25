@@ -2,12 +2,18 @@
 
 package de.nico.ha_manager.activities;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +21,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -33,6 +40,9 @@ public class Preferences extends PreferenceActivity {
 	Preference subjects_reset;
 	
 	Preference feedback_share;
+
+	Preference importexport_import;
+	Preference importexport_export;
 	
 	//Default SharedPreferences of the application
 	SharedPreferences prefs;
@@ -153,6 +163,163 @@ public class Preferences extends PreferenceActivity {
                     	 return true;
                      }
                  });
+        
+        importexport_export = (Preference) findPreference("pref_importexport_export");
+        importexport_export.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        	@SuppressLint("SdCardPath")
+        	public boolean onPreferenceClick(Preference preference) {
+        		//Check if directory exists
+        		File dir = new File(Environment.getExternalStorageDirectory()
+        				+ "/" + getString(R.string.app_name));
+        		if (!(dir.exists()))
+        			dir.mkdir();
+        		
+        		//Path for Database
+        		File srcDB = new File(
+        				"/data/data/de.nico.ha_manager/databases/Homework.db");
+        		File dstDB = new File(Environment.getExternalStorageDirectory()
+        				+ "/" + getString(R.string.app_name) + "/Homework.db");
+
+        		//Path for SharedPrefernces
+        		File srcPref = new File(
+        				"/data/data/de.nico.ha_manager/shared_prefs/de.nico.ha_manager_preferences.xml");
+        		File dstPref = new File(Environment.getExternalStorageDirectory()
+        				+ "/" + getString(R.string.app_name) + "/Preferences.xml");
+        		
+        		try {
+        			//Export Database
+            		FileInputStream inStream = new FileInputStream(srcDB);
+        			FileOutputStream outStream = new FileOutputStream(dstDB);
+        			FileChannel inChannel = inStream.getChannel();
+        			FileChannel outChannel = outStream.getChannel();
+        			inChannel.transferTo(0, inChannel.size(), outChannel);
+        			inStream.close();
+        			outStream.close();
+        			
+        			//Export SharedPrefernces
+        			inStream = new FileInputStream(srcPref);
+        			outStream = new FileOutputStream(dstPref);
+        			inChannel = inStream.getChannel();
+        			outChannel = outStream.getChannel();
+        			inChannel.transferTo(0, inChannel.size(), outChannel);
+        			inStream.close();
+        			outStream.close();
+        			
+        		}
+        		catch (FileNotFoundException e) {
+        			Log.e("FileNotFoundException", e.toString());
+        			Toast.makeText(Preferences.this, "Export failed",
+        					Toast.LENGTH_SHORT).show();
+        			return true;
+        			
+        		}
+        		catch (IOException e) {
+        			Log.e("IOException", e.toString());
+        			Toast.makeText(Preferences.this, "Export failed",
+        					Toast.LENGTH_SHORT).show();
+        			return true;
+        			
+        		}
+        		Toast.makeText(Preferences.this, "Export sucessfully",
+    					Toast.LENGTH_SHORT).show();
+        		return true;
+        		
+        	}
+        	
+        });
+        
+        importexport_import = (Preference) findPreference("pref_importexport_import");
+        importexport_import.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+        	@SuppressLint("SdCardPath")
+        	public boolean onPreferenceClick(Preference preference) {
+        		//Check if directory exists
+        		File dir = new File(Environment.getExternalStorageDirectory()
+        				+ "/" + getString(R.string.app_name));
+        		if (!(dir.exists())) {
+        			Toast.makeText(Preferences.this,
+        					"No Files at SD/" + getString(R.string.app_name),
+        					Toast.LENGTH_LONG).show();
+        			return true;
+        		}
+        		
+        		//Path for Database
+        		File srcDB = new File(Environment.getExternalStorageDirectory()
+        				+ "/" + getString(R.string.app_name) + "/Homework.db");
+        		File dstDB = new File(
+        				"/data/data/de.nico.ha_manager/databases/Homework.db");
+
+        		//Path for SharedPrefernces
+        		File srcPref = new File(Environment.getExternalStorageDirectory()
+        				+ "/" + getString(R.string.app_name) + "/Preferences.xml");
+        		File dstPref = new File(
+        				"/data/data/de.nico.ha_manager/shared_prefs/de.nico.ha_manager_preferences.xml");
+
+        		//Check if Database exists
+        		if (!(srcDB.exists())) {
+        			Toast.makeText(Preferences.this,
+        					"No Database at SD/" + getString(R.string.app_name),
+        					Toast.LENGTH_LONG).show();
+        			return true;
+        			
+        		}
+        		
+        		//Check if SharedPrefernces exists
+        		if (!(srcPref.exists())) {
+        			Toast.makeText(Preferences.this,
+        					"No Database at SD/" + getString(R.string.app_name),
+        					Toast.LENGTH_LONG).show();
+        			return true;
+        			
+        		}
+        		
+        		try {
+        			//Import Database
+            		FileInputStream inStream = new FileInputStream(srcDB);
+        			FileOutputStream outStream = new FileOutputStream(dstDB);
+        			FileChannel inChannel = inStream.getChannel();
+        			FileChannel outChannel = outStream.getChannel();
+        			inChannel.transferTo(0, inChannel.size(), outChannel);
+        			inStream.close();
+        			outStream.close();
+        			
+        			//Import SharedPrefernces
+        			inStream = new FileInputStream(srcPref);
+        			outStream = new FileOutputStream(dstPref);
+        			inChannel = inStream.getChannel();
+        			outChannel = outStream.getChannel();
+        			inChannel.transferTo(0, inChannel.size(), outChannel);
+        			inStream.close();
+        			outStream.close();
+        			
+        		}
+        		catch (FileNotFoundException e) {
+        			Log.e("FileNotFoundException", e.toString());
+        			Toast.makeText(Preferences.this, "Import failed",
+        					Toast.LENGTH_SHORT).show();
+        			return true;
+        			
+        		}
+        		catch (IOException e) {
+        			Log.e("IOException", e.toString());
+        			Toast.makeText(Preferences.this, "Import failed",
+        					Toast.LENGTH_SHORT).show();
+        			return true;
+        			
+        		}
+        		Toast.makeText(Preferences.this, "Import sucessfully",
+    					Toast.LENGTH_SHORT).show();
+        		
+        		//Only works with a restart at the moment...
+        		System.exit(0);
+        		Intent i = getBaseContext().getPackageManager()
+        				.getLaunchIntentForPackage(getBaseContext().getPackageName());
+        		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        		startActivity(i);
+        		return true;
+        		
+        	}
+        	
+        });
         
     }
     
