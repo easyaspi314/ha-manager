@@ -2,20 +2,28 @@
 
 package de.nico.ha_manager.activities;
 
+import java.text.DateFormat;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
-import de.nico.ha_manager.R;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
+import de.nico.ha_manager.R;
 
 public class Preferences extends PreferenceActivity {
 
@@ -35,6 +43,31 @@ public class Preferences extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		try{
+			//Get Build Date
+			ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), 0);
+			ZipFile zf = new ZipFile(ai.sourceDir);
+			ZipEntry ze = zf.getEntry("classes.dex");
+			zf.close();
+			long time = ze.getTime();
+			
+			//Get Version Name
+			PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+			String version = pInfo.versionName;
+			DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+			String build_date = f.format(time);
+			
+			//Set Preference
+			PreferenceScreen prefscreen =
+					((PreferenceScreen)findPreference("pref_about_current_version"));
+			prefscreen.setSummary(version + " (" + build_date + ")");
+			onContentChanged();
+			
+		}
+		catch(Exception e){
+			Log.e("Get Build Date", e.toString());
+		}
         
         subjects_add = (Preference) findPreference("subjects_add");
         subjects_add.setOnPreferenceClickListener(new OnPreferenceClickListener() {

@@ -2,7 +2,6 @@
 <resources>
     
     <string name="app_name">HW-Manager</string>
-    <string name="app_current_version">0.81 (20.11.2014)</string>
     
     <!-- Titles -->
     <string name="title_subjects">Subjects</string>
@@ -18,14 +17,14 @@
     <!-- Homework Page -->
     <string name="hw_subject">Subject:</string>
     <string name="hw_until">Until:</string>
-    <string name="hw_urgent">Urgent?</string>
+    <string name="hw_urgent">Important</string>
     <string name="hw_homework">Homework</string>
     <string name="hw_add">Add</string>
     
     <!-- Preferences Page -->    
     <string name="pref_subjects">Subjects</string>
     <string name="pref_subjects_add">Add a subject</string>
-    <string name="pref_subjects_add_summary">Add a subject to the list</string>
+    <string name="pref_subjects_add_summary">Add a new subject to the list</string>
     <string name="pref_offers_overview">Suggestions</string>
     <string name="pref_offers_overview_summary">A list with suggestions</string>
     <string name="pref_subjects_overview">Overview</string>
@@ -38,12 +37,12 @@
     <string name="pref_about_credits_summary">Copyleft 2014: GPLv2 or later\nMainly developed by Nico Alt</string>
     <string name="pref_about_current_version">Current Version</string>
     
-    <string name="pref_feedback">Feedback</string>
+    <string name="pref_feedback">Send feedback</string>
     <string name="pref_feedback_share">Share</string>
-    <string name="pref_feedback_share_summary">Share this app with a friend</string>
+    <string name="pref_feedback_share_summary">Share this app with a friend!</string>
     <string name="pref_feedback_playstore">Play Store</string>
     <string name="pref_feedback_playstore_summary">Review the app in the Google Play Store</string>
-    <string name="pref_feedback_mail">Mail</string>
+    <string name="pref_feedback_mail">Email</string>
     <string name="pref_feedback_mail_summary">Send an email to the developer</string>
     
     <!-- Dialogs -->
@@ -57,14 +56,14 @@
     <!-- Intents -->
     <string name="intent_mail">Send a mail to the developer</string>
     <string name="intent_share_title">Share</string>
-    <string name="intent_share_text">Hey, don´t you want to test the HW-Manager? You can download it here: http://goo.gl/GT99iV</string>
+    <string name="intent_share_text">Hey, do you want to try out HW-Manager? You can download it here: http://goo.gl/GT99iV</string>
     
     <!-- Toasts -->
     <string name="toast_have2enter">You have to enter something!</string>
     <string name="added">added</string>
     
     <!-- Homework String Items -->
-    <string name="action_urgent">Urgent!</string>
+    <string name="action_urgent">Important!</string>
     
     <!-- Default Subject Array -->
     <string-array name="subjects">
@@ -72,7 +71,7 @@
         <item>Chemistry</item>
         <item>English</item>
         <item>History</item>
-        <item>Mathematics</item>
+        <item>Math</item>
         <item>Physics</item>
         <item>Sports</item>
     </string-array>
