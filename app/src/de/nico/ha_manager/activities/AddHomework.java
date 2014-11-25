@@ -79,7 +79,7 @@ public class AddHomework extends Activity {
 	}
 	
 	public void setTextViewUntil (int y, int m, int d) {
-		//Format to 31.12. or local version of that
+		//Format to 31.12.14 or local version of that
 		DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
 		until = f.format(new GregorianCalendar(y, m, d).getTime());
 		

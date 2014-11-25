@@ -74,7 +74,7 @@
         
         <PreferenceScreen
             android:title="@string/pref_about_current_version"
-            android:summary="@string/app_current_version">
+            android:key="pref_about_current_version">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:data="https://github.com/AltNico/ha-manager/releases/latest"
