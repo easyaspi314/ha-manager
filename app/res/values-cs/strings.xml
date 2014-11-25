@@ -5,7 +5,7 @@
     
     <!-- Titles -->
     <string name="title_subjects">Předměty</string>
-    <string name="title_subject_offers">Doporučit předmět</string>
+    <string name="title_subject_offers">Další předměty</string>
     <string name="title_homework">Domácí úkoly</string>
     <string name="title_addhomework">Přidat domácí úkol</string>
     
@@ -25,8 +25,8 @@
     <string name="pref_subjects">Předměty</string>
     <string name="pref_subjects_add">Přidat předmět</string>
     <string name="pref_subjects_add_summary">Přidat předmět do seznamu</string>
-    <string name="pref_offers_overview">Doporučení</string>
-    <string name="pref_offers_overview_summary">Seznam doporučení</string>
+    <string name="pref_offers_overview">Další předměty</string>
+    <string name="pref_offers_overview_summary">Seznam dalších předmětů</string>
     <string name="pref_subjects_overview">Přehled</string>
     <string name="pref_subjects_overview_summary">Seznam se všemi předměty</string>
     <string name="pref_subjects_reset">Obnovit</string>
