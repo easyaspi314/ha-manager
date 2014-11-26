@@ -1,79 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+<ScrollView 
     android:id="@+id/scrollView_add"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
 
-    <TableLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:stretchColumns="1" >
-
-        <TableRow>
+        android:orientation="vertical">        
 
             <TextView
                 android:id="@+id/textView_subject"
                 android:text="@string/hw_subject"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </TableRow>
-
-        <TableRow android:layout_marginBottom="8dp" >
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
                 android:id="@+id/spinner_subject"
                 android:layout_height="48dp"
-                android:layout_span="2" />
-        </TableRow>
+                android:layout_marginBottom="8dp"
+                android:layout_width="fill_parent"/>
 
-        <TableRow>
 
             <TextView
                 android:id="@+id/textView_until"
                 android:text="@string/hw_until"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </TableRow>
-
-        <TableRow android:layout_marginBottom="8dp" >
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
+                android:layout_width="fill_parent"
                 android:id="@+id/button_until"
                 style="?android:attr/spinnerStyle"
                 android:layout_height="48dp"
-                android:layout_span="2"
-                android:onClick="setUntil"
-                android:paddingEnd="12dp"
                 android:paddingLeft="12dp"
+                android:paddingStart="12dp"
                 android:paddingRight="12dp"
-                android:paddingStart="12dp" />
-        </TableRow>
-
-        <TableRow android:layout_marginBottom="8dp" >
+                android:paddingEnd="12dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="setUntil" />
 
             <EditText
+                android:layout_width="fill_parent"
                 android:id="@+id/editText_homework"
-                android:layout_height="48dp"
-                android:layout_span="2"
                 android:hint="@string/hw_homework"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
                 android:inputType="textMultiLine" />
-        </TableRow>
-
-        <TableRow android:layout_marginBottom="8dp" >
 
             <CheckBox
                 android:id="@+id/checkBox_urgent"
-                android:layout_span="2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="@string/hw_urgent" />
-        </TableRow>
 
-        <TableRow>
-
-            <Button
-                android:id="@+id/button_add"
-                android:layout_span="2"
-                android:onClick="add_homework"
-                android:text="@string/hw_add" />
-        </TableRow>
-    </TableLayout>
-
+    </LinearLayout>
 </ScrollView>
+<include layout="@layout/button_bar"/>
+</LinearLayout>
