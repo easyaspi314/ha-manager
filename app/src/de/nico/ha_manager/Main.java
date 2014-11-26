@@ -58,12 +58,12 @@ public class Main extends Activity {
 		SharedPreferences.Editor editor = prefs.edit();
 		ListView lHomework = (ListView) findViewById(R.id.listView_main);
 		int listSize = lHomework.getCount();
-		if (prefs.getInt("hwid" + "_list", 0) == 0) {
-			editor.putInt("hwid" + "_list", 1);
-			editor.putInt("hwid" + "_size", listSize);
+		if (prefs.getInt("hwid_list", 0) == 0) {
+			editor.putInt("hwid_list", 1);
+			editor.putInt("hwid_size", listSize);
 			for (int i = 0; i < listSize + 1; i++) {
 				int id = i + 1;
-				editor.putString("hwid" + "_" + i, "ID = " + id);
+				editor.putString("hwid_" + i, "ID = " + id);
 
 			}
 			editor.commit();
@@ -139,6 +139,7 @@ public class Main extends Activity {
 										(getString(android.R.string.yes)),
 										new DialogInterface.OnClickListener() {
 
+											@Override
 											public void onClick(
 													DialogInterface dialog,
 													int which) {
@@ -153,6 +154,7 @@ public class Main extends Activity {
 								(getString(android.R.string.no)),
 								new DialogInterface.OnClickListener() {
 
+									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
 										return;
@@ -175,11 +177,11 @@ public class Main extends Activity {
 
 		// Get IDs
 		prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
-		int size = prefs.getInt("hwid" + "_size", 0);
+		int size = prefs.getInt("hwid_size", 0);
 		String[] IdList = new String[size];
 
 		for (int i = 0; i < size; i++) {
-			IdList[i] = prefs.getString("hwid" + "_" + i, null);
+			IdList[i] = prefs.getString("hwid_" + i, null);
 
 		}
 
@@ -191,20 +193,20 @@ public class Main extends Activity {
 
 		for (int i = 0; i < size; i++) {
 			if (i < pos)
-				IdList[i] = prefs.getString("hwid" + "_" + i, null);
+				IdList[i] = prefs.getString("hwid_" + i, null);
 
 			if (i > pos)
-				IdList[i - 1] = prefs.getString("hwid" + "_" + i, null);
+				IdList[i - 1] = prefs.getString("hwid_" + i, null);
 
 		}
 
 		for (int i = 0; i < IdList.length; i++) {
-			editor.putString("hwid" + "_" + i, IdList[i]);
+			editor.putString("hwid_" + i, IdList[i]);
 
 		}
 
-		editor.putInt("hwid" + "_size", IdList.length);
-		editor.remove("hwid" + "_" + IdList.length);
+		editor.putInt("hwid_size", IdList.length);
+		editor.remove("hwid_" + IdList.length);
 		editor.commit();
 
 	}
@@ -216,10 +218,11 @@ public class Main extends Activity {
 		delete_it.setPositiveButton((getString(android.R.string.yes)),
 				new DialogInterface.OnClickListener() {
 
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						datasource.delete_item("HOMEWORK", null, null);
 						SharedPreferences.Editor editor = prefs.edit();
-						editor.putInt("hwid" + "_size", 0);
+						editor.putInt("hwid_size", 0);
 						editor.commit();
 						update();
 					}
@@ -228,6 +231,7 @@ public class Main extends Activity {
 		delete_it.setNegativeButton((getString(android.R.string.no)),
 				new DialogInterface.OnClickListener() {
 
+					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						return;
 					}
@@ -246,12 +250,12 @@ public class Main extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(con);
 
 		// Set size of array to amount of Strings in SharedPreferences
-		int size = prefs.getInt("subjects" + "_size", 0);
+		int size = prefs.getInt("subjects_size", 0);
 		subjects = new String[size];
 
 		// Get parts of subject array from SharedPreferences Strings
 		for (int i = 0; i < size; i++) {
-			subjects[i] = prefs.getString("subjects" + "_" + i, null);
+			subjects[i] = prefs.getString("subjects_" + i, null);
 		}
 		return subjects;
 	}
@@ -265,9 +269,9 @@ public class Main extends Activity {
 
 		// Add subjects to SharedPreferences
 		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("subjects" + "_size", subjects.length);
+		editor.putInt("subjects_size", subjects.length);
 		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
+			editor.putString("subjects_" + i, subjects[i]);
 		}
 		editor.commit();
 	}
