@@ -36,7 +36,8 @@
             android:label="@string/title_subjects" />
         <activity
             android:name="de.nico.ha_manager.activities.AddHomework"
-            android:label="@string/title_addhomework" />
+            android:label="@string/title_addhomework"
+            android:theme="@style/AddTheme" />
     </application>
 
 </manifest>
