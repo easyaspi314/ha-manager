@@ -10,28 +10,39 @@
         android:stretchColumns="1"
         android:padding="8dp">
 
-        <TableRow
-            android:layout_marginBottom="8dp" >
+        <TableRow>
 
             <TextView
                 android:id="@+id/textView_subject"
                 android:text="@string/hw_subject"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <Spinner
+                android:layout_span="2"
                 android:id="@+id/spinner_subject"
                 android:layout_height="48dp"/>
 
         </TableRow>
-        <TableRow
-            android:layout_marginBottom="8dp" >
+        
+        <TableRow>
 
             <TextView
                 android:id="@+id/textView_until"
                 android:text="@string/hw_until"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </TableRow>
+        
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <Button
+                android:layout_span="2"
                 android:id="@+id/button_until"
                 style="?android:attr/spinnerStyle"
                 android:layout_height="48dp"
@@ -42,6 +53,7 @@
                 android:onClick="setUntil" />
 
         </TableRow>
+        
         <TableRow
             android:layout_marginBottom="8dp" >
 
@@ -53,7 +65,8 @@
                 android:inputType="textMultiLine" />
 
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginBottom="8dp" >
 
             <CheckBox
                 android:id="@+id/checkBox_urgent"
@@ -61,8 +74,7 @@
                 android:text="@string/hw_urgent" />
 
         </TableRow>
-        <TableRow
-            android:layout_marginBottom="8dp" >
+        <TableRow>
 
             <Button
                 android:id="@+id/button_add"

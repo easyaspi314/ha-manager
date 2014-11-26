@@ -15,8 +15,8 @@
     <string name="action_settings">Nastavení</string>
     
     <!-- Homework Page -->
-    <string name="hw_subject">Předmět:</string>
-    <string name="hw_until">Termín:</string>
+    <string name="hw_subject">Předmět</string>
+    <string name="hw_until">Termín</string>
     <string name="hw_urgent">Naléhavý?</string>
     <string name="hw_homework">Domácí úkol</string>
     <string name="hw_add">Přidat</string>

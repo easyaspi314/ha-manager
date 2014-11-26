@@ -15,8 +15,8 @@
     <string name="action_settings">Einstellungen</string>
     
     <!-- Homework Page -->
-    <string name="hw_subject">Fach:</string>
-    <string name="hw_until">Bis:</string>
+    <string name="hw_subject">Fach</string>
+    <string name="hw_until">Bis</string>
     <string name="hw_urgent">Dringend?</string>
     <string name="hw_homework">Hausaufgabe</string>
     <string name="hw_add">Hinzufügen</string>
