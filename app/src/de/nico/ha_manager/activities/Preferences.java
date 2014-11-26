@@ -197,14 +197,12 @@ public class Preferences extends PreferenceActivity {
 		//Path for Database
 		File srcDB = new File(Environment.getExternalStorageDirectory()
 				+ "/" + getString(R.string.app_name) + "/Homework.db");
-		File dstDB = new File(
-				"/data/data/de.nico.ha_manager/databases/Homework.db");
+		File dstDB = new File(Preferences.this.getApplicationInfo().dataDir + "/databases/Homework.db");
 
 		//Path for SharedPrefernces
 		File srcPref = new File(Environment.getExternalStorageDirectory()
 				+ "/" + getString(R.string.app_name) + "/Preferences.xml");
-		File dstPref = new File(
-				"/data/data/de.nico.ha_manager/shared_prefs/de.nico.ha_manager_preferences.xml");
+		File dstPref = new File(Preferences.this.getApplicationInfo().dataDir + "/shared_prefs/de.nico.ha_manager_preferences.xml");
 
 		//Check if Database exists
 		if (!(srcDB.exists())) {
@@ -278,14 +276,12 @@ public class Preferences extends PreferenceActivity {
 			dir.mkdir();
 		
 		//Path for Database
-		File srcDB = new File(
-				"/data/data/de.nico.ha_manager/databases/Homework.db");
+		File srcDB = new File(Preferences.this.getApplicationInfo().dataDir + "/databases/Homework.db");
 		File dstDB = new File(Environment.getExternalStorageDirectory()
 				+ "/" + getString(R.string.app_name) + "/Homework.db");
 
 		//Path for SharedPrefernces
-		File srcPref = new File(
-				"/data/data/de.nico.ha_manager/shared_prefs/de.nico.ha_manager_preferences.xml");
+		File srcPref = new File(Preferences.this.getApplicationInfo().dataDir + "/shared_prefs/de.nico.ha_manager_preferences.xml");
 		File dstPref = new File(Environment.getExternalStorageDirectory()
 				+ "/" + getString(R.string.app_name) + "/Preferences.xml");
 		
