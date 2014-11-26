@@ -14,19 +14,17 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
 
-
 public class HomeworkDataSource {
 
-	
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
-	private String[] allColumns = { "ID", "URGENT", "SUBJECT",
-			"HOMEWORK", "UNTIL"};
-	
+	private String[] allColumns = { "ID", "URGENT", "SUBJECT", "HOMEWORK",
+			"UNTIL" };
+
 	public HomeworkDataSource(Context context) {
 		dbHelper = new MySQLiteHelper(context);
 	}
-	
+
 	public void open() throws SQLException {
 		database = dbHelper.getWritableDatabase();
 	}
@@ -34,48 +32,50 @@ public class HomeworkDataSource {
 	public void close() {
 		dbHelper.close();
 	}
-	
-	public Entry createEntry(String urgent, String subject, String homework, String until) {
+
+	public Entry createEntry(String urgent, String subject, String homework,
+			String until) {
 		ContentValues values = new ContentValues();
 		values.put("URGENT", urgent);
 		values.put("SUBJECT", subject);
 		values.put("HOMEWORK", homework);
 		values.put("UNTIL", until);
 
-		String insertId = "ID = " + database.insert("HOMEWORK", null,
-				values);
-		
+		String insertId = "ID = " + database.insert("HOMEWORK", null, values);
+
 		addID(insertId);
-		
-		Cursor cursor = database.query("HOMEWORK",allColumns, insertId, null, null, null, null);
+
+		Cursor cursor = database.query("HOMEWORK", allColumns, insertId, null,
+				null, null, null);
 		cursor.moveToFirst();
-	
+
 		return cursorToEntry(cursor);
 	}
-	
-	public void addID (String id) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
+
+	public void addID(String id) {
+		SharedPreferences prefs = PreferenceManager
+				.getDefaultSharedPreferences(Main.con);
 		int size = prefs.getInt("hwid" + "_size", 0);
-		String [] IdList = new String[size + 1];
-		
-		for(int i = 0; i < size; i++) {
+		String[] IdList = new String[size + 1];
+
+		for (int i = 0; i < size; i++) {
 			IdList[i] = prefs.getString("hwid" + "_" + i, null);
-			
+
 		}
 		IdList[size] = id;
-		
+
 		SharedPreferences.Editor editor = prefs.edit();
-		for(int i = 0; i < IdList.length; i++) {
+		for (int i = 0; i < IdList.length; i++) {
 			editor.putString("hwid" + "_" + i, IdList[i]);
-			
+
 		}
-		
+
 		editor.putInt("hwid" + "_size", IdList.length);
 		editor.putInt("hwid" + "_list", 1);
 		editor.commit();
-		
+
 	}
-	
+
 	public void delete_item(String s1, String s2, String[] s3) {
 		open();
 		database.delete(s1, s2, s3);
@@ -84,24 +84,24 @@ public class HomeworkDataSource {
 
 	public List<Entry> getAllEntries() {
 		List<Entry> EntriesList = new ArrayList<Entry>();
-		
-		Cursor cursor = database.query("HOMEWORK", allColumns, null, null, null, null, null);
+
+		Cursor cursor = database.query("HOMEWORK", allColumns, null, null,
+				null, null, null);
 		cursor.moveToFirst();
-		
-		if(cursor.getCount() == 0) return EntriesList;
-		
-		
+
+		if (cursor.getCount() == 0)
+			return EntriesList;
+
 		while (cursor.isAfterLast() == false) {
 			Entry entry = cursorToEntry(cursor);
 			EntriesList.add(entry);
 			cursor.moveToNext();
-		} 	
+		}
 
 		cursor.close();
-		
+
 		return EntriesList;
 	}
-	
 
 	private Entry cursorToEntry(Cursor cursor) {
 		Entry entry = new Entry();
@@ -113,5 +113,5 @@ public class HomeworkDataSource {
 
 		return entry;
 	}
-	
+
 }

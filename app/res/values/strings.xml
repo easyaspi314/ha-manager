@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">HW-Manager</string>
-    
+
     <!-- Titles -->
     <string name="title_subjects">Subjects</string>
     <string name="title_subject_offers">Subject Suggestions</string>
     <string name="title_homework">Homework</string>
     <string name="title_addhomework">Add Homework</string>
-    
+
     <!-- Menu Items -->
     <string name="action_add">Add</string>
     <string name="action_delete">Delete everything</string>
     <string name="action_settings">Settings</string>
-    
+
     <!-- Homework Page -->
     <string name="hw_subject">Subject</string>
     <string name="hw_until">Until</string>
     <string name="hw_urgent">Important</string>
     <string name="hw_homework">Homework</string>
     <string name="hw_add">Add</string>
-    
-    <!-- Preferences Page -->    
+
+    <!-- Preferences Page -->
     <string name="pref_subjects">Subjects</string>
     <string name="pref_subjects_add">Add a subject</string>
     <string name="pref_subjects_add_summary">Add a new subject to the list</string>
@@ -31,12 +31,10 @@
     <string name="pref_subjects_overview_summary">A list containing all subjects</string>
     <string name="pref_subjects_reset">Reset</string>
     <string name="pref_subjects_reset_summary">Reset the subjects list to the default value</string>
-    
     <string name="pref_about">About</string>
     <string name="pref_about_credits">Credits</string>
     <string name="pref_about_credits_summary">Copyleft 2014: GPLv2 or later\nMainly developed by Nico Alt</string>
     <string name="pref_about_current_version">Current Version</string>
-    
     <string name="pref_feedback">Send feedback</string>
     <string name="pref_feedback_share">Share</string>
     <string name="pref_feedback_share_summary">Share this app with a friend!</string>
@@ -44,27 +42,26 @@
     <string name="pref_feedback_playstore_summary">Review the app in the Google Play Store</string>
     <string name="pref_feedback_mail">Email</string>
     <string name="pref_feedback_mail_summary">Send an email to the developer</string>
-    
+
     <!-- Dialogs -->
     <string name="dialog_addSubject">Add Subject</string>
     <string name="dialog_addSubject_message">Which subject do you want to add?</string>
-    
     <string name="dialog_delete">Delete</string>
     <string name="dialog_really_delete_hw">Do you really want to delete all homework assignments?</string>
     <string name="dialog_really_delete_subs">Do you really want to delete all subjects?</string>
-    
+
     <!-- Intents -->
     <string name="intent_mail">Send a mail to the developer</string>
     <string name="intent_share_title">Share</string>
     <string name="intent_share_text">Hey, do you want to try out HW-Manager? You can download it here: http://goo.gl/GT99iV</string>
-    
+
     <!-- Toasts -->
     <string name="toast_have2enter">You have to enter something!</string>
     <string name="added">added</string>
-    
+
     <!-- Homework String Items -->
     <string name="action_urgent">Important!</string>
-    
+
     <!-- Default Subject Array -->
     <string-array name="subjects">
         <item>Biology</item>
@@ -75,7 +72,7 @@
         <item>Physics</item>
         <item>Sports</item>
     </string-array>
-    
+
     <!-- Subject Offers Array -->
     <string-array name="subject_offers">
         <item>Afrikaans</item>

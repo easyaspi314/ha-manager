@@ -1,106 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    
-    <PreferenceCategory 
-        android:title="@string/pref_subjects"
-        android:key="subjects">
-        
+
+    <PreferenceCategory
+        android:key="subjects"
+        android:title="@string/pref_subjects" >
         <Preference
             android:key="subjects_overview"
-            android:title="@string/pref_subjects_overview"
-            android:summary="@string/pref_subjects_overview_summary" />
-        
+            android:summary="@string/pref_subjects_overview_summary"
+            android:title="@string/pref_subjects_overview" />
         <Preference
             android:key="subjects_add"
-            android:title="@string/pref_subjects_add"
+            android:onClick="addsubject"
             android:summary="@string/pref_subjects_add_summary"
-            android:onClick="addsubject" />
-        
+            android:title="@string/pref_subjects_add" />
         <Preference
             android:key="subjects_offers"
-            android:title="@string/pref_offers_overview"
-            android:summary="@string/pref_offers_overview_summary" />
-        
+            android:summary="@string/pref_offers_overview_summary"
+            android:title="@string/pref_offers_overview" />
         <Preference
             android:key="subjects_reset"
-            android:title="@string/pref_subjects_reset"
-            android:summary="@string/pref_subjects_reset_summary" />
-        
+            android:summary="@string/pref_subjects_reset_summary"
+            android:title="@string/pref_subjects_reset" />
     </PreferenceCategory>
-    
-    <PreferenceCategory 
-        android:title="@string/pref_feedback"
-        android:key="pref_key_storage_settings">
-        
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="@string/pref_feedback" >
         <Preference
             android:key="feedback_share"
-            android:title="@string/pref_feedback_share"
-            android:summary="@string/pref_feedback_share_summary" />
-        
+            android:summary="@string/pref_feedback_share_summary"
+            android:title="@string/pref_feedback_share" />
+
         <PreferenceScreen
-            android:title="@string/pref_feedback_playstore"
-            android:summary="@string/pref_feedback_playstore_summary">
+            android:summary="@string/pref_feedback_playstore_summary"
+            android:title="@string/pref_feedback_playstore" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://play.google.com/store/apps/details?id=de.nico.ha_manager"
-                />
+                android:data="https://play.google.com/store/apps/details?id=de.nico.ha_manager" />
         </PreferenceScreen>
-        
         <PreferenceScreen
-            android:title="@string/pref_feedback_mail"
-            android:summary="@string/pref_feedback_mail_summary">
+            android:summary="@string/pref_feedback_mail_summary"
+            android:title="@string/pref_feedback_mail" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="mailto:nicoalt@gmx.de">
-                <extra android:name="android.intent.extra.SUBJECT" android:value="@string/app_name" />
-                <extra android:name="android.intent.extra.TITLE" android:value="@string/intent_mail" />
-                </intent>
-        </PreferenceScreen>        
-        
+                android:data="mailto:nicoalt@gmx.de" >
+                <extra
+                    android:name="android.intent.extra.SUBJECT"
+                    android:value="@string/app_name" />
+                <extra
+                    android:name="android.intent.extra.TITLE"
+                    android:value="@string/intent_mail" />
+            </intent>
+        </PreferenceScreen>
     </PreferenceCategory>
-    
-    
-    
-    <PreferenceCategory 
-        android:title="Import/Export"
-        android:key="pref_importexport">
-        
+    <PreferenceCategory
+        android:key="pref_importexport"
+        android:title="Import/Export" >
         <PreferenceScreen
-            android:title="Export Database"
+            android:key="pref_importexport_export"
             android:summary="Export the Database to the SD"
-            android:key="pref_importexport_export">
+            android:title="Export Database" >
         </PreferenceScreen>
-        
         <PreferenceScreen
-            android:title="Import Database"
+            android:key="pref_importexport_import"
             android:summary="Import the Database from the SD"
-            android:key="pref_importexport_import">
+            android:title="Import Database" >
         </PreferenceScreen>
-        
     </PreferenceCategory>
-    
-    <PreferenceCategory 
-        android:title="@string/pref_about"
-        android:key="pref_key_storage_settings">
-        
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="@string/pref_about" >
         <PreferenceScreen
-            android:title="@string/pref_about_credits"
-            android:summary="@string/pref_about_credits_summary">
+            android:summary="@string/pref_about_credits_summary"
+            android:title="@string/pref_about_credits" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://nicoalt.pfweb.eu/projekte/android/ha-manager/"
-                />
+                android:data="https://nicoalt.pfweb.eu/projekte/android/ha-manager/" />
         </PreferenceScreen>
-        
         <PreferenceScreen
-            android:title="@string/pref_about_current_version"
-            android:key="pref_about_current_version">
+            android:key="pref_about_current_version"
+            android:title="@string/pref_about_current_version" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/AltNico/ha-manager/releases/latest"
-                />
-        </PreferenceScreen>        
-        
+                android:data="https://github.com/AltNico/ha-manager/releases/latest" />
+        </PreferenceScreen>
     </PreferenceCategory>
 
 </PreferenceScreen>

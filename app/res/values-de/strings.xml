@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">HA-Manager</string>
-    
+
     <!-- Titles -->
     <string name="title_subjects">Fächer</string>
     <string name="title_subject_offers">Fächer Vorschläge</string>
     <string name="title_homework">Hausaufgaben</string>
     <string name="title_addhomework">Hausaufgabe hinzufügen</string>
-    
+
     <!-- Menu Items -->
     <string name="action_add">Hinzufügen</string>
     <string name="action_delete">Alles löschen</string>
     <string name="action_settings">Einstellungen</string>
-    
+
     <!-- Homework Page -->
     <string name="hw_subject">Fach</string>
     <string name="hw_until">Bis</string>
     <string name="hw_urgent">Dringend?</string>
     <string name="hw_homework">Hausaufgabe</string>
     <string name="hw_add">Hinzufügen</string>
-    
-    <!-- Preferences Page -->    
+
+    <!-- Preferences Page -->
     <string name="pref_subjects">Fächer</string>
     <string name="pref_subjects_add">Ein Fach hinzufügen</string>
     <string name="pref_subjects_add_summary">Füge ein Fach zur Liste hinzu</string>
@@ -31,12 +31,10 @@
     <string name="pref_subjects_overview_summary">Eine Liste mit allen Fächern</string>
     <string name="pref_subjects_reset">Zurücksetzen</string>
     <string name="pref_subjects_reset_summary">Setze die Fächerliste auf den Ursprungszustand zurück</string>
-    
     <string name="pref_about">Über</string>
     <string name="pref_about_credits">Credits</string>
     <string name="pref_about_credits_summary">Copyleft 2014: GPLv2 or later\nMainly developed by Nico Alt</string>
     <string name="pref_about_current_version">Aktuelle Version</string>
-    
     <string name="pref_feedback">Feedback</string>
     <string name="pref_feedback_share">Teilen</string>
     <string name="pref_feedback_share_summary">Teile diese App mit deinen Freunden</string>
@@ -44,27 +42,26 @@
     <string name="pref_feedback_playstore_summary">Bewerte diese App im Google Play Store</string>
     <string name="pref_feedback_mail">E-Mail</string>
     <string name="pref_feedback_mail_summary">Sende eine E-Mail an den Entwickler</string>
-    
+
     <!-- Dialogs -->
     <string name="dialog_addSubject">Fach hinzufügen</string>
     <string name="dialog_addSubject_message">Welches Fach möchtest du hinzufügen?</string>
-    
     <string name="dialog_delete">Löschen</string>
     <string name="dialog_really_delete_hw">Willst du wirklich alle Hausaufgaben löschen?</string>
     <string name="dialog_really_delete_subs">Willst du wirklich alle Fächer löschen?</string>
-    
+
     <!-- Intents -->
     <string name="intent_mail">Sende eine E-Mail an den Entwickler</string>
     <string name="intent_share_title">Teilen</string>
     <string name="intent_share_text">Hey, willst du nicht mal den HA-Manager testen? Du kannst ihn hier herunterladen: http://goo.gl/GT99iV</string>
-    
+
     <!-- Toasts -->
     <string name="toast_have2enter">Du musst etwas eingeben!</string>
     <string name="added">hinzugefügt</string>
-    
+
     <!-- Homework String Items -->
     <string name="action_urgent">Dringend!</string>
-    
+
     <!-- Default Subject Array -->
     <string-array name="subjects">
         <item>Biologie</item>
@@ -75,7 +72,7 @@
         <item>Physik</item>
         <item>Sport</item>
     </string-array>
-    
+
     <!-- Subject Offers Array -->
     <string-array name="subject_offers">
         <item>Afrikanisch</item>

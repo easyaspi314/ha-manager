@@ -27,17 +27,17 @@ import de.nico.ha_manager.database.Entry;
 import de.nico.ha_manager.database.HomeworkDataSource;
 
 public class Main extends Activity {
-	
-	//String array containing the subjects
+
+	// String array containing the subjects
 	String[] subjects;
-	
-	//Stuff for the Homework list
+
+	// Stuff for the Homework list
 	HomeworkDataSource datasource;
 	List<Entry> HomeworkList = new ArrayList<Entry>();
-	
-	//Default SharedPreferences of the application
+
+	// Default SharedPreferences of the application
 	SharedPreferences prefs;
-	
+
 	public static Context con;
 
 	@Override
@@ -45,38 +45,38 @@ public class Main extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
 		setTitle(getString(R.string.title_homework));
-		
+
 		con = this;
-		
-		//Update ListView
+
+		// Update ListView
 		update();
-		
-		//Check if a subject list is in SharedPreferences
+
+		// Check if a subject list is in SharedPreferences
 		checkSubjects();
-		
-		//Check if list is available
+
+		// Check if list is available
 		SharedPreferences.Editor editor = prefs.edit();
 		ListView lHomework = (ListView) findViewById(R.id.listView_main);
 		int listSize = lHomework.getCount();
 		if (prefs.getInt("hwid" + "_list", 0) == 0) {
 			editor.putInt("hwid" + "_list", 1);
 			editor.putInt("hwid" + "_size", listSize);
-			for(int i = 0; i < listSize + 1; i++) {
+			for (int i = 0; i < listSize + 1; i++) {
 				int id = i + 1;
 				editor.putString("hwid" + "_" + i, "ID = " + id);
-				
+
 			}
 			editor.commit();
-			
+
 		}
-		
+
 	}
-	
+
 	@Override
-	public void onResume () {
+	public void onResume() {
 		super.onResume();
 		update();
-		
+
 	}
 
 	@Override
@@ -85,178 +85,188 @@ public class Main extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-	    switch (item.getItemId()) {
-	        case R.id.action_settings:
-                startActivityForResult(new Intent(getApplicationContext(), Preferences.class), 1);
-	            return true;
-	            
-	        case R.id.action_delete:
-	        	delete_all();
-	            return true;
-	            
-	        case R.id.action_add:
-	        	startActivityForResult(new Intent(getApplicationContext(), AddHomework.class), 1);
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item); 
-	    }
+		// Handle presses on the action bar items
+		switch (item.getItemId()) {
+		case R.id.action_settings:
+			startActivityForResult(new Intent(getApplicationContext(),
+					Preferences.class), 1);
+			return true;
+
+		case R.id.action_delete:
+			delete_all();
+			return true;
+
+		case R.id.action_add:
+			startActivityForResult(new Intent(getApplicationContext(),
+					AddHomework.class), 1);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
-	
-	public void update () {
+
+	public void update() {
 		HomeworkList.clear();
 		datasource = new HomeworkDataSource(this);
 		try {
 			datasource.open();
 			HomeworkList = datasource.getAllEntries();
 			datasource.close();
-			}
-		catch (Exception ex){
+		} catch (Exception ex) {
 			Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
-			}
-		
-		ArrayAdapter<Entry> adapterHomework = new
-				ArrayAdapter<Entry>(Main.this, android.R.layout.simple_list_item_1, HomeworkList);
-		
+		}
+
+		ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(
+				Main.this, android.R.layout.simple_list_item_1, HomeworkList);
+
 		final ListView lHomework = (ListView) findViewById(R.id.listView_main);
 		lHomework.setAdapter(adapterHomework);
-		lHomework.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-				String item = lHomework.getItemAtPosition(position).toString();
-				AlertDialog.Builder delete_it = (new AlertDialog.Builder(Main.this))
-						.setTitle(getString(R.string.dialog_delete))
-						.setMessage(item)
-						.setPositiveButton((getString(android.R.string.yes)),
+		lHomework
+				.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							final int position, long id) {
+						String item = lHomework.getItemAtPosition(position)
+								.toString();
+						AlertDialog.Builder delete_it = (new AlertDialog.Builder(
+								Main.this))
+								.setTitle(getString(R.string.dialog_delete))
+								.setMessage(item)
+								.setPositiveButton(
+										(getString(android.R.string.yes)),
+										new DialogInterface.OnClickListener() {
+
+											public void onClick(
+													DialogInterface dialog,
+													int which) {
+												deleteItem(position);
+												update();
+
+											}
+
+										});
+
+						delete_it.setNegativeButton(
+								(getString(android.R.string.no)),
 								new DialogInterface.OnClickListener() {
-							
-							public void onClick(DialogInterface dialog, int which) {
-								deleteItem(position);
-								update();
-								
-							}
-							
-						});
-				
-				delete_it.setNegativeButton((getString(android.R.string.no)),
-						new DialogInterface.OnClickListener() {
-					
-					public void onClick(DialogInterface dialog, int which) {
-						return;
-						
+
+									public void onClick(DialogInterface dialog,
+											int which) {
+										return;
+
+									}
+
+								});
+
+						AlertDialog delete_dialog = delete_it.create();
+						delete_dialog.show();
+
 					}
-					
+
 				});
-				
-				AlertDialog delete_dialog = delete_it.create();
-				delete_dialog.show();
-				
-			}
-			
-		});
-        
+
 	}
-	
-	public void deleteItem (int pos) {
+
+	public void deleteItem(int pos) {
 		SharedPreferences.Editor editor = prefs.edit();
-		
-		//Get IDs
+
+		// Get IDs
 		prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
 		int size = prefs.getInt("hwid" + "_size", 0);
-		String [] IdList = new String[size];
-		
-		for(int i = 0; i < size; i++) {
+		String[] IdList = new String[size];
+
+		for (int i = 0; i < size; i++) {
 			IdList[i] = prefs.getString("hwid" + "_" + i, null);
-			
+
 		}
-		
-		//Delete it in database
+
+		// Delete it in database
 		datasource.delete_item("HOMEWORK", IdList[pos], null);
-		
-		//Delete item from SharedPreferences
+
+		// Delete item from SharedPreferences
 		IdList = new String[size - 1];
-		
-		for(int i = 0; i < size; i++) {
+
+		for (int i = 0; i < size; i++) {
 			if (i < pos)
 				IdList[i] = prefs.getString("hwid" + "_" + i, null);
-			
+
 			if (i > pos)
 				IdList[i - 1] = prefs.getString("hwid" + "_" + i, null);
-			
+
 		}
-		
-		for(int i = 0; i < IdList.length; i++) {
+
+		for (int i = 0; i < IdList.length; i++) {
 			editor.putString("hwid" + "_" + i, IdList[i]);
-			
+
 		}
-		
-		editor.putInt("hwid" +"_size", IdList.length);
+
+		editor.putInt("hwid" + "_size", IdList.length);
 		editor.remove("hwid" + "_" + IdList.length);
 		editor.commit();
-		
+
 	}
-	
+
 	public void delete_all() {
 		AlertDialog.Builder delete_it = new AlertDialog.Builder(this);
 		delete_it.setTitle(getString(R.string.dialog_delete));
 		delete_it.setMessage(getString(R.string.dialog_really_delete_hw));
 		delete_it.setPositiveButton((getString(android.R.string.yes)),
-		   new DialogInterface.OnClickListener() {
-			 
-		      public void onClick(DialogInterface dialog, int which) {
-		  		datasource.delete_item("HOMEWORK", null, null);
-		  		SharedPreferences.Editor editor = prefs.edit();
-		  		editor.putInt("hwid" +"_size", 0);
-				editor.commit();
-		  		update();
-		    }
-		   });
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						datasource.delete_item("HOMEWORK", null, null);
+						SharedPreferences.Editor editor = prefs.edit();
+						editor.putInt("hwid" + "_size", 0);
+						editor.commit();
+						update();
+					}
+				});
 
 		delete_it.setNegativeButton((getString(android.R.string.no)),
-		   new DialogInterface.OnClickListener() {
-			 
-		      public void onClick(DialogInterface dialog, int which) {
-		  		return;
-		    }
-		   });
+				new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						return;
+					}
+				});
 		AlertDialog delete_dialog = delete_it.create();
 		delete_dialog.show();
 	}
-	
-	public void checkSubjects () {
+
+	public void checkSubjects() {
 		if (!(getSubjects(this).length > 0)) {
 			setDefaultSubjects();
 		}
 	}
-	
-	public String[] getSubjects (Context con) {
+
+	public String[] getSubjects(Context con) {
 		prefs = PreferenceManager.getDefaultSharedPreferences(con);
-		
+
 		// Set size of array to amount of Strings in SharedPreferences
 		int size = prefs.getInt("subjects" + "_size", 0);
 		subjects = new String[size];
-		
+
 		// Get parts of subject array from SharedPreferences Strings
-		for(int i = 0; i < size; i++) {
+		for (int i = 0; i < size; i++) {
 			subjects[i] = prefs.getString("subjects" + "_" + i, null);
 		}
 		return subjects;
 	}
-	
-	public void setDefaultSubjects () {
-		//Get subjects from strings.xml
-    	String [] subjects = getResources().getStringArray(R.array.subjects);
-    	
-    	//Sort subjects array alphabetically
+
+	public void setDefaultSubjects() {
+		// Get subjects from strings.xml
+		String[] subjects = getResources().getStringArray(R.array.subjects);
+
+		// Sort subjects array alphabetically
 		Arrays.sort(subjects);
-		
-		//Add subjects to SharedPreferences
+
+		// Add subjects to SharedPreferences
 		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("subjects" +"_size", subjects.length);
-		for(int i = 0; i < subjects.length; i++) {
+		editor.putInt("subjects" + "_size", subjects.length);
+		for (int i = 0; i < subjects.length; i++) {
 			editor.putString("subjects" + "_" + i, subjects[i]);
 		}
 		editor.commit();
