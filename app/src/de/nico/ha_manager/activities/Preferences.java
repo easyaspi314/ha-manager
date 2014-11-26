@@ -234,7 +234,7 @@ public class Preferences extends PreferenceActivity {
 		File srcPref = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name) + "/Preferences.xml");
 		File dstPref = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/shared_prefs/de.nico.ha_manager_preferences.xml");
+				+ "/shared_prefs/" + Preferences.this.getApplicationInfo().packageName + "_preferences.xml");
 
 		// Check if Database exists
 		if (!(srcDB.exists())) {
@@ -313,7 +313,7 @@ public class Preferences extends PreferenceActivity {
 
 		// Path for SharedPrefernces
 		File srcPref = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/shared_prefs/de.nico.ha_manager_preferences.xml");
+				+ "/shared_prefs/" + Preferences.this.getApplicationInfo().packageName + "_preferences.xml");
 		File dstPref = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name) + "/Preferences.xml");
 
