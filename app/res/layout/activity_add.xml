@@ -1,60 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
-<ScrollView 
-    android:id="@+id/scrollView_add"
-    android:layout_width="fill_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1">
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView_add"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:orientation="vertical">        
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp" >
 
             <TextView
                 android:id="@+id/textView_subject"
-                android:text="@string/hw_subject"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/hw_subject"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
                 android:id="@+id/spinner_subject"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_width="fill_parent"/>
-
+                android:layout_marginBottom="8dp" />
 
             <TextView
                 android:id="@+id/textView_until"
-                android:text="@string/hw_until"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/hw_until"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Button
-                android:layout_width="fill_parent"
                 android:id="@+id/button_until"
                 style="?android:attr/spinnerStyle"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="12dp"
-                android:paddingStart="12dp"
-                android:paddingRight="12dp"
-                android:paddingEnd="12dp"
                 android:layout_marginBottom="8dp"
-                android:onClick="setUntil" />
+                android:onClick="setUntil"
+                android:paddingEnd="12dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingStart="12dp" />
 
             <EditText
-                android:layout_width="fill_parent"
                 android:id="@+id/editText_homework"
-                android:hint="@string/hw_homework"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:hint="@string/hw_homework"
                 android:inputType="textMultiLine" />
 
             <CheckBox
@@ -63,8 +62,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="@string/hw_urgent" />
+        </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-</ScrollView>
-<include layout="@layout/button_bar"/>
+    <include layout="@layout/button_bar" />
+
 </LinearLayout>
