@@ -7,7 +7,7 @@
 <ScrollView 
     android:id="@+id/scrollView_add"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
     android:layout_weight="1">
 
     <LinearLayout
@@ -25,7 +25,7 @@
 
             <Spinner
                 android:id="@+id/spinner_subject"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_width="fill_parent"/>
 
@@ -41,7 +41,7 @@
                 android:layout_width="fill_parent"
                 android:id="@+id/button_until"
                 style="?android:attr/spinnerStyle"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:paddingLeft="12dp"
                 android:paddingStart="12dp"
                 android:paddingRight="12dp"
@@ -53,7 +53,7 @@
                 android:layout_width="fill_parent"
                 android:id="@+id/editText_homework"
                 android:hint="@string/hw_homework"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:inputType="textMultiLine" />
 
