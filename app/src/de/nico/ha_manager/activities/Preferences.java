@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -79,9 +80,10 @@ public class Preferences extends PreferenceActivity {
 			Log.e("Get Build Date", e.toString());
 		}
 
-		subjects_add = (Preference) findPreference("subjects_add");
+		subjects_add = findPreference("subjects_add");
 		subjects_add
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						final EditText input = new EditText(Preferences.this);
 						new AlertDialog.Builder(Preferences.this)
@@ -92,6 +94,7 @@ public class Preferences extends PreferenceActivity {
 								.setPositiveButton(
 										getString(android.R.string.ok),
 										new DialogInterface.OnClickListener() {
+											@Override
 											public void onClick(
 													DialogInterface dialog,
 													int whichButton) {
@@ -102,6 +105,7 @@ public class Preferences extends PreferenceActivity {
 								.setNegativeButton(
 										getString(android.R.string.cancel),
 										new DialogInterface.OnClickListener() {
+											@Override
 											public void onClick(
 													DialogInterface dialog,
 													int whichButton) {
@@ -112,9 +116,10 @@ public class Preferences extends PreferenceActivity {
 					}
 				});
 
-		subjects_overview = (Preference) findPreference("subjects_overview");
+		subjects_overview = findPreference("subjects_overview");
 		subjects_overview
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						startActivityForResult(new Intent(
 								getApplicationContext(), Subjects.class), 1);
@@ -122,9 +127,10 @@ public class Preferences extends PreferenceActivity {
 					}
 				});
 
-		subjects_offers = (Preference) findPreference("subjects_offers");
+		subjects_offers = findPreference("subjects_offers");
 		subjects_offers
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						startActivityForResult(new Intent(
 								getApplicationContext(), SubjectOffers.class),
@@ -133,9 +139,10 @@ public class Preferences extends PreferenceActivity {
 					}
 				});
 
-		subjects_reset = (Preference) findPreference("subjects_reset");
+		subjects_reset = findPreference("subjects_reset");
 		subjects_reset
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						AlertDialog.Builder delete_subjects = new AlertDialog.Builder(
 								Preferences.this);
@@ -148,6 +155,7 @@ public class Preferences extends PreferenceActivity {
 								(getString(android.R.string.yes)),
 								new DialogInterface.OnClickListener() {
 
+									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
 										resetSubjects();
@@ -159,6 +167,7 @@ public class Preferences extends PreferenceActivity {
 								(getString(android.R.string.no)),
 								new DialogInterface.OnClickListener() {
 
+									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
 										return;
@@ -172,9 +181,10 @@ public class Preferences extends PreferenceActivity {
 					}
 				});
 
-		feedback_share = (Preference) findPreference("feedback_share");
+		feedback_share = findPreference("feedback_share");
 		feedback_share
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						String share_title = getString(R.string.intent_share_title);
 						String app_name = getString(R.string.app_name);
@@ -191,9 +201,10 @@ public class Preferences extends PreferenceActivity {
 					}
 				});
 
-		importexport_export = (Preference) findPreference("pref_importexport_export");
+		importexport_export = findPreference("pref_importexport_export");
 		importexport_export
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						return exportData();
 
@@ -201,9 +212,10 @@ public class Preferences extends PreferenceActivity {
 
 				});
 
-		importexport_import = (Preference) findPreference("pref_importexport_import");
+		importexport_import = findPreference("pref_importexport_import");
 		importexport_import
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						return importData();
 
@@ -234,7 +246,9 @@ public class Preferences extends PreferenceActivity {
 		File srcPref = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name) + "/Preferences.xml");
 		File dstPref = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/shared_prefs/" + Preferences.this.getApplicationInfo().packageName + "_preferences.xml");
+				+ "/shared_prefs/"
+				+ Preferences.this.getApplicationInfo().packageName
+				+ "_preferences.xml");
 
 		// Check if Database exists
 		if (!(srcDB.exists())) {
@@ -313,7 +327,9 @@ public class Preferences extends PreferenceActivity {
 
 		// Path for SharedPrefernces
 		File srcPref = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/shared_prefs/" + Preferences.this.getApplicationInfo().packageName + "_preferences.xml");
+				+ "/shared_prefs/"
+				+ Preferences.this.getApplicationInfo().packageName
+				+ "_preferences.xml");
 		File dstPref = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name) + "/Preferences.xml");
 
