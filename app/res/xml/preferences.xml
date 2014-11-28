@@ -74,7 +74,7 @@
             android:title="@string/pref_about_credits" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://nicoalt.pfweb.eu/projekte/android/ha-manager/" />
+                android:data="https://altnico.github.io/projects.html#HW-Manager" />
         </PreferenceScreen>
         <PreferenceScreen
             android:key="pref_about_current_version"
