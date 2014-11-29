@@ -206,7 +206,40 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						return exportData();
+						AlertDialog.Builder delete_subjects = new AlertDialog.Builder(
+								Preferences.this);
+						delete_subjects.setTitle("Export Data");
+						delete_subjects
+								.setMessage("Do you really want to backup the data and "
+										+ "overwrite the old backup?");
+
+						delete_subjects.setPositiveButton(
+								(getString(android.R.string.yes)),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										exportData();
+									}
+
+								});
+
+						delete_subjects.setNegativeButton(
+								(getString(android.R.string.no)),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// Do nothing
+									}
+
+								});
+
+						AlertDialog delete_dialog = delete_subjects.create();
+						delete_dialog.show();
+						return true;
 
 					}
 
@@ -217,7 +250,40 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						return importData();
+						AlertDialog.Builder delete_subjects = new AlertDialog.Builder(
+								Preferences.this);
+						delete_subjects.setTitle("Import Data");
+						delete_subjects
+								.setMessage("Do you really want to import the data and "
+										+ "overwrite the current data?");
+
+						delete_subjects.setPositiveButton(
+								(getString(android.R.string.yes)),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										importData();
+									}
+
+								});
+
+						delete_subjects.setNegativeButton(
+								(getString(android.R.string.no)),
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// Do nothing
+									}
+
+								});
+
+						AlertDialog delete_dialog = delete_subjects.create();
+						delete_dialog.show();
+						return true;
 
 					}
 
@@ -225,7 +291,7 @@ public class Preferences extends PreferenceActivity {
 
 	}
 
-	public boolean importData() {
+	public void importData() {
 		// Check if directory exists
 		File dir = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name));
@@ -233,7 +299,7 @@ public class Preferences extends PreferenceActivity {
 			Toast.makeText(Preferences.this,
 					"No Files at SD/" + getString(R.string.app_name),
 					Toast.LENGTH_LONG).show();
-			return true;
+			return;
 		}
 
 		// Path for Database
@@ -255,7 +321,7 @@ public class Preferences extends PreferenceActivity {
 			Toast.makeText(Preferences.this,
 					"No Database at SD/" + getString(R.string.app_name),
 					Toast.LENGTH_LONG).show();
-			return true;
+			return;
 
 		}
 
@@ -264,7 +330,7 @@ public class Preferences extends PreferenceActivity {
 			Toast.makeText(Preferences.this,
 					"No Database at SD/" + getString(R.string.app_name),
 					Toast.LENGTH_LONG).show();
-			return true;
+			return;
 
 		}
 
@@ -291,13 +357,13 @@ public class Preferences extends PreferenceActivity {
 			Log.e("FileNotFoundException", e.toString());
 			Toast.makeText(Preferences.this, "Import failed",
 					Toast.LENGTH_SHORT).show();
-			return true;
+			return;
 
 		} catch (IOException e) {
 			Log.e("IOException", e.toString());
 			Toast.makeText(Preferences.this, "Import failed",
 					Toast.LENGTH_SHORT).show();
-			return true;
+			return;
 
 		}
 		Toast.makeText(Preferences.this, "Import sucessfully",
@@ -309,10 +375,9 @@ public class Preferences extends PreferenceActivity {
 				.getLaunchIntentForPackage(getBaseContext().getPackageName());
 		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(i);
-		return true;
 	}
 
-	public boolean exportData() {
+	public void exportData() {
 		// Check if directory exists
 		File dir = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name));
@@ -356,18 +421,17 @@ public class Preferences extends PreferenceActivity {
 			Log.e("FileNotFoundException", e.toString());
 			Toast.makeText(Preferences.this, "Export failed",
 					Toast.LENGTH_SHORT).show();
-			return true;
+			return;
 
 		} catch (IOException e) {
 			Log.e("IOException", e.toString());
 			Toast.makeText(Preferences.this, "Export failed",
 					Toast.LENGTH_SHORT).show();
-			return true;
+			return;
 
 		}
 		Toast.makeText(Preferences.this, "Export sucessfully",
 				Toast.LENGTH_SHORT).show();
-		return true;
 	}
 
 	public void resetSubjects() {
