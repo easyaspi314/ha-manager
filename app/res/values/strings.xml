@@ -42,6 +42,10 @@
     <string name="pref_feedback_playstore_summary">Review the app in the Google Play Store</string>
     <string name="pref_feedback_mail">Email</string>
     <string name="pref_feedback_mail_summary">Send an email to the developer</string>
+    <string name="pref_homework_import">Import</string>
+    <string name="pref_homework_import_summary">Import the homework from the SD</string>
+    <string name="pref_homework_export">Export</string>
+    <string name="pref_homework_export_summary">Export the homework to the SD</string>
 
     <!-- Dialogs -->
     <string name="dialog_addSubject">Add Subject</string>
@@ -49,6 +53,8 @@
     <string name="dialog_delete">Delete</string>
     <string name="dialog_really_delete_hw">Do you really want to delete all homework assignments?</string>
     <string name="dialog_really_delete_subs">Do you really want to delete all subjects?</string>
+    <string name="dialog_export_message">Do you really want to backup the homework and overwrite the old backup?</string>
+    <string name="dialog_import_message">Do you really want to import the homework and overwrite the current homework?</string>
 
     <!-- Intents -->
     <string name="intent_mail">Send a mail to the developer</string>
@@ -58,6 +64,11 @@
     <!-- Toasts -->
     <string name="toast_have2enter">You have to enter something!</string>
     <string name="added">added</string>
+    <string name="toast_nobackup">No Files at SD/</string><!-- app name will be added programmatically -->
+    <string name="toast_import_success">Import successfully</string>
+    <string name="toast_import_fail">Import failed</string>
+    <string name="toast_export_success">Export successfully</string>
+    <string name="toast_export_fail">Export failed</string>
 
     <!-- Homework String Items -->
     <string name="action_urgent">Important!</string>

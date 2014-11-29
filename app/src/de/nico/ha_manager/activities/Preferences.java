@@ -208,10 +208,10 @@ public class Preferences extends PreferenceActivity {
 					public boolean onPreferenceClick(Preference preference) {
 						AlertDialog.Builder delete_subjects = new AlertDialog.Builder(
 								Preferences.this);
-						delete_subjects.setTitle("Export Data");
 						delete_subjects
-								.setMessage("Do you really want to backup the data and "
-										+ "overwrite the old backup?");
+								.setTitle(getString(R.string.pref_homework_export));
+						delete_subjects
+								.setMessage(getString(R.string.dialog_export_message));
 
 						delete_subjects.setPositiveButton(
 								(getString(android.R.string.yes)),
@@ -252,10 +252,10 @@ public class Preferences extends PreferenceActivity {
 					public boolean onPreferenceClick(Preference preference) {
 						AlertDialog.Builder delete_subjects = new AlertDialog.Builder(
 								Preferences.this);
-						delete_subjects.setTitle("Import Data");
 						delete_subjects
-								.setMessage("Do you really want to import the data and "
-										+ "overwrite the current data?");
+								.setTitle(getString(R.string.pref_homework_import));
+						delete_subjects
+								.setMessage(getString(R.string.dialog_import_message));
 
 						delete_subjects.setPositiveButton(
 								(getString(android.R.string.yes)),
@@ -297,7 +297,8 @@ public class Preferences extends PreferenceActivity {
 				+ getString(R.string.app_name));
 		if (!(dir.exists())) {
 			Toast.makeText(Preferences.this,
-					"No Files at SD/" + getString(R.string.app_name),
+					getString(R.string.toast_nobackup)
+							+ getString(R.string.app_name),
 					Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -319,7 +320,8 @@ public class Preferences extends PreferenceActivity {
 		// Check if Database exists
 		if (!(srcDB.exists())) {
 			Toast.makeText(Preferences.this,
-					"No Database at SD/" + getString(R.string.app_name),
+					getString(R.string.toast_nobackup)
+							+ getString(R.string.app_name),
 					Toast.LENGTH_LONG).show();
 			return;
 
@@ -328,7 +330,8 @@ public class Preferences extends PreferenceActivity {
 		// Check if SharedPrefernces exists
 		if (!(srcPref.exists())) {
 			Toast.makeText(Preferences.this,
-					"No Database at SD/" + getString(R.string.app_name),
+					getString(R.string.toast_nobackup)
+							+ getString(R.string.app_name),
 					Toast.LENGTH_LONG).show();
 			return;
 
@@ -355,18 +358,21 @@ public class Preferences extends PreferenceActivity {
 
 		} catch (FileNotFoundException e) {
 			Log.e("FileNotFoundException", e.toString());
-			Toast.makeText(Preferences.this, "Import failed",
+			Toast.makeText(Preferences.this,
+					getString(R.string.toast_import_fail),
 					Toast.LENGTH_SHORT).show();
 			return;
 
 		} catch (IOException e) {
 			Log.e("IOException", e.toString());
-			Toast.makeText(Preferences.this, "Import failed",
+			Toast.makeText(Preferences.this,
+					getString(R.string.toast_import_fail),
 					Toast.LENGTH_SHORT).show();
 			return;
 
 		}
-		Toast.makeText(Preferences.this, "Import sucessfully",
+		Toast.makeText(Preferences.this,
+				getString(R.string.toast_import_success),
 				Toast.LENGTH_SHORT).show();
 
 		// Only works with a restart at the moment...
@@ -419,18 +425,21 @@ public class Preferences extends PreferenceActivity {
 
 		} catch (FileNotFoundException e) {
 			Log.e("FileNotFoundException", e.toString());
-			Toast.makeText(Preferences.this, "Export failed",
+			Toast.makeText(Preferences.this,
+					getString(R.string.toast_export_fail),
 					Toast.LENGTH_SHORT).show();
 			return;
 
 		} catch (IOException e) {
 			Log.e("IOException", e.toString());
-			Toast.makeText(Preferences.this, "Export failed",
+			Toast.makeText(Preferences.this,
+					getString(R.string.toast_export_fail),
 					Toast.LENGTH_SHORT).show();
 			return;
 
 		}
-		Toast.makeText(Preferences.this, "Export sucessfully",
+		Toast.makeText(Preferences.this,
+				getString(R.string.toast_export_success),
 				Toast.LENGTH_SHORT).show();
 	}
 

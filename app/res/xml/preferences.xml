@@ -54,16 +54,16 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_importexport"
-        android:title="Import/Export" >
+        android:title="@string/title_homework" >
         <PreferenceScreen
             android:key="pref_importexport_export"
-            android:summary="Export the Database to the SD"
-            android:title="Export Database" >
+            android:summary="@string/pref_homework_export_summary"
+            android:title="@string/pref_homework_export" >
         </PreferenceScreen>
         <PreferenceScreen
             android:key="pref_importexport_import"
-            android:summary="Import the Database from the SD"
-            android:title="Import Database" >
+            android:summary="@string/pref_homework_import_summary"
+            android:title="@string/pref_homework_import" >
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
