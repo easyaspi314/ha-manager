@@ -1,23 +1,22 @@
-Mainly developed by Nico Alt.
+# HW-Manager #
 
-### LICENSE ###
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/hw-manager/localized.png)](https://crowdin.com/project/hw-manager)
 
-GPLv2 or later
-For more license information see LICENSE.txt
+[![F-Droid](https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png)](https://f-droid.org/repository/browse/?fdfilter=hw-manager&fdid=de.nico.ha_manager)
+[![Play Store](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=de.nico.ha_manager)
 
-### What is this project for? ###
+## What is this project for? ##
 
-With the programm 'HA-Manager' you are able to save your homeworks for school.
+With the application 'HW-Manager' you are able to save your homework for school.
 
-### How do I get set up? ###
+## How do I get set up? ##
 
 Import the project into eclipse and compile it to get an .apk file, which you can install on an android phone.
 
-### Structure ###
+## LICENSE ##
 
-In the main dircetory are several texts and images which are used in the app itself or in the Play Store entry.
+See [LICENSE.txt](https://github.com/AltNico/ha-manager/blob/develop/LICENSE.txt)
 
-### Git ###
+## Git ##
 
-As Git workflow I want to use the so called "GitFlow" which is shown here:
-https://www.atlassian.com/en/git/workflows#!workflow-gitflow
+As Git workflow I want to use the so called "GitFlow" which is shown [here](https://www.atlassian.com/en/git/workflows#!workflow-gitflow).
