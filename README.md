@@ -19,4 +19,4 @@ See [LICENSE.txt](https://github.com/AltNico/ha-manager/blob/develop/LICENSE.txt
 
 ## Git ##
 
-As Git workflow I want to use the so called "GitFlow" which is shown [here](https://www.atlassian.com/en/git/workflows#!workflow-gitflow).
+As Git workflow I want to use the so called "GitFlow" which is shown [here](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
