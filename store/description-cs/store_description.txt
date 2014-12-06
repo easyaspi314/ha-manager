@@ -1,0 +1,6 @@
+S aplikací HW-Manager si můžete ulehčit školní den a udržovat přehled o svých domácích úkolech.
+Cílem projektu je mít jednoduchého správce domácích úkolů, narozdíl od jiných aplikací.
+
+Aplikace je open source, takže můžete přispět sami, i když nejste programátoři. 
+
+Kód se nachází zde:
