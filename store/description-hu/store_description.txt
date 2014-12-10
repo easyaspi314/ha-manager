@@ -1,0 +1,6 @@
+A HW-Manager megkönnyíti a tanulást és áttekintést nyújt a házi feladatokról.
+A project célja, hogy könnyen lehessen kezelni a házi feladatokat és ne nőjön túl nagyra, mint néhány másik alkalmazás.
+
+Az alkalmazás nyílt forráskódú, részt vehetsz benne akkor is ha nem vagy programozó. 
+
+A kódja itt található:
