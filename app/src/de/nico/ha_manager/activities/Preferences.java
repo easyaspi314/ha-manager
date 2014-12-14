@@ -309,26 +309,8 @@ public class Preferences extends PreferenceActivity {
 		File dstDB = new File(Preferences.this.getApplicationInfo().dataDir
 				+ "/databases/Homework.db");
 
-		// Path for SharedPrefernces
-		File srcPref = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getString(R.string.app_name) + "/Preferences.xml");
-		File dstPref = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/shared_prefs/"
-				+ Preferences.this.getApplicationInfo().packageName
-				+ "_preferences.xml");
-
 		// Check if Database exists
 		if (!(srcDB.exists())) {
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_nobackup)
-							+ getString(R.string.app_name),
-					Toast.LENGTH_LONG).show();
-			return;
-
-		}
-
-		// Check if SharedPrefernces exists
-		if (!(srcPref.exists())) {
 			Toast.makeText(Preferences.this,
 					getString(R.string.toast_nobackup)
 							+ getString(R.string.app_name),
@@ -343,15 +325,6 @@ public class Preferences extends PreferenceActivity {
 			FileOutputStream outStream = new FileOutputStream(dstDB);
 			FileChannel inChannel = inStream.getChannel();
 			FileChannel outChannel = outStream.getChannel();
-			inChannel.transferTo(0, inChannel.size(), outChannel);
-			inStream.close();
-			outStream.close();
-
-			// Import SharedPrefernces
-			inStream = new FileInputStream(srcPref);
-			outStream = new FileOutputStream(dstPref);
-			inChannel = inStream.getChannel();
-			outChannel = outStream.getChannel();
 			inChannel.transferTo(0, inChannel.size(), outChannel);
 			inStream.close();
 			outStream.close();
@@ -374,13 +347,6 @@ public class Preferences extends PreferenceActivity {
 		Toast.makeText(Preferences.this,
 				getString(R.string.toast_import_success),
 				Toast.LENGTH_SHORT).show();
-
-		// Only works with a restart at the moment...
-		System.exit(0);
-		Intent i = getBaseContext().getPackageManager()
-				.getLaunchIntentForPackage(getBaseContext().getPackageName());
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(i);
 	}
 
 	public void exportData() {
@@ -396,29 +362,12 @@ public class Preferences extends PreferenceActivity {
 		File dstDB = new File(Environment.getExternalStorageDirectory() + "/"
 				+ getString(R.string.app_name) + "/Homework.db");
 
-		// Path for SharedPrefernces
-		File srcPref = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/shared_prefs/"
-				+ Preferences.this.getApplicationInfo().packageName
-				+ "_preferences.xml");
-		File dstPref = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getString(R.string.app_name) + "/Preferences.xml");
-
 		try {
 			// Export Database
 			FileInputStream inStream = new FileInputStream(srcDB);
 			FileOutputStream outStream = new FileOutputStream(dstDB);
 			FileChannel inChannel = inStream.getChannel();
 			FileChannel outChannel = outStream.getChannel();
-			inChannel.transferTo(0, inChannel.size(), outChannel);
-			inStream.close();
-			outStream.close();
-
-			// Export SharedPrefernces
-			inStream = new FileInputStream(srcPref);
-			outStream = new FileOutputStream(dstPref);
-			inChannel = inStream.getChannel();
-			outChannel = outStream.getChannel();
 			inChannel.transferTo(0, inChannel.size(), outChannel);
 			inStream.close();
 			outStream.close();

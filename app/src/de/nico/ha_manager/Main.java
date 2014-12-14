@@ -4,7 +4,7 @@ package de.nico.ha_manager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -18,12 +18,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import de.nico.ha_manager.activities.AddHomework;
 import de.nico.ha_manager.activities.Preferences;
-import de.nico.ha_manager.database.Entry;
 import de.nico.ha_manager.database.HomeworkDataSource;
 
 public class Main extends Activity {
@@ -33,12 +34,10 @@ public class Main extends Activity {
 
 	// Stuff for the Homework list
 	HomeworkDataSource datasource;
-	List<Entry> HomeworkList = new ArrayList<Entry>();
+	ArrayList<HashMap<String, String>> HomeworkList = new ArrayList<HashMap<String, String>>();
 
 	// Default SharedPreferences of the application
 	SharedPreferences prefs;
-
-	public static Context con;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,29 +45,11 @@ public class Main extends Activity {
 		setContentView(R.layout.activity_list);
 		setTitle(getString(R.string.title_homework));
 
-		con = this;
-
 		// Update ListView
 		update();
 
 		// Check if a subject list is in SharedPreferences
 		checkSubjects();
-
-		// Check if list is available
-		SharedPreferences.Editor editor = prefs.edit();
-		ListView lHomework = (ListView) findViewById(R.id.listView_main);
-		int listSize = lHomework.getCount();
-		if (prefs.getInt("hwid_list", 0) == 0) {
-			editor.putInt("hwid_list", 1);
-			editor.putInt("hwid_size", listSize);
-			for (int i = 0; i < listSize + 1; i++) {
-				int id = i + 1;
-				editor.putString("hwid_" + i, "ID = " + id);
-
-			}
-			editor.commit();
-
-		}
 
 	}
 
@@ -119,95 +100,78 @@ public class Main extends Activity {
 			Toast.makeText(this, ex.toString(), Toast.LENGTH_LONG).show();
 		}
 
-		ArrayAdapter<Entry> adapterHomework = new ArrayAdapter<Entry>(
-				Main.this, android.R.layout.simple_list_item_1, HomeworkList);
-
 		final ListView lHomework = (ListView) findViewById(R.id.listView_main);
-		lHomework.setAdapter(adapterHomework);
-		lHomework
-				.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							final int position, long id) {
-						String item = lHomework.getItemAtPosition(position)
-								.toString();
-						AlertDialog.Builder delete_it = (new AlertDialog.Builder(
-								Main.this))
-								.setTitle(getString(R.string.dialog_delete))
-								.setMessage(item)
-								.setPositiveButton(
-										(getString(android.R.string.yes)),
-										new DialogInterface.OnClickListener() {
+		ListAdapter listAdapter = new SimpleAdapter(Main.this, HomeworkList,
+				R.layout.listview_entry, new String[] { "URGENT", "SUBJECT",
+						"HOMEWORK", "UNTIL" }, new int[] {
+						R.id.textView_urgent, R.id.textView_subject,
+						R.id.textView_homework, R.id.textView_until, });
 
-											@Override
-											public void onClick(
-													DialogInterface dialog,
-													int which) {
-												deleteItem(position);
-												update();
-
-											}
-
-										});
-
-						delete_it.setNegativeButton(
-								(getString(android.R.string.no)),
+		lHomework.setAdapter(listAdapter);
+		lHomework.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				// Get current things and add them to a temporary ArrayList
+				ArrayList<HashMap<String, String>> tempArray = new ArrayList<HashMap<String, String>>();
+				HashMap<String, String> tempHashMap = new HashMap<String, String>();
+				tempHashMap.put("URGENT",
+						HomeworkList.get(position).get("URGENT"));
+				tempHashMap.put("SUBJECT",
+						HomeworkList.get(position).get("SUBJECT"));
+				tempHashMap.put("HOMEWORK",
+						HomeworkList.get(position).get("HOMEWORK"));
+				tempHashMap.put("UNTIL", HomeworkList.get(position)
+						.get("UNTIL"));
+				tempHashMap.put("ID", HomeworkList.get(position).get("ID"));
+				tempArray.add(tempHashMap);
+				// Get ID for deletion
+				final String currentID = "ID = "
+						+ HomeworkList.get(position).get("ID");
+				// Make a new SimpleAdapter which contains the ListView entry
+				SimpleAdapter alertAdapter = new SimpleAdapter(Main.this,
+						tempArray, R.layout.listview_entry, new String[] {
+								"URGENT", "SUBJECT", "HOMEWORK", "UNTIL" },
+						new int[] { R.id.textView_urgent,
+								R.id.textView_subject, R.id.textView_homework,
+								R.id.textView_until, });
+				// Make a AlertDialog
+				AlertDialog.Builder delete_it = (new AlertDialog.Builder(
+						Main.this))
+						.setTitle(getString(R.string.dialog_delete))
+						.setAdapter(alertAdapter, null)
+						.setPositiveButton((getString(android.R.string.yes)),
 								new DialogInterface.OnClickListener() {
 
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										return;
+										datasource.delete_item("HOMEWORK",
+												currentID, null);
+										update();
 
 									}
 
 								});
 
-						AlertDialog delete_dialog = delete_it.create();
-						delete_dialog.show();
+				delete_it.setNegativeButton((getString(android.R.string.no)),
+						new DialogInterface.OnClickListener() {
 
-					}
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								return;
 
-				});
+							}
 
-	}
+						});
 
-	public void deleteItem(int pos) {
-		SharedPreferences.Editor editor = prefs.edit();
+				AlertDialog delete_dialog = delete_it.create();
+				delete_dialog.show();
 
-		// Get IDs
-		prefs = PreferenceManager.getDefaultSharedPreferences(Main.con);
-		int size = prefs.getInt("hwid_size", 0);
-		String[] IdList = new String[size];
+			}
 
-		for (int i = 0; i < size; i++) {
-			IdList[i] = prefs.getString("hwid_" + i, null);
-
-		}
-
-		// Delete it in database
-		datasource.delete_item("HOMEWORK", IdList[pos], null);
-
-		// Delete item from SharedPreferences
-		IdList = new String[size - 1];
-
-		for (int i = 0; i < size; i++) {
-			if (i < pos)
-				IdList[i] = prefs.getString("hwid_" + i, null);
-
-			if (i > pos)
-				IdList[i - 1] = prefs.getString("hwid_" + i, null);
-
-		}
-
-		for (int i = 0; i < IdList.length; i++) {
-			editor.putString("hwid_" + i, IdList[i]);
-
-		}
-
-		editor.putInt("hwid_size", IdList.length);
-		editor.remove("hwid_" + IdList.length);
-		editor.commit();
+		});
 
 	}
 

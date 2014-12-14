@@ -3,16 +3,13 @@
 package de.nico.ha_manager.database;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-import de.nico.ha_manager.Main;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.preference.PreferenceManager;
 
 public class HomeworkDataSource {
 
@@ -33,7 +30,7 @@ public class HomeworkDataSource {
 		dbHelper.close();
 	}
 
-	public Entry createEntry(String urgent, String subject, String homework,
+	public void createEntry(String urgent, String subject, String homework,
 			String until) {
 		ContentValues values = new ContentValues();
 		values.put("URGENT", urgent);
@@ -43,37 +40,9 @@ public class HomeworkDataSource {
 
 		String insertId = "ID = " + database.insert("HOMEWORK", null, values);
 
-		addID(insertId);
-
 		Cursor cursor = database.query("HOMEWORK", allColumns, insertId, null,
 				null, null, null);
 		cursor.moveToFirst();
-
-		return cursorToEntry(cursor);
-	}
-
-	public void addID(String id) {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(Main.con);
-		int size = prefs.getInt("hwid" + "_size", 0);
-		String[] IdList = new String[size + 1];
-
-		for (int i = 0; i < size; i++) {
-			IdList[i] = prefs.getString("hwid" + "_" + i, null);
-
-		}
-		IdList[size] = id;
-
-		SharedPreferences.Editor editor = prefs.edit();
-		for (int i = 0; i < IdList.length; i++) {
-			editor.putString("hwid" + "_" + i, IdList[i]);
-
-		}
-
-		editor.putInt("hwid" + "_size", IdList.length);
-		editor.putInt("hwid" + "_list", 1);
-		editor.commit();
-
 	}
 
 	public void delete_item(String s1, String s2, String[] s3) {
@@ -82,8 +51,8 @@ public class HomeworkDataSource {
 		close();
 	}
 
-	public List<Entry> getAllEntries() {
-		List<Entry> EntriesList = new ArrayList<Entry>();
+	public ArrayList<HashMap<String, String>> getAllEntries() {
+		ArrayList<HashMap<String, String>> EntriesList = new ArrayList<HashMap<String, String>>();
 
 		Cursor cursor = database.query("HOMEWORK", allColumns, null, null,
 				null, null, null);
@@ -93,25 +62,19 @@ public class HomeworkDataSource {
 			return EntriesList;
 
 		while (cursor.isAfterLast() == false) {
-			Entry entry = cursorToEntry(cursor);
-			EntriesList.add(entry);
+			HashMap<String, String> temp = new HashMap<String, String>();
+			temp.put(allColumns[0], String.valueOf(cursor.getLong(0)));
+			temp.put(allColumns[1], cursor.getString(1));
+			temp.put(allColumns[2], cursor.getString(2));
+			temp.put(allColumns[3], cursor.getString(3));
+			temp.put(allColumns[4], cursor.getString(4));
+			EntriesList.add(temp);
 			cursor.moveToNext();
 		}
 
 		cursor.close();
 
 		return EntriesList;
-	}
-
-	private Entry cursorToEntry(Cursor cursor) {
-		Entry entry = new Entry();
-		entry.setId(cursor.getLong(0));
-		entry.setUrgent(cursor.getString(1));
-		entry.setSubject(cursor.getString(2));
-		entry.setHomework(cursor.getString(3));
-		entry.setUntil(cursor.getString(4));
-
-		return entry;
 	}
 
 }
