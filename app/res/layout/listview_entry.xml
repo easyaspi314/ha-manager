@@ -16,6 +16,7 @@ https://gitlab.com/fdroid/fdroidclient/blob/master/F-Droid/res/layout/applistite
         android:layout_width="48dip"
         android:layout_height="48dip"
         android:layout_gravity="center_vertical"
+        android:focusable="false"
         android:visibility="gone" />
 
     <LinearLayout

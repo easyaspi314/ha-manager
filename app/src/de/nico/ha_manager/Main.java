@@ -14,11 +14,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -89,6 +90,29 @@ public class Main extends Activity {
 		}
 	}
 
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		// menu.add(0, v.getId(), 0, getString(R.string.dialog_edit));
+		menu.add(0, v.getId(), 1, getString(R.string.dialog_delete));
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+		if (item.getTitle() == getString(R.string.dialog_edit)) {
+			return true;
+		}
+		if (item.getTitle() == getString(R.string.dialog_delete)) {
+			delete_one(info.position);
+			return true;
+		}
+		return false;
+
+	}
+
 	public void update() {
 		HomeworkList.clear();
 		datasource = new HomeworkDataSource(this);
@@ -108,70 +132,59 @@ public class Main extends Activity {
 						R.id.textView_homework, R.id.textView_until, });
 
 		lHomework.setAdapter(listAdapter);
-		lHomework.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
-				// Get current things and add them to a temporary ArrayList
-				ArrayList<HashMap<String, String>> tempArray = new ArrayList<HashMap<String, String>>();
-				HashMap<String, String> tempHashMap = new HashMap<String, String>();
-				tempHashMap.put("URGENT",
-						HomeworkList.get(position).get("URGENT"));
-				tempHashMap.put("SUBJECT",
-						HomeworkList.get(position).get("SUBJECT"));
-				tempHashMap.put("HOMEWORK",
-						HomeworkList.get(position).get("HOMEWORK"));
-				tempHashMap.put("UNTIL", HomeworkList.get(position)
-						.get("UNTIL"));
-				tempHashMap.put("ID", HomeworkList.get(position).get("ID"));
-				tempArray.add(tempHashMap);
-				// Get ID for deletion
-				final String currentID = "ID = "
-						+ HomeworkList.get(position).get("ID");
-				// Make a new SimpleAdapter which contains the ListView entry
-				SimpleAdapter alertAdapter = new SimpleAdapter(Main.this,
-						tempArray, R.layout.listview_entry, new String[] {
-								"URGENT", "SUBJECT", "HOMEWORK", "UNTIL" },
-						new int[] { R.id.textView_urgent,
-								R.id.textView_subject, R.id.textView_homework,
-								R.id.textView_until, });
-				// Make a AlertDialog
-				AlertDialog.Builder delete_it = (new AlertDialog.Builder(
-						Main.this))
-						.setTitle(getString(R.string.dialog_delete))
-						.setAdapter(alertAdapter, null)
-						.setPositiveButton((getString(android.R.string.yes)),
-								new DialogInterface.OnClickListener() {
+		registerForContextMenu(lHomework);
 
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										datasource.delete_item("HOMEWORK",
-												currentID, null);
-										update();
+	}
 
-									}
-
-								});
-
-				delete_it.setNegativeButton((getString(android.R.string.no)),
+	public void delete_one(int pos) {
+		// Get current things and add them to a temporary ArrayList
+		ArrayList<HashMap<String, String>> tempArray = new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> tempHashMap = new HashMap<String, String>();
+		tempHashMap.put("URGENT", HomeworkList.get(pos).get("URGENT"));
+		tempHashMap.put("SUBJECT", HomeworkList.get(pos).get("SUBJECT"));
+		tempHashMap.put("HOMEWORK", HomeworkList.get(pos).get("HOMEWORK"));
+		tempHashMap.put("UNTIL", HomeworkList.get(pos).get("UNTIL"));
+		tempHashMap.put("ID", HomeworkList.get(pos).get("ID"));
+		tempArray.add(tempHashMap);
+		// Get ID for deletion
+		final String currentID = "ID = " + HomeworkList.get(pos).get("ID");
+		// Make a new SimpleAdapter which contains the ListView entry
+		SimpleAdapter alertAdapter = new SimpleAdapter(Main.this, tempArray,
+				R.layout.listview_entry, new String[] { "URGENT", "SUBJECT",
+						"HOMEWORK", "UNTIL" }, new int[] {
+						R.id.textView_urgent, R.id.textView_subject,
+						R.id.textView_homework, R.id.textView_until, });
+		// Make a AlertDialog
+		AlertDialog.Builder delete_it = (new AlertDialog.Builder(Main.this))
+				.setTitle(getString(R.string.dialog_delete))
+				.setAdapter(alertAdapter, null)
+				.setPositiveButton((getString(android.R.string.yes)),
 						new DialogInterface.OnClickListener() {
 
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								return;
+								datasource.delete_item("HOMEWORK", currentID,
+										null);
+								update();
 
 							}
 
 						});
 
-				AlertDialog delete_dialog = delete_it.create();
-				delete_dialog.show();
+		delete_it.setNegativeButton((getString(android.R.string.no)),
+				new DialogInterface.OnClickListener() {
 
-			}
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						return;
 
-		});
+					}
+
+				});
+
+		AlertDialog delete_dialog = delete_it.create();
+		delete_dialog.show();
 
 	}
 
