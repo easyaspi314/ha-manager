@@ -12,6 +12,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
@@ -67,9 +68,28 @@ public class AddHomework extends Activity {
 		setSpinner();
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
+			if (!(getLarge(this)))
+				getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 
+	}
+
+	private static boolean getLarge(Context c) {
+		int screenLayout = c.getResources().getConfiguration().screenLayout;
+		screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+
+		switch (screenLayout) {
+		case Configuration.SCREENLAYOUT_SIZE_SMALL:
+			return false;
+		case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+			return false;
+		case Configuration.SCREENLAYOUT_SIZE_LARGE:
+			return true;
+		case 4: // Configuration.SCREENLAYOUT_SIZE_XLARGE is API >= 9
+			return true;
+		default:
+			return true;
+		}
 	}
 
 	@Override
