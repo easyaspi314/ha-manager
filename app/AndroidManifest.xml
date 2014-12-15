@@ -16,6 +16,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- Main Activity -->
         <activity
             android:name="de.nico.ha_manager.Main"
             android:label="@string/app_name" >
@@ -25,19 +27,43 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="de.nico.ha_manager.activities.Preferences"
-            android:label="@string/action_settings" />
-        <activity
-            android:name="de.nico.ha_manager.activities.SubjectOffers"
-            android:label="@string/title_subject_offers" />
-        <activity
-            android:name="de.nico.ha_manager.activities.Subjects"
-            android:label="@string/title_subjects" />
+
+        <!-- Add Homework -->
         <activity
             android:name="de.nico.ha_manager.activities.AddHomework"
             android:label="@string/title_addhomework"
-            android:theme="@style/AddTheme" />
+            android:theme="@style/AddTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.nico.ha_manager.Main" />
+        </activity>
+
+        <!-- Preferences -->
+        <activity
+            android:name="de.nico.ha_manager.activities.Preferences"
+            android:label="@string/action_settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.nico.ha_manager.Main" />
+        </activity>
+
+        <!-- Subject Offers -->
+        <activity
+            android:name="de.nico.ha_manager.activities.SubjectOffers"
+            android:label="@string/title_subject_offers" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.nico.ha_manager.activities.Preferences" />
+        </activity>
+
+        <!-- Subject List -->
+        <activity
+            android:name="de.nico.ha_manager.activities.Subjects"
+            android:label="@string/title_subjects" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.nico.ha_manager.activities.Preferences" />
+        </activity>
     </application>
 
 </manifest>

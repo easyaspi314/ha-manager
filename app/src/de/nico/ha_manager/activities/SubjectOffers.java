@@ -4,13 +4,15 @@ package de.nico.ha_manager.activities;
 
 import java.util.Arrays;
 
-import de.nico.ha_manager.R;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import de.nico.ha_manager.R;
 
 public class SubjectOffers extends Activity {
 
@@ -27,6 +30,7 @@ public class SubjectOffers extends Activity {
 	// Default SharedPreferences of the application
 	SharedPreferences prefs;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,6 +38,22 @@ public class SubjectOffers extends Activity {
 		prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
 		setSubjects();
+
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	public void setSubjects() {
@@ -61,6 +81,7 @@ public class SubjectOffers extends Activity {
 				delete_it.setPositiveButton((getString(android.R.string.yes)),
 						new DialogInterface.OnClickListener() {
 
+							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
 								addSubject(item);
@@ -70,6 +91,7 @@ public class SubjectOffers extends Activity {
 				delete_it.setNegativeButton((getString(android.R.string.no)),
 						new DialogInterface.OnClickListener() {
 
+							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
 								return;

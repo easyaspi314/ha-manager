@@ -8,15 +8,14 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import de.nico.ha_manager.Main;
-import de.nico.ha_manager.R;
-import de.nico.ha_manager.database.HomeworkDataSource;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -25,6 +24,9 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import de.nico.ha_manager.Main;
+import de.nico.ha_manager.R;
+import de.nico.ha_manager.database.HomeworkDataSource;
 
 @SuppressLint("SimpleDateFormat")
 public class AddHomework extends Activity {
@@ -46,6 +48,7 @@ public class AddHomework extends Activity {
 	int mMonth;
 	int mDay;
 
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +66,21 @@ public class AddHomework extends Activity {
 		setTextViewUntil(mYear, mMonth, mDay);
 		setSpinner();
 
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	public void setCurrentDate() {
