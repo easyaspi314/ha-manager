@@ -2,6 +2,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory
+        android:key="pref_importexport"
+        android:title="@string/title_homework" >
+        <PreferenceScreen
+            android:key="pref_importexport_export"
+            android:summary="@string/pref_homework_export_summary"
+            android:title="@string/pref_homework_export" >
+        </PreferenceScreen>
+        <PreferenceScreen
+            android:key="pref_importexport_import"
+            android:summary="@string/pref_homework_import_summary"
+            android:title="@string/pref_homework_import" >
+        </PreferenceScreen>
+    </PreferenceCategory>
+    <PreferenceCategory
         android:key="subjects"
         android:title="@string/pref_subjects" >
         <Preference
@@ -50,20 +64,6 @@
                     android:name="android.intent.extra.TITLE"
                     android:value="@string/intent_mail" />
             </intent>
-        </PreferenceScreen>
-    </PreferenceCategory>
-    <PreferenceCategory
-        android:key="pref_importexport"
-        android:title="@string/title_homework" >
-        <PreferenceScreen
-            android:key="pref_importexport_export"
-            android:summary="@string/pref_homework_export_summary"
-            android:title="@string/pref_homework_export" >
-        </PreferenceScreen>
-        <PreferenceScreen
-            android:key="pref_importexport_import"
-            android:summary="@string/pref_homework_import_summary"
-            android:title="@string/pref_homework_import" >
         </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory
