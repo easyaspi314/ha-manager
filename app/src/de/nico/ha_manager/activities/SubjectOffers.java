@@ -19,8 +19,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import de.nico.ha_manager.R;
+import de.nico.ha_manager.helper.Subject;
 
 public class SubjectOffers extends Activity {
 
@@ -84,7 +84,7 @@ public class SubjectOffers extends Activity {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								addSubject(item);
+								Subject.add(SubjectOffers.this, item);
 							}
 						});
 
@@ -103,30 +103,6 @@ public class SubjectOffers extends Activity {
 			}
 
 		});
-
-	}
-
-	public void addSubject(String subject) {
-		int size = prefs.getInt("subjects_size", 0);
-		String[] subjects = new String[size + 1];
-
-		for (int i = 0; i < size; i++) {
-			subjects[i] = prefs.getString("subjects" + "_" + i, null);
-		}
-		subjects[size] = subject;
-
-		SharedPreferences.Editor editor = prefs.edit();
-		Arrays.sort(subjects);
-
-		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
-		}
-		editor.putInt("subjects" + "_size", subjects.length);
-		editor.commit();
-
-		String sAdded = getString(R.string.added);
-		Toast.makeText(SubjectOffers.this, subject + " " + sAdded,
-				Toast.LENGTH_SHORT).show();
 
 	}
 

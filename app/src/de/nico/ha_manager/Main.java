@@ -3,17 +3,12 @@
 package de.nico.ha_manager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -27,18 +22,14 @@ import android.widget.Toast;
 import de.nico.ha_manager.activities.AddHomework;
 import de.nico.ha_manager.activities.Preferences;
 import de.nico.ha_manager.database.HomeworkDataSource;
+import de.nico.ha_manager.helper.Homework;
+import de.nico.ha_manager.helper.Subject;
 
 public class Main extends Activity {
-
-	// String array containing the subjects
-	String[] subjects;
 
 	// Stuff for the Homework list
 	HomeworkDataSource datasource;
 	ArrayList<HashMap<String, String>> HomeworkList = new ArrayList<HashMap<String, String>>();
-
-	// Default SharedPreferences of the application
-	SharedPreferences prefs;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +37,8 @@ public class Main extends Activity {
 		setContentView(R.layout.activity_list);
 		setTitle(getString(R.string.title_homework));
 
-		// Update ListView
 		update();
-
-		// Check if a subject list is in SharedPreferences
-		checkSubjects();
+		checkSubjects(this);
 
 	}
 
@@ -78,7 +66,8 @@ public class Main extends Activity {
 			return true;
 
 		case R.id.action_delete:
-			delete_all();
+			Homework.delete_all(this);
+			update();
 			return true;
 
 		case R.id.action_add:
@@ -106,7 +95,8 @@ public class Main extends Activity {
 			return true;
 		}
 		if (item.getTitle() == getString(R.string.dialog_delete)) {
-			delete_one(info.position);
+			Homework.delete_one(HomeworkList, this, info.position);
+			update();
 			return true;
 		}
 		return false;
@@ -125,7 +115,7 @@ public class Main extends Activity {
 		}
 
 		final ListView lHomework = (ListView) findViewById(R.id.listView_main);
-		ListAdapter listAdapter = new SimpleAdapter(Main.this, HomeworkList,
+		ListAdapter listAdapter = new SimpleAdapter(this, HomeworkList,
 				R.layout.listview_entry, new String[] { "URGENT", "SUBJECT",
 						"HOMEWORK", "UNTIL" }, new int[] {
 						R.id.textView_urgent, R.id.textView_subject,
@@ -136,120 +126,10 @@ public class Main extends Activity {
 
 	}
 
-	public void delete_one(int pos) {
-		// Get current things and add them to a temporary ArrayList
-		ArrayList<HashMap<String, String>> tempArray = new ArrayList<HashMap<String, String>>();
-		HashMap<String, String> tempHashMap = new HashMap<String, String>();
-		tempHashMap.put("URGENT", HomeworkList.get(pos).get("URGENT"));
-		tempHashMap.put("SUBJECT", HomeworkList.get(pos).get("SUBJECT"));
-		tempHashMap.put("HOMEWORK", HomeworkList.get(pos).get("HOMEWORK"));
-		tempHashMap.put("UNTIL", HomeworkList.get(pos).get("UNTIL"));
-		tempHashMap.put("ID", HomeworkList.get(pos).get("ID"));
-		tempArray.add(tempHashMap);
-		// Get ID for deletion
-		final String currentID = "ID = " + HomeworkList.get(pos).get("ID");
-		// Make a new SimpleAdapter which contains the ListView entry
-		SimpleAdapter alertAdapter = new SimpleAdapter(Main.this, tempArray,
-				R.layout.listview_entry, new String[] { "URGENT", "SUBJECT",
-						"HOMEWORK", "UNTIL" }, new int[] {
-						R.id.textView_urgent, R.id.textView_subject,
-						R.id.textView_homework, R.id.textView_until, });
-		// Make a AlertDialog
-		AlertDialog.Builder delete_it = (new AlertDialog.Builder(Main.this))
-				.setTitle(getString(R.string.dialog_delete))
-				.setAdapter(alertAdapter, null)
-				.setPositiveButton((getString(android.R.string.yes)),
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								datasource.delete_item("HOMEWORK", currentID,
-										null);
-								update();
-
-							}
-
-						});
-
-		delete_it.setNegativeButton((getString(android.R.string.no)),
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						return;
-
-					}
-
-				});
-
-		AlertDialog delete_dialog = delete_it.create();
-		delete_dialog.show();
-
-	}
-
-	public void delete_all() {
-		AlertDialog.Builder delete_it = new AlertDialog.Builder(this);
-		delete_it.setTitle(getString(R.string.dialog_delete));
-		delete_it.setMessage(getString(R.string.dialog_really_delete_hw));
-		delete_it.setPositiveButton((getString(android.R.string.yes)),
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						datasource.delete_item("HOMEWORK", null, null);
-						SharedPreferences.Editor editor = prefs.edit();
-						editor.putInt("hwid_size", 0);
-						editor.commit();
-						update();
-					}
-				});
-
-		delete_it.setNegativeButton((getString(android.R.string.no)),
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						return;
-					}
-				});
-		AlertDialog delete_dialog = delete_it.create();
-		delete_dialog.show();
-	}
-
-	public void checkSubjects() {
-		if (!(getSubjects(this).length > 0)) {
-			setDefaultSubjects();
+	public void checkSubjects(Context con) {
+		if (!(Subject.get(con).length > 0)) {
+			Subject.setDefault(con);
 		}
 	}
 
-	public String[] getSubjects(Context con) {
-		prefs = PreferenceManager.getDefaultSharedPreferences(con);
-
-		// Set size of array to amount of Strings in SharedPreferences
-		int size = prefs.getInt("subjects_size", 0);
-		subjects = new String[size];
-
-		// Get parts of subject array from SharedPreferences Strings
-		for (int i = 0; i < size; i++) {
-			subjects[i] = prefs.getString("subjects_" + i, null);
-		}
-		return subjects;
-	}
-
-	public void setDefaultSubjects() {
-		// Get subjects from strings.xml
-		String[] subjects = getResources().getStringArray(R.array.subjects);
-
-		// Sort subjects array alphabetically
-		Arrays.sort(subjects);
-
-		// Add subjects to SharedPreferences
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("subjects_size", subjects.length);
-		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects_" + i, subjects[i]);
-		}
-		editor.commit();
-	}
 }

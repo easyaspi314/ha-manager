@@ -15,7 +15,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,9 +24,10 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import de.nico.ha_manager.Main;
 import de.nico.ha_manager.R;
 import de.nico.ha_manager.database.HomeworkDataSource;
+import de.nico.ha_manager.helper.Homework;
+import de.nico.ha_manager.helper.Subject;
 
 @SuppressLint("SimpleDateFormat")
 public class AddHomework extends Activity {
@@ -56,12 +56,11 @@ public class AddHomework extends Activity {
 		setContentView(R.layout.activity_add);
 
 		datasource = new HomeworkDataSource(this);
-		Main ma = new Main();
 
 		// Button to open DatePicker
 		b_until = (Button) findViewById(R.id.button_until);
 
-		subjects = ma.getSubjects(this);
+		subjects = Subject.get(this);
 
 		setCurrentDate();
 		setTextViewUntil(mYear, mMonth, mDay);
@@ -191,13 +190,7 @@ public class AddHomework extends Activity {
 		String homework = homework_edit.getText().toString();
 
 		// Entry in database
-		try {
-			datasource.open();
-			datasource.createEntry(urgent, subject, homework, until);
-			datasource.close();
-		} catch (Exception ex) {
-			Log.e("Database", ex.toString());
-		}
+		Homework.add(this, urgent, subject, homework, until);
 
 		this.finish();
 	}

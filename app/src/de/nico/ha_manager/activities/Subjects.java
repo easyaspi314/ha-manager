@@ -17,8 +17,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import de.nico.ha_manager.Main;
 import de.nico.ha_manager.R;
+import de.nico.ha_manager.helper.Subject;
 
 public class Subjects extends Activity {
 
@@ -55,8 +55,7 @@ public class Subjects extends Activity {
 	}
 
 	public void setSubjects() {
-		Main ma = new Main();
-		subjects = ma.getSubjects(this);
+		subjects = Subject.get(this);
 
 		// Make simple list containing subjects
 		ArrayAdapter<String> adapterSubjects = new ArrayAdapter<String>(this,

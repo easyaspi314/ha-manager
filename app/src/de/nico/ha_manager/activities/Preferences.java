@@ -2,14 +2,7 @@
 
 package de.nico.ha_manager.activities;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -22,7 +15,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
@@ -32,8 +24,9 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.Toast;
 import de.nico.ha_manager.R;
+import de.nico.ha_manager.helper.Homework;
+import de.nico.ha_manager.helper.Subject;
 
 public class Preferences extends PreferenceActivity {
 
@@ -106,8 +99,9 @@ public class Preferences extends PreferenceActivity {
 											public void onClick(
 													DialogInterface dialog,
 													int whichButton) {
-												addSubject(input.getText()
-														.toString());
+												Subject.add(Preferences.this,
+														input.getText()
+																.toString());
 											}
 										})
 								.setNegativeButton(
@@ -166,7 +160,7 @@ public class Preferences extends PreferenceActivity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										resetSubjects();
+										Subject.setDefault(Preferences.this);
 									}
 
 								});
@@ -228,7 +222,7 @@ public class Preferences extends PreferenceActivity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										exportData();
+										Homework.exportIt(Preferences.this);
 									}
 
 								});
@@ -272,7 +266,7 @@ public class Preferences extends PreferenceActivity {
 									@Override
 									public void onClick(DialogInterface dialog,
 											int which) {
-										importData();
+										Homework.importIt(Preferences.this);
 									}
 
 								});
@@ -308,145 +302,5 @@ public class Preferences extends PreferenceActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	public void importData() {
-		// Check if directory exists
-		File dir = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getString(R.string.app_name));
-		if (!(dir.exists())) {
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_nobackup)
-							+ getString(R.string.app_name),
-					Toast.LENGTH_LONG).show();
-			return;
-		}
-
-		// Path for Database
-		File srcDB = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getString(R.string.app_name) + "/Homework.db");
-		File dstDB = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/databases/Homework.db");
-
-		// Check if Database exists
-		if (!(srcDB.exists())) {
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_nobackup)
-							+ getString(R.string.app_name),
-					Toast.LENGTH_LONG).show();
-			return;
-
-		}
-
-		try {
-			// Import Database
-			FileInputStream inStream = new FileInputStream(srcDB);
-			FileOutputStream outStream = new FileOutputStream(dstDB);
-			FileChannel inChannel = inStream.getChannel();
-			FileChannel outChannel = outStream.getChannel();
-			inChannel.transferTo(0, inChannel.size(), outChannel);
-			inStream.close();
-			outStream.close();
-
-		} catch (FileNotFoundException e) {
-			Log.e("FileNotFoundException", e.toString());
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_import_fail),
-					Toast.LENGTH_SHORT).show();
-			return;
-
-		} catch (IOException e) {
-			Log.e("IOException", e.toString());
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_import_fail),
-					Toast.LENGTH_SHORT).show();
-			return;
-
-		}
-		Toast.makeText(Preferences.this,
-				getString(R.string.toast_import_success),
-				Toast.LENGTH_SHORT).show();
-	}
-
-	public void exportData() {
-		// Check if directory exists
-		File dir = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getString(R.string.app_name));
-		if (!(dir.exists()))
-			dir.mkdir();
-
-		// Path for Database
-		File srcDB = new File(Preferences.this.getApplicationInfo().dataDir
-				+ "/databases/Homework.db");
-		File dstDB = new File(Environment.getExternalStorageDirectory() + "/"
-				+ getString(R.string.app_name) + "/Homework.db");
-
-		try {
-			// Export Database
-			FileInputStream inStream = new FileInputStream(srcDB);
-			FileOutputStream outStream = new FileOutputStream(dstDB);
-			FileChannel inChannel = inStream.getChannel();
-			FileChannel outChannel = outStream.getChannel();
-			inChannel.transferTo(0, inChannel.size(), outChannel);
-			inStream.close();
-			outStream.close();
-
-		} catch (FileNotFoundException e) {
-			Log.e("FileNotFoundException", e.toString());
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_export_fail),
-					Toast.LENGTH_SHORT).show();
-			return;
-
-		} catch (IOException e) {
-			Log.e("IOException", e.toString());
-			Toast.makeText(Preferences.this,
-					getString(R.string.toast_export_fail),
-					Toast.LENGTH_SHORT).show();
-			return;
-
-		}
-		Toast.makeText(Preferences.this,
-				getString(R.string.toast_export_success),
-				Toast.LENGTH_SHORT).show();
-	}
-
-	public void resetSubjects() {
-		// Get subjects from strings.xml
-		String[] subjects = getResources().getStringArray(R.array.subjects);
-
-		// Sort subjects array alphabetically
-		Arrays.sort(subjects);
-
-		// Add subjects to SharedPreferences
-		SharedPreferences.Editor editor = prefs.edit();
-		editor.putInt("subjects" + "_size", subjects.length);
-		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
-		}
-		editor.commit();
-	}
-
-	public void addSubject(String subject) {
-		int size = prefs.getInt("subjects_size", 0);
-		String[] subjects = new String[size + 1];
-
-		for (int i = 0; i < size; i++) {
-			subjects[i] = prefs.getString("subjects" + "_" + i, null);
-		}
-		subjects[size] = subject;
-
-		SharedPreferences.Editor editor = prefs.edit();
-		Arrays.sort(subjects);
-
-		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
-		}
-		editor.putInt("subjects" + "_size", subjects.length);
-		editor.commit();
-
-		String sAdded = getString(R.string.added);
-		Toast.makeText(Preferences.this, subject + " " + sAdded,
-				Toast.LENGTH_SHORT).show();
 	}
 }
