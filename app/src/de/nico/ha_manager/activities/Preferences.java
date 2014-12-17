@@ -27,6 +27,7 @@ import android.widget.EditText;
 import de.nico.ha_manager.R;
 import de.nico.ha_manager.helper.Homework;
 import de.nico.ha_manager.helper.Subject;
+import de.nico.ha_manager.helper.Utils;
 
 public class Preferences extends PreferenceActivity {
 
@@ -55,31 +56,7 @@ public class Preferences extends PreferenceActivity {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 
-		try {
-			// Get Build Date
-			ApplicationInfo ai = getPackageManager().getApplicationInfo(
-					getPackageName(), 0);
-			ZipFile zf = new ZipFile(ai.sourceDir);
-			ZipEntry ze = zf.getEntry("classes.dex");
-			zf.close();
-			long time = ze.getTime();
-
-			// Get Version Name
-			PackageInfo pInfo = getPackageManager().getPackageInfo(
-					getPackageName(), 0);
-			String version = pInfo.versionName;
-			DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT,
-					Locale.getDefault());
-			String build_date = f.format(time);
-
-			// Set Preference
-			PreferenceScreen prefscreen = ((PreferenceScreen) findPreference("pref_about_current_version"));
-			prefscreen.setSummary(version + " (" + build_date + ")");
-			onContentChanged();
-
-		} catch (Exception e) {
-			Log.e("Get Build Date", e.toString());
-		}
+		setBuildDate();
 
 		subjects_add = findPreference("subjects_add");
 		subjects_add
@@ -106,14 +83,7 @@ public class Preferences extends PreferenceActivity {
 										})
 								.setNegativeButton(
 										getString(android.R.string.cancel),
-										new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(
-													DialogInterface dialog,
-													int whichButton) {
-												return;
-											}
-										}).show();
+										null).show();
 						return true;
 					}
 				});
@@ -166,16 +136,7 @@ public class Preferences extends PreferenceActivity {
 								});
 
 						delete_subjects.setNegativeButton(
-								(getString(android.R.string.no)),
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										return;
-									}
-
-								});
+								(getString(android.R.string.no)), null);
 
 						AlertDialog delete_dialog = delete_subjects.create();
 						delete_dialog.show();
@@ -188,18 +149,7 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						String share_title = getString(R.string.intent_share_title);
-						String app_name = getString(R.string.app_name);
-
-						Intent intent = new Intent(
-								android.content.Intent.ACTION_SEND);
-						intent.setType("text/plain");
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-						intent.putExtra(Intent.EXTRA_TEXT,
-								getString(R.string.intent_share_text));
-						startActivity(Intent.createChooser(intent, share_title
-								+ " " + app_name));
-						return true;
+						return Utils.shareApp(Preferences.this);
 					}
 				});
 
@@ -228,16 +178,7 @@ public class Preferences extends PreferenceActivity {
 								});
 
 						delete_subjects.setNegativeButton(
-								(getString(android.R.string.no)),
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// Do nothing
-									}
-
-								});
+								(getString(android.R.string.no)), null);
 
 						AlertDialog delete_dialog = delete_subjects.create();
 						delete_dialog.show();
@@ -272,16 +213,7 @@ public class Preferences extends PreferenceActivity {
 								});
 
 						delete_subjects.setNegativeButton(
-								(getString(android.R.string.no)),
-								new DialogInterface.OnClickListener() {
-
-									@Override
-									public void onClick(DialogInterface dialog,
-											int which) {
-										// Do nothing
-									}
-
-								});
+								(getString(android.R.string.no)), null);
 
 						AlertDialog delete_dialog = delete_subjects.create();
 						delete_dialog.show();
@@ -302,5 +234,34 @@ public class Preferences extends PreferenceActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void setBuildDate() {
+		try {
+			// Get Build Date
+			ApplicationInfo ai = getPackageManager().getApplicationInfo(
+					getPackageName(), 0);
+			ZipFile zf = new ZipFile(ai.sourceDir);
+			ZipEntry ze = zf.getEntry("classes.dex");
+			zf.close();
+			long time = ze.getTime();
+
+			// Get Version Name
+			PackageInfo pInfo = getPackageManager().getPackageInfo(
+					getPackageName(), 0);
+			String version = pInfo.versionName;
+			DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT,
+					Locale.getDefault());
+			String build_date = f.format(time);
+
+			// Set Preference
+			@SuppressWarnings("deprecation")
+			PreferenceScreen prefscreen = ((PreferenceScreen) findPreference("pref_about_current_version"));
+			prefscreen.setSummary(version + " (" + build_date + ")");
+			onContentChanged();
+
+		} catch (Exception e) {
+			Log.e("Set Build Date", e.toString());
+		}
 	}
 }

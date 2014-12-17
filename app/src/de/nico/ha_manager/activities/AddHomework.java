@@ -25,7 +25,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import de.nico.ha_manager.R;
-import de.nico.ha_manager.database.HomeworkDataSource;
 import de.nico.ha_manager.helper.Homework;
 import de.nico.ha_manager.helper.Subject;
 
@@ -35,11 +34,8 @@ public class AddHomework extends Activity {
 	// String array containing the subjects
 	String[] subjects;
 
-	// Stuff for the Homework list
-	HomeworkDataSource datasource;
-
 	// Button to open DatePicker
-	Button b_until;
+	Button buttonUntil;
 
 	// Until when the homework has to be finished
 	String until;
@@ -55,10 +51,8 @@ public class AddHomework extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add);
 
-		datasource = new HomeworkDataSource(this);
-
 		// Button to open DatePicker
-		b_until = (Button) findViewById(R.id.button_until);
+		buttonUntil = (Button) findViewById(R.id.button_until);
 
 		subjects = Subject.get(this);
 
@@ -74,21 +68,17 @@ public class AddHomework extends Activity {
 	}
 
 	private static boolean getLarge(Context c) {
-		int screenLayout = c.getResources().getConfiguration().screenLayout;
-		screenLayout &= Configuration.SCREENLAYOUT_SIZE_MASK;
+		int screenLayout = c.getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
 
-		switch (screenLayout) {
-		case Configuration.SCREENLAYOUT_SIZE_SMALL:
+		// If Small or Normal
+		if (screenLayout == 1 || screenLayout == 2)
 			return false;
-		case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+
+		// If Large or XLarge
+		if (screenLayout == 3 || screenLayout == 4)
 			return false;
-		case Configuration.SCREENLAYOUT_SIZE_LARGE:
-			return true;
-		case 4: // Configuration.SCREENLAYOUT_SIZE_XLARGE is API >= 9
-			return true;
-		default:
-			return true;
-		}
+		return true;
 	}
 
 	@Override
@@ -129,7 +119,7 @@ public class AddHomework extends Activity {
 
 		// Tab space because else the date is too far to the left
 		until = (asWeek + ", " + until);
-		b_until.setText(until);
+		buttonUntil.setText(until);
 
 	}
 

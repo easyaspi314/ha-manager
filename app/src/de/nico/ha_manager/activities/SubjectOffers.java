@@ -71,7 +71,7 @@ public class SubjectOffers extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
+				// Selected item
 				final String item = ((TextView) view).getText().toString();
 
 				AlertDialog.Builder delete_it = new AlertDialog.Builder(
@@ -89,14 +89,7 @@ public class SubjectOffers extends Activity {
 						});
 
 				delete_it.setNegativeButton((getString(android.R.string.no)),
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								return;
-							}
-						});
+						null);
 				AlertDialog delete_dialog = delete_it.create();
 				delete_dialog.show();
 

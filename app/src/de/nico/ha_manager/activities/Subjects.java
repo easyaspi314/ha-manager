@@ -6,9 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,17 +23,12 @@ public class Subjects extends Activity {
 	// String array containing the subjects
 	String[] subjects;
 
-	// Default SharedPreferences of the application
-	SharedPreferences prefs;
-
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-		setSubjects();
+		update();
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,7 +47,7 @@ public class Subjects extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void setSubjects() {
+	public void update() {
 		subjects = Subject.get(this);
 
 		// Make simple list containing subjects
@@ -81,52 +74,19 @@ public class Subjects extends Activity {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								deleteSubject(position);
+								Subject.delete(Subjects.this, position);
+								update();
 							}
 						});
 
 				delete_it.setNegativeButton((getString(android.R.string.no)),
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								return;
-							}
-						});
+						null);
 				AlertDialog delete_dialog = delete_it.create();
 				delete_dialog.show();
 
 			}
 
 		});
-
-	}
-
-	public void deleteSubject(int pos) {
-		int size = prefs.getInt("subjects_size", 0);
-		String[] subjects = new String[size - 1];
-
-		for (int i = 0; i < size; i++) {
-			if (i < pos)
-				subjects[i] = prefs.getString("subjects" + "_" + i, null);
-
-			if (i > pos)
-				subjects[i - 1] = prefs.getString("subjects" + "_" + i, null);
-
-		}
-
-		SharedPreferences.Editor editor = prefs.edit();
-
-		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
-
-		}
-
-		editor.putInt("subjects" + "_size", subjects.length);
-		editor.commit();
-
-		setSubjects();
 
 	}
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory
-        android:key="pref_importexport"
-        android:title="@string/title_homework" >
+    <PreferenceCategory android:title="@string/title_homework" >
         <PreferenceScreen
             android:key="pref_importexport_export"
             android:summary="@string/pref_homework_export_summary"
@@ -15,9 +13,7 @@
             android:title="@string/pref_homework_import" >
         </PreferenceScreen>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:key="subjects"
-        android:title="@string/pref_subjects" >
+    <PreferenceCategory android:title="@string/pref_subjects" >
         <Preference
             android:key="subjects_overview"
             android:summary="@string/pref_subjects_overview_summary"
@@ -36,9 +32,7 @@
             android:summary="@string/pref_subjects_reset_summary"
             android:title="@string/pref_subjects_reset" />
     </PreferenceCategory>
-    <PreferenceCategory
-        android:key="pref_key_storage_settings"
-        android:title="@string/pref_feedback" >
+    <PreferenceCategory android:title="@string/pref_feedback" >
         <Preference
             android:key="feedback_share"
             android:summary="@string/pref_feedback_share_summary"
@@ -56,7 +50,7 @@
             android:title="@string/pref_feedback_mail" >
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="mailto:nicoalt@gmx.de" >
+                android:data="mailto:nicoalt@posteo.org" >
                 <extra
                     android:name="android.intent.extra.SUBJECT"
                     android:value="@string/app_name" />
@@ -66,9 +60,7 @@
             </intent>
         </PreferenceScreen>
     </PreferenceCategory>
-    <PreferenceCategory
-        android:key="pref_key_storage_settings"
-        android:title="@string/pref_about" >
+    <PreferenceCategory android:title="@string/pref_about" >
         <PreferenceScreen
             android:summary="@string/pref_about_credits_summary"
             android:title="@string/pref_about_credits" >

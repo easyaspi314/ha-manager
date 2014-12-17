@@ -11,15 +11,17 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class HomeworkDataSource {
+public class Source {
 
 	private SQLiteDatabase database;
-	private MySQLiteHelper dbHelper;
-	private String[] allColumns = { "ID", "URGENT", "SUBJECT", "HOMEWORK",
-			"UNTIL" };
+	private Helper dbHelper;
+	public static final String[] allColumns = { "ID", "URGENT", "SUBJECT",
+			"HOMEWORK", "UNTIL" };
+	public static final String[] mostColumns = { "URGENT", "SUBJECT",
+			"HOMEWORK", "UNTIL" };
 
-	public HomeworkDataSource(Context context) {
-		dbHelper = new MySQLiteHelper(context);
+	public Source(Context context) {
+		dbHelper = new Helper(context);
 	}
 
 	public void open() throws SQLException {
@@ -30,8 +32,8 @@ public class HomeworkDataSource {
 		dbHelper.close();
 	}
 
-	public void createEntry(String urgent, String subject, String homework,
-			String until) {
+	public void createEntry(String urgent, String subject,
+			String homework, String until) {
 		ContentValues values = new ContentValues();
 		values.put("URGENT", urgent);
 		values.put("SUBJECT", subject);
@@ -64,10 +66,8 @@ public class HomeworkDataSource {
 		while (cursor.isAfterLast() == false) {
 			HashMap<String, String> temp = new HashMap<String, String>();
 			temp.put(allColumns[0], String.valueOf(cursor.getLong(0)));
-			temp.put(allColumns[1], cursor.getString(1));
-			temp.put(allColumns[2], cursor.getString(2));
-			temp.put(allColumns[3], cursor.getString(3));
-			temp.put(allColumns[4], cursor.getString(4));
+			for (int i = 1; i < 5; i++)
+				temp.put(allColumns[i], cursor.getString(i));
 			EntriesList.add(temp);
 			cursor.moveToNext();
 		}
