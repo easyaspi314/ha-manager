@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<!--
+	Author: Nico Alt and Devin
+	See the file "LICENSE.txt" for the full license governing this code.
+--><resources>
 
     <style name="AddTheme" parent="android:Theme.Holo.Light.DialogWhenLarge" />
 

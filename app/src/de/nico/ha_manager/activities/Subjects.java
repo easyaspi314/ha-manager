@@ -1,6 +1,9 @@
-//Copyright (c) 2014 Nico Alt GPLv2 or later
-
 package de.nico.ha_manager.activities;
+
+/* 
+ * Author: Nico Alt
+ * See the file "LICENSE.txt" for the full license governing this code.
+ */
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

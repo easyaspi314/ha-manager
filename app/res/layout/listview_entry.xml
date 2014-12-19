@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Ported from F-Droid client application (14.12.2014), thank you therefore:
-https://gitlab.com/fdroid/fdroidclient/blob/master/F-Droid/res/layout/applistitem.xml
+	Author: Nico Alt
+	See the file "LICENSE.txt" for the full license governing this code.
+	
+	Ported from F-Droid client application (14.12.2014), thank you therefore:
+	https://gitlab.com/fdroid/fdroidclient/blob/master/F-Droid/res/layout/applistitem.xml
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

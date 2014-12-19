@@ -1,5 +1,10 @@
 package de.nico.ha_manager.helper;
 
+/* 
+ * Author: Nico Alt
+ * See the file "LICENSE.txt" for the full license governing this code.
+ */
+
 import java.util.Arrays;
 
 import android.content.Context;

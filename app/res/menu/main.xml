@@ -1,5 +1,8 @@
-<!-- Copyright (c) 2014 Nico Alt GPLv2 or later -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<!--
+	Author: Nico Alt and Devin
+	See the file "LICENSE.txt" for the full license governing this code.
+-->
 
     <item
         android:id="@+id/action_settings"

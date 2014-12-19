@@ -1,6 +1,9 @@
-//Copyright (c) 2014 Nico Alt GPLv2 or later
-
 package de.nico.ha_manager.activities;
+
+/* 
+ * Author: Nico Alt and Devin
+ * See the file "LICENSE.txt" for the full license governing this code.
+ */
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

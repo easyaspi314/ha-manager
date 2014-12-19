@@ -1,5 +1,10 @@
 package de.nico.ha_manager.helper;
 
+/* 
+ * Author: Nico Alt
+ * See the file "LICENSE.txt" for the full license governing this code.
+ */
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
