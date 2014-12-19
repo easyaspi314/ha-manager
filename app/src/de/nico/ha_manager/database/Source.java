@@ -32,8 +32,8 @@ public class Source {
 		dbHelper.close();
 	}
 
-	public void createEntry(String urgent, String subject,
-			String homework, String until) {
+	public void createEntry(String urgent, String subject, String homework,
+			String until) {
 		ContentValues values = new ContentValues();
 		values.put("URGENT", urgent);
 		values.put("SUBJECT", subject);
@@ -47,34 +47,34 @@ public class Source {
 		cursor.moveToFirst();
 	}
 
-	public void delete_item(String s1, String s2, String[] s3) {
+	public void delete_item(String table, String whereC, String[] whereA) {
 		open();
-		database.delete(s1, s2, s3);
+		database.delete(table, whereC, whereA);
 		close();
 	}
 
-	public ArrayList<HashMap<String, String>> getAllEntries() {
-		ArrayList<HashMap<String, String>> EntriesList = new ArrayList<HashMap<String, String>>();
+	public ArrayList<HashMap<String, String>> get() {
+		ArrayList<HashMap<String, String>> entriesList = new ArrayList<HashMap<String, String>>();
 
 		Cursor cursor = database.query("HOMEWORK", allColumns, null, null,
 				null, null, null);
 		cursor.moveToFirst();
 
 		if (cursor.getCount() == 0)
-			return EntriesList;
+			return entriesList;
 
 		while (cursor.isAfterLast() == false) {
 			HashMap<String, String> temp = new HashMap<String, String>();
 			temp.put(allColumns[0], String.valueOf(cursor.getLong(0)));
 			for (int i = 1; i < 5; i++)
 				temp.put(allColumns[i], cursor.getString(i));
-			EntriesList.add(temp);
+			entriesList.add(temp);
 			cursor.moveToNext();
 		}
 
 		cursor.close();
 
-		return EntriesList;
+		return entriesList;
 	}
 
 }

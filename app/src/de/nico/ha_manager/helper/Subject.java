@@ -36,7 +36,7 @@ public class Subject {
 		String[] subjects = new String[size + 1];
 
 		for (int i = 0; i < size; i++) {
-			subjects[i] = prefs.getString("subjects" + "_" + i, null);
+			subjects[i] = prefs.getString("subjects_" + i, null);
 		}
 		subjects[size] = subject;
 
@@ -44,9 +44,9 @@ public class Subject {
 		Arrays.sort(subjects);
 
 		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
+			editor.putString("subjects_" + i, subjects[i]);
 		}
-		editor.putInt("subjects" + "_size", subjects.length);
+		editor.putInt("subjects_size", subjects.length);
 		editor.commit();
 
 		String sAdded = c.getString(R.string.added);
@@ -77,21 +77,21 @@ public class Subject {
 
 		for (int i = 0; i < size; i++) {
 			if (i < pos)
-				subjects[i] = prefs.getString("subjects" + "_" + i, null);
+				subjects[i] = prefs.getString("subjects_" + i, null);
 
 			if (i > pos)
-				subjects[i - 1] = prefs.getString("subjects" + "_" + i, null);
+				subjects[i - 1] = prefs.getString("subjects_" + i, null);
 
 		}
 
 		SharedPreferences.Editor editor = prefs.edit();
 
 		for (int i = 0; i < subjects.length; i++) {
-			editor.putString("subjects" + "_" + i, subjects[i]);
+			editor.putString("subjects_" + i, subjects[i]);
 
 		}
 
-		editor.putInt("subjects" + "_size", subjects.length);
+		editor.putInt("subjects_size", subjects.length);
 		editor.commit();
 
 	}

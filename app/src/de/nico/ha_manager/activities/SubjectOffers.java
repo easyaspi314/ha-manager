@@ -8,9 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,20 +22,12 @@ import de.nico.ha_manager.helper.Subject;
 
 public class SubjectOffers extends Activity {
 
-	// String array containing the subjects
-	String[] subjectOffers;
-
-	// Default SharedPreferences of the application
-	SharedPreferences prefs;
-
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
-		prefs = PreferenceManager.getDefaultSharedPreferences(this);
-
-		setSubjects();
+		update();
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -56,42 +46,39 @@ public class SubjectOffers extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void setSubjects() {
-		subjectOffers = getResources().getStringArray(R.array.subject_offers);
-		Arrays.sort(subjectOffers);
+	private void update() {
+		String[] subOffers = getResources().getStringArray(
+				R.array.subject_offers);
+		Arrays.sort(subOffers);
 
 		// Make simple list containing subjects
-		ArrayAdapter<String> adapterSubjects = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, subjectOffers);
+		ArrayAdapter<String> subAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, subOffers);
 
-		ListView lSubjects = (ListView) findViewById(R.id.listView_main);
-		lSubjects.setAdapter(adapterSubjects);
+		ListView subList = (ListView) findViewById(R.id.listView_main);
+		subList.setAdapter(subAdapter);
 
-		lSubjects.setOnItemClickListener(new OnItemClickListener() {
+		subList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View v, int pos,
+					long id) {
 				// Selected item
-				final String item = ((TextView) view).getText().toString();
+				final String item = ((TextView) v).getText().toString();
 
-				AlertDialog.Builder delete_it = new AlertDialog.Builder(
+				AlertDialog.Builder deleteDialog = new AlertDialog.Builder(
 						SubjectOffers.this);
-				delete_it
-						.setTitle(getString(R.string.action_add) + ": " + item);
-				delete_it.setPositiveButton((getString(android.R.string.yes)),
-						new DialogInterface.OnClickListener() {
+				deleteDialog
+						.setTitle(getString(R.string.action_add) + ": " + item)
+						.setPositiveButton((getString(android.R.string.yes)),
+								new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								Subject.add(SubjectOffers.this, item);
-							}
-						});
-
-				delete_it.setNegativeButton((getString(android.R.string.no)),
-						null);
-				AlertDialog delete_dialog = delete_it.create();
-				delete_dialog.show();
+									@Override
+									public void onClick(DialogInterface d, int i) {
+										Subject.add(SubjectOffers.this, item);
+									}
+								})
+						.setNegativeButton((getString(android.R.string.no)),
+								null).show();
 
 			}
 

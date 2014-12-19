@@ -10,7 +10,7 @@
         android:id="@+id/button_add"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:onClick="add_homework"
+        android:onClick="addHomework"
         android:text="@string/hw_add" />
 
 </LinearLayout>

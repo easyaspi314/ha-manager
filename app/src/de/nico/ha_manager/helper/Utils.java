@@ -1,10 +1,17 @@
 package de.nico.ha_manager.helper;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.util.Log;
 import android.widget.SimpleAdapter;
 import de.nico.ha_manager.R;
 import de.nico.ha_manager.database.Source;
@@ -57,6 +64,34 @@ public class Utils {
 		c.startActivity(Intent.createChooser(intent, share_title + " "
 				+ app_name));
 		return true;
+	}
+
+	public static String getBuildInfo(Context c) {
+		String buildInfo = "Built with love.";
+		try {
+			// Get Version Name
+			PackageInfo pInfo = c.getPackageManager().getPackageInfo(
+					c.getPackageName(), 0);
+			String versionName = pInfo.versionName;
+
+			// Get build time
+			ApplicationInfo aInfo = c.getPackageManager().getApplicationInfo(
+					c.getPackageName(), 0);
+			ZipFile zf = new ZipFile(aInfo.sourceDir);
+			ZipEntry ze = zf.getEntry("classes.dex");
+			zf.close();
+			long time = ze.getTime();
+			DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT,
+					Locale.getDefault());
+			String buildDate = f.format(time);
+
+			buildInfo = versionName + " (" + buildDate + ")";
+
+		} catch (Exception e) {
+			Log.e("Get Build Info:", e.toString());
+		}
+
+		return buildInfo;
 	}
 
 }

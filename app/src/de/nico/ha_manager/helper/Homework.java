@@ -25,7 +25,7 @@ public class Homework {
 		prefs = PreferenceManager.getDefaultSharedPreferences(c);
 	}
 
-	public static void delete_all(final Context c) {
+	public static void deleteAll(final Context c) {
 		Source s = new Source(c);
 		s.delete_item("HOMEWORK", null, null);
 
@@ -43,7 +43,7 @@ public class Homework {
 			s.createEntry(urgent, subject, homework, until);
 			s.close();
 		} catch (Exception ex) {
-			Log.e("Database", ex.toString());
+			Log.e("Database:", ex.toString());
 		}
 
 	}

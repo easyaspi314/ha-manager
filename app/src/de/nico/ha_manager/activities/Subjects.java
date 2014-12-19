@@ -47,42 +47,39 @@ public class Subjects extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void update() {
+	private void update() {
 		subjects = Subject.get(this);
 
 		// Make simple list containing subjects
-		ArrayAdapter<String> adapterSubjects = new ArrayAdapter<String>(this,
+		ArrayAdapter<String> subAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, subjects);
 
-		ListView lSubjects = (ListView) findViewById(R.id.listView_main);
-		lSubjects.setAdapter(adapterSubjects);
+		ListView subList = (ListView) findViewById(R.id.listView_main);
+		subList.setAdapter(subAdapter);
 
-		lSubjects.setOnItemClickListener(new OnItemClickListener() {
+		subList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View v,
+					final int pos, long id) {
 
-				String item = ((TextView) view).getText().toString();
+				String item = ((TextView) v).getText().toString();
 
-				AlertDialog.Builder delete_it = new AlertDialog.Builder(
+				AlertDialog.Builder alertDialog = new AlertDialog.Builder(
 						Subjects.this);
-				delete_it.setTitle(getString(R.string.dialog_delete) + ": "
-						+ item);
-				delete_it.setPositiveButton((getString(android.R.string.yes)),
-						new DialogInterface.OnClickListener() {
+				alertDialog
+						.setTitle(
+								getString(R.string.dialog_delete) + ": " + item)
+						.setPositiveButton((getString(android.R.string.yes)),
+								new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								Subject.delete(Subjects.this, position);
-								update();
-							}
-						});
-
-				delete_it.setNegativeButton((getString(android.R.string.no)),
-						null);
-				AlertDialog delete_dialog = delete_it.create();
-				delete_dialog.show();
+									@Override
+									public void onClick(DialogInterface d, int i) {
+										Subject.delete(Subjects.this, pos);
+										update();
+									}
+								})
+						.setNegativeButton((getString(android.R.string.no)),
+								null).show();
 
 			}
 

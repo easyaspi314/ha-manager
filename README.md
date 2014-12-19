@@ -13,6 +13,10 @@ With the application 'HW-Manager' you are able to save your homework for school.
 
 Import the project into eclipse and compile it to get an .apk file, which you can install on an android phone.
 
+## TODO ##
+
+Take a look at [Github Issues](https://github.com/AltNico/ha-manager/issues).
+
 ## LICENSE ##
 
 See [LICENSE.txt](https://github.com/AltNico/ha-manager/blob/develop/LICENSE.txt)

@@ -34,16 +34,11 @@ public class AddHomework extends Activity {
 	// String array containing the subjects
 	String[] subjects;
 
-	// Button to open DatePicker
-	Button buttonUntil;
-
 	// Until when the homework has to be finished
 	String until;
 
-	// Current date
-	int mYear;
-	int mMonth;
-	int mDay;
+	// 0 is year, 1 is month and 2 is day
+	int[] date;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -51,13 +46,10 @@ public class AddHomework extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add);
 
-		// Button to open DatePicker
-		buttonUntil = (Button) findViewById(R.id.button_until);
-
 		subjects = Subject.get(this);
+		date = getCurrentDate();
 
-		setCurrentDate();
-		setTextViewUntil(mYear, mMonth, mDay);
+		setTextViewUntil(date);
 		setSpinner();
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
@@ -92,44 +84,49 @@ public class AddHomework extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void setCurrentDate() {
+	private int[] getCurrentDate() {
 		final Calendar c = Calendar.getInstance();
+		date = new int[3];
 
 		// E.g "1970"
-		mYear = c.get(Calendar.YEAR);
+		date[0] = c.get(Calendar.YEAR);
 
 		// E.g "01"
-		mMonth = c.get(Calendar.MONTH);
+		date[1] = c.get(Calendar.MONTH);
 
 		// Get current day, e.g. "01", plus one day > e.g. "02"
-		mDay = c.get(Calendar.DAY_OF_MONTH) + 1;
+		date[2] = c.get(Calendar.DAY_OF_MONTH) + 1;
+
+		return date;
+
 	}
 
-	public void setTextViewUntil(int y, int m, int d) {
+	private void setTextViewUntil(int[] date) {
 		// Format to 31.12.14 or local version of that
 		DateFormat f = DateFormat.getDateInstance(DateFormat.SHORT,
 				Locale.getDefault());
-		until = f.format(new GregorianCalendar(y, m, d).getTime());
+		GregorianCalendar gc = new GregorianCalendar(date[0], date[1], date[2]);
+		until = f.format(gc.getTime());
 
 		// Format to Week of Day, for example Mo. or local version of that
 		SimpleDateFormat dateFormat = new SimpleDateFormat("EEE",
 				Locale.getDefault());
-		String asWeek = dateFormat.format(new GregorianCalendar(y, m, d)
-				.getTime());
+		String asWeek = dateFormat.format(gc.getTime());
 
 		// Tab space because else the date is too far to the left
 		until = (asWeek + ", " + until);
-		buttonUntil.setText(until);
+		Button untilButton = (Button) findViewById(R.id.button_until);
+		untilButton.setText(until);
 
 	}
 
-	public void setSpinner() {
+	private void setSpinner() {
 		// Set spinner with subjects
-		Spinner subspin = (Spinner) findViewById(R.id.spinner_subject);
+		Spinner subSpin = (Spinner) findViewById(R.id.spinner_subject);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, subjects);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		subspin.setAdapter(adapter);
+		subSpin.setAdapter(adapter);
 	}
 
 	public void setUntil(View v) {
@@ -139,50 +136,48 @@ public class AddHomework extends Activity {
 					@Override
 					public void onDateSet(DatePicker view, int year,
 							int monthOfYear, int dayOfMonth) {
-						setTextViewUntil(year, monthOfYear, dayOfMonth);
-
-						mYear = year;
-						mMonth = monthOfYear;
-						mDay = dayOfMonth;
+						date[0] = year;
+						date[1] = monthOfYear;
+						date[2] = dayOfMonth;
+						setTextViewUntil(date);
 
 					}
 
-				}, mYear, mMonth, mDay);
+				}, date[0], date[1], date[2]);
 
 		dpd.show();
 	}
 
-	public void add_homework(View view) {
-		Spinner subject_spin = (Spinner) findViewById(R.id.spinner_subject);
-		EditText homework_edit = (EditText) findViewById(R.id.editText_homework);
+	public void addHomework(View v) {
+		Spinner subSpin = (Spinner) findViewById(R.id.spinner_subject);
+		EditText hwEdit = (EditText) findViewById(R.id.editText_homework);
 
 		// Close keyboard
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(homework_edit.getWindowToken(), 0);
+		imm.hideSoftInputFromWindow(hwEdit.getWindowToken(), 0);
 
 		// If nothing filled in -> cancel
-		if (homework_edit.getText().toString().length() == 0) {
-			final String enter = getString(R.string.toast_have2enter);
-			homework_edit.setError(enter);
+		if (hwEdit.getText().toString().length() == 0) {
+			hwEdit.setError(getString(R.string.toast_have2enter));
 			return;
 		}
 
 		// Urgent?
 		String urgent;
-		CheckBox urgent_check = (CheckBox) findViewById(R.id.checkBox_urgent);
-		if ((urgent_check).isChecked()) {
-			urgent = getString(R.string.action_urgent) + " ";
-		} else
+		CheckBox urgentCheck = (CheckBox) findViewById(R.id.checkBox_urgent);
+		if (urgentCheck.isChecked())
+			urgent = getString(R.string.action_urgent);
+		else
 			urgent = "";
 
 		// Get filled in data
-		String subject = subject_spin.getSelectedItem().toString();
-		String homework = homework_edit.getText().toString();
+		String subject = subSpin.getSelectedItem().toString();
+		String homework = hwEdit.getText().toString();
 
 		// Entry in database
 		Homework.add(this, urgent, subject, homework, until);
 
-		this.finish();
+		finish();
 	}
 
 }

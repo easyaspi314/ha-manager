@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,16 +28,17 @@ import de.nico.ha_manager.helper.Utils;
 
 public class Main extends Activity {
 
-	ArrayList<HashMap<String, String>> HomeworkList = new ArrayList<HashMap<String, String>>();
+	ArrayList<HashMap<String, String>> hwArray = new ArrayList<HashMap<String, String>>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list);
 		setTitle(getString(R.string.title_homework));
-
 		update();
-		checkSubjects(this);
+
+		if (!(Subject.get(this).length > 0))
+			Subject.setDefault(this);
 
 	}
 
@@ -61,17 +61,15 @@ public class Main extends Activity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.action_settings:
-			startActivityForResult(new Intent(getApplicationContext(),
-					Preferences.class), 1);
+			startActivity(new Intent(this, Preferences.class));
 			return true;
 
 		case R.id.action_delete:
-			deleteAll(this);
+			deleteAll();
 			return true;
 
 		case R.id.action_add:
-			startActivityForResult(new Intent(getApplicationContext(),
-					AddHomework.class), 1);
+			startActivity(new Intent(this, AddHomework.class));
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -94,7 +92,7 @@ public class Main extends Activity {
 			return true;
 		}
 		if (item.getTitle() == getString(R.string.dialog_delete)) {
-			deleteOne(HomeworkList, info.position);
+			deleteOne(hwArray, info.position);
 			update();
 			return true;
 		}
@@ -104,28 +102,22 @@ public class Main extends Activity {
 
 	private void update() {
 		// Remove old content
-		HomeworkList.clear();
+		hwArray.clear();
 		Source s = new Source(this);
 
 		// Get content from SQLite Database
 		try {
 			s.open();
-			HomeworkList = s.getAllEntries();
+			hwArray = s.get();
 			s.close();
 		} catch (Exception ex) {
-			Log.e("Update Homework List", ex.toString());
+			Log.e("Update Homework List:", ex.toString());
 		}
 
-		ListView lHomework = (ListView) findViewById(R.id.listView_main);
-		lHomework.setAdapter(Utils.entryAdapter(this, HomeworkList));
-		registerForContextMenu(lHomework);
+		ListView hwList = (ListView) findViewById(R.id.listView_main);
+		hwList.setAdapter(Utils.entryAdapter(this, hwArray));
+		registerForContextMenu(hwList);
 
-	}
-
-	private void checkSubjects(Context con) {
-		if (!(Subject.get(con).length > 0)) {
-			Subject.setDefault(con);
-		}
 	}
 
 	private void deleteOne(ArrayList<HashMap<String, String>> ArHa, int pos) {
@@ -134,47 +126,42 @@ public class Main extends Activity {
 		final String currentID = "ID = " + ArHa.get(pos).get("ID");
 		SimpleAdapter alertAdapter = Utils.entryAdapter(this, tempArray);
 
-		AlertDialog.Builder delete_it = (new AlertDialog.Builder(this))
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+		alertDialog
 				.setTitle(getString(R.string.dialog_delete))
 				.setAdapter(alertAdapter, null)
 				.setPositiveButton((getString(android.R.string.yes)),
 						new DialogInterface.OnClickListener() {
 
 							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
+							public void onClick(DialogInterface d, int i) {
 								Source s = new Source(Main.this);
 								s.delete_item("HOMEWORK", currentID, null);
 								update();
 
 							}
 
-						});
-
-		delete_it.setNegativeButton((getString(android.R.string.no)), null);
-
-		AlertDialog delete_dialog = delete_it.create();
-		delete_dialog.show();
+						})
+				.setNegativeButton((getString(android.R.string.no)), null)
+				.show();
 	}
 
-	private void deleteAll(final Context c) {
-		AlertDialog.Builder delete_it = new AlertDialog.Builder(c);
-		delete_it
+	private void deleteAll() {
+		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+		alertDialog
 				.setTitle(getString(R.string.dialog_delete))
 				.setMessage(getString(R.string.dialog_really_delete_hw))
 				.setPositiveButton((getString(android.R.string.yes)),
 						new DialogInterface.OnClickListener() {
 
 							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								Homework.delete_all(c);
+							public void onClick(DialogInterface d, int i) {
+								Homework.deleteAll(Main.this);
 								update();
 							}
 						})
-				.setNegativeButton((c.getString(android.R.string.no)), null);
-		AlertDialog delete_dialog = delete_it.create();
-		delete_dialog.show();
+				.setNegativeButton((getString(android.R.string.no)), null)
+				.show();
 	}
 
 }
