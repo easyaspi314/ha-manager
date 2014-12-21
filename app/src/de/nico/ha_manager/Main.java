@@ -138,8 +138,7 @@ public class Main extends Activity {
 
 							@Override
 							public void onClick(DialogInterface d, int i) {
-								Source s = new Source(Main.this);
-								s.delete_item("HOMEWORK", currentID, null);
+								Homework.deleteOne(Main.this, currentID);
 								update();
 
 							}

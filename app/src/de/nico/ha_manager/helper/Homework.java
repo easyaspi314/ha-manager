@@ -26,6 +26,11 @@ public class Homework {
 		s.delete_item("HOMEWORK", null, null);
 	}
 
+	public static void deleteOne(Context c, String ID) {
+		Source s = new Source(c);
+		s.delete_item("HOMEWORK", ID, null);
+	}
+
 	public static void add(Context c, String urgent, String subject,
 			String homework, String until) {
 		try {
