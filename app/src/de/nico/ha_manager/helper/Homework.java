@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import de.nico.ha_manager.R;
@@ -23,21 +21,9 @@ import de.nico.ha_manager.database.Source;
 
 public class Homework {
 
-	private static SharedPreferences prefs;
-	private static SharedPreferences.Editor editor;
-
-	private static void initPrefs(Context c) {
-		prefs = PreferenceManager.getDefaultSharedPreferences(c);
-	}
-
 	public static void deleteAll(final Context c) {
 		Source s = new Source(c);
 		s.delete_item("HOMEWORK", null, null);
-
-		initPrefs(c);
-		editor = prefs.edit();
-		editor.putInt("hwid_size", 0);
-		editor.commit();
 	}
 
 	public static void add(Context c, String urgent, String subject,
