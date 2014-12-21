@@ -25,7 +25,6 @@
   <string name="pref_subjects_reset_summary">ریست کردن فهرست عناوین به مقادیر پیش‌فرض</string>
   <string name="pref_about">درباره</string>
   <string name="pref_about_credits">پدیدآورندگان</string>
-  <string name="pref_about_credits_summary">کپی‌لفت ۲۰۱۴: جی‌پی‌ال ورژن۲ یا بعدا\nعمدتا توسط نیکو آلت توسعه یافته</string>
   <string name="pref_about_current_version">نسخه‌ی جاری</string>
   <string name="pref_feedback">ارسال بازخورد</string>
   <string name="pref_feedback_share">به‌اشتراک‌گذاری</string>
