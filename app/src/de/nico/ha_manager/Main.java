@@ -83,7 +83,7 @@ public class Main extends Activity {
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		// menu.add(0, v.getId(), 0, getString(R.string.dialog_edit));
+		menu.add(0, v.getId(), 0, getString(R.string.dialog_edit));
 		menu.add(0, v.getId(), 1, getString(R.string.dialog_delete));
 	}
 
@@ -92,6 +92,7 @@ public class Main extends Activity {
 		final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
 				.getMenuInfo();
 		if (item.getTitle() == getString(R.string.dialog_edit)) {
+			editOne(hwArray, info.position);
 			return true;
 		}
 		if (item.getTitle() == getString(R.string.dialog_delete)) {
@@ -121,6 +122,18 @@ public class Main extends Activity {
 		hwList.setAdapter(Utils.entryAdapter(this, hwArray));
 		registerForContextMenu(hwList);
 
+	}
+
+	private void editOne(ArrayList<HashMap<String, String>> ArHa, int pos) {
+		final String currentID = "ID = " + ArHa.get(pos).get("ID");
+		Intent intent = new Intent(this, AddHomework.class);
+		Bundle mBundle = new Bundle();
+		mBundle.putString(Source.allColumns[0], currentID);
+		for (int i = 1; i < 5; i++)
+			mBundle.putString(Source.allColumns[i],
+					ArHa.get(pos).get(Source.allColumns[i]));
+		intent.putExtras(mBundle);
+		startActivity(intent);
 	}
 
 	private void deleteOne(ArrayList<HashMap<String, String>> ArHa, int pos) {

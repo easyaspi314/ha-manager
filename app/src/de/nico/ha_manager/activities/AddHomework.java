@@ -7,6 +7,7 @@ package de.nico.ha_manager.activities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -15,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -28,6 +30,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import de.nico.ha_manager.R;
+import de.nico.ha_manager.database.Source;
 import de.nico.ha_manager.helper.Homework;
 import de.nico.ha_manager.helper.Subject;
 
@@ -43,6 +46,8 @@ public class AddHomework extends Activity {
 	// 0 is year, 1 is month and 2 is day
 	int[] date;
 
+	String ID = null;
+
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +59,7 @@ public class AddHomework extends Activity {
 
 		setTextViewUntil(date);
 		setSpinner();
+		handleIntent(getIntent());
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
 			if (!(getLarge(this)))
@@ -102,6 +108,54 @@ public class AddHomework extends Activity {
 
 		return date;
 
+	}
+
+	private void handleIntent(Intent intent) {
+		Bundle extras = intent.getExtras();
+		if (extras != null) {
+			// Set ID
+			ID = extras.getString(Source.allColumns[0]);
+
+			// Set Urgent
+			if (!extras.getString(Source.allColumns[1]).equals("")) {
+				CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox_urgent);
+				checkBox.setChecked(true);
+			}
+
+			// Set Subject
+			String subject = extras.getString(Source.allColumns[2]);
+			Spinner subSpin = (Spinner) findViewById(R.id.spinner_subject);
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, subjects);
+			// Get position in subject list
+			int spinnerPostion = adapter.getPosition(subject);
+			// If subject is not in subject list
+			if (spinnerPostion == -1) {
+				int size = subjects.length;
+				String[] tmp = new String[size + 1];
+				for (int i = 0; i < size; i++) {
+					tmp[i] = subjects[i];
+				}
+				tmp[size] = subject;
+				Arrays.sort(tmp);
+
+				subjects = tmp;
+				setSpinner();
+				adapter = new ArrayAdapter<String>(this,
+						android.R.layout.simple_spinner_item, subjects);
+				spinnerPostion = adapter.getPosition(subject);
+			}
+
+			subSpin.setSelection(spinnerPostion);
+
+			// Set Homework
+			EditText hwEdit = (EditText) findViewById(R.id.editText_homework);
+			hwEdit.setText(extras.getString(Source.allColumns[3]));
+
+			// Set Until
+			Button untilButton = (Button) findViewById(R.id.button_until);
+			untilButton.setText(extras.getString(Source.allColumns[4]));
+		}
 	}
 
 	private void setTextViewUntil(int[] date) {
@@ -178,7 +232,7 @@ public class AddHomework extends Activity {
 		String homework = hwEdit.getText().toString();
 
 		// Entry in database
-		Homework.add(this, urgent, subject, homework, until);
+		Homework.add(this, ID, urgent, subject, homework, until);
 
 		finish();
 	}

@@ -31,12 +31,12 @@ public class Homework {
 		s.delete_item("HOMEWORK", ID, null);
 	}
 
-	public static void add(Context c, String urgent, String subject,
+	public static void add(Context c, String ID, String urgent, String subject,
 			String homework, String until) {
 		try {
 			Source s = new Source(c);
 			s.open();
-			s.createEntry(urgent, subject, homework, until);
+			s.createEntry(c, ID, urgent, subject, homework, until);
 			s.close();
 		} catch (Exception ex) {
 			Log.e("Database:", ex.toString());

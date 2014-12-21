@@ -50,6 +50,7 @@
     <!-- Dialogs -->
     <string name="dialog_addSubject">Fach hinzufügen</string>
     <string name="dialog_addSubject_message">Welches Fach möchtest du hinzufügen?</string>
+    <string name="dialog_edit">Bearbeiten</string>
     <string name="dialog_delete">Löschen</string>
     <string name="dialog_really_delete_hw">Willst du wirklich alle Hausaufgaben löschen?</string>
     <string name="dialog_really_delete_subs">Willst du wirklich alle Fächer löschen?</string>

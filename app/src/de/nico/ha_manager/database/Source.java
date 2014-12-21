@@ -13,6 +13,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import de.nico.ha_manager.helper.Homework;
 
 public class Source {
 
@@ -35,8 +36,8 @@ public class Source {
 		dbHelper.close();
 	}
 
-	public void createEntry(String urgent, String subject, String homework,
-			String until) {
+	public void createEntry(Context c, String ID, String urgent,
+			String subject, String homework, String until) {
 		ContentValues values = new ContentValues();
 		values.put("URGENT", urgent);
 		values.put("SUBJECT", subject);
@@ -44,6 +45,10 @@ public class Source {
 		values.put("UNTIL", until);
 
 		String insertId = "ID = " + database.insert("HOMEWORK", null, values);
+		if (ID != null) {
+			Homework.deleteOne(c, ID);
+			insertId = ID;
+		}
 
 		Cursor cursor = database.query("HOMEWORK", allColumns, insertId, null,
 				null, null, null);
