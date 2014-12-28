@@ -5,6 +5,12 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <PreferenceCategory android:title="@string/app_name" >
+        <PreferenceScreen
+            android:key="pref_app_language"
+            android:title="@string/pref_language" >
+        </PreferenceScreen>
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_homework" >
         <PreferenceScreen
             android:key="pref_importexport_export"

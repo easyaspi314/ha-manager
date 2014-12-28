@@ -1,4 +1,4 @@
-package de.nico.ha_manager;
+package de.nico.ha_manager.activities;
 
 /* 
  * Author: Nico Alt
@@ -22,8 +22,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import de.nico.ha_manager.activities.AddHomework;
-import de.nico.ha_manager.activities.Preferences;
+import de.nico.ha_manager.R;
 import de.nico.ha_manager.database.Source;
 import de.nico.ha_manager.helper.Homework;
 import de.nico.ha_manager.helper.Subject;

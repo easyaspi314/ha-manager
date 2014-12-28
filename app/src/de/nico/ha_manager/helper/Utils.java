@@ -12,10 +12,16 @@ import java.util.Locale;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.SimpleAdapter;
 import de.nico.ha_manager.R;
@@ -97,6 +103,50 @@ public class Utils {
 		}
 
 		return buildInfo;
+	}
+
+	public static void langSpinner(final Context c) {
+		AlertDialog.Builder b = new Builder(c);
+		// Current translations of HW-Manager
+		final String[] langs = { "cs", "de", "en", "hu", "fa" };
+		// Items with translation's language
+		String[] items = new String[6];
+		items[0] = c.getString(R.string.pref_language_default);
+		for (int i = 1; i < 6; i++) {
+			Locale appLoc = new Locale(langs[i - 1]);
+			items[i] = appLoc.getDisplayLanguage(appLoc);
+		}
+		b.setTitle(c.getString(R.string.pref_language));
+		b.setItems(items, new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				SharedPreferences prefs = PreferenceManager
+						.getDefaultSharedPreferences(c);
+				SharedPreferences.Editor editor = prefs.edit();
+
+				if (which == 0) {
+					editor.putString("locale_override", "");
+					editor.commit();
+				} else {
+					editor.putString("locale_override", langs[which - 1]);
+					editor.commit();
+				}
+				restart(c);
+			}
+
+		});
+
+		b.show();
+	}
+
+	public static void restart(Context c) {
+		Intent i = c.getPackageManager().getLaunchIntentForPackage(
+				c.getPackageName());
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		System.exit(0);
+		c.startActivity(i);
 	}
 
 }

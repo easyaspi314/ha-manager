@@ -5,8 +5,11 @@ package de.nico.ha_manager.activities;
  * See the file "LICENSE.txt" for the full license governing this code.
  */
 
+import java.util.Locale;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,14 +28,18 @@ import de.nico.ha_manager.helper.Utils;
 
 public class Preferences extends PreferenceActivity {
 
+	private static Context c;
+
 	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
+		c = this;
 
 		setBuildInfo();
+		setLanguage();
 		checkPreferences();
 
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
@@ -64,17 +71,43 @@ public class Preferences extends PreferenceActivity {
 	}
 
 	@SuppressWarnings("deprecation")
+	private void setLanguage() {
+		Preference language = findPreference("pref_app_language");
+
+		// Locale of HW-Manager
+		Locale appLoc = getResources().getConfiguration().locale;
+
+		// Locale of device
+		Locale devLoc = Locale.getDefault();
+
+		if (devLoc.equals(appLoc)) {
+			language.setSummary(getString(R.string.pref_language_default));
+		} else {
+			language.setSummary(appLoc.getDisplayLanguage(appLoc));
+		}
+	}
+
+	@SuppressWarnings("deprecation")
 	private void checkPreferences() {
+		Preference language = findPreference("pref_app_language");
+		language.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				Utils.langSpinner(c);
+				return true;
+			}
+		});
+
 		Preference subjects_add = findPreference("subjects_add");
 		subjects_add
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						final EditText input = new EditText(Preferences.this);
+						final EditText input = new EditText(c);
 						input.setInputType(InputType.TYPE_CLASS_TEXT
 								| InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 						AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-								Preferences.this);
+								c);
 						alertDialog
 								.setTitle(getString(R.string.dialog_addSubject))
 								.setMessage(
@@ -86,7 +119,7 @@ public class Preferences extends PreferenceActivity {
 											@Override
 											public void onClick(
 													DialogInterface d, int i) {
-												Subject.add(Preferences.this,
+												Subject.add(c,
 														input.getText()
 																.toString());
 											}
@@ -103,7 +136,7 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						startActivity(new Intent(Preferences.this,
+						startActivity(new Intent(c,
 								Subjects.class));
 						return true;
 					}
@@ -114,7 +147,7 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						startActivity(new Intent(Preferences.this,
+						startActivity(new Intent(c,
 								SubjectOffers.class));
 						return true;
 					}
@@ -126,7 +159,7 @@ public class Preferences extends PreferenceActivity {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-								Preferences.this);
+								c);
 						alertDialog
 								.setTitle(getString(R.string.dialog_delete))
 								.setMessage(
@@ -138,7 +171,7 @@ public class Preferences extends PreferenceActivity {
 											@Override
 											public void onClick(
 													DialogInterface d, int i) {
-												Subject.setDefault(Preferences.this);
+												Subject.setDefault(c);
 											}
 
 										})
@@ -154,7 +187,7 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						return Utils.shareApp(Preferences.this);
+						return Utils.shareApp(c);
 					}
 				});
 
@@ -164,7 +197,7 @@ public class Preferences extends PreferenceActivity {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-								Preferences.this);
+								c);
 						alertDialog
 								.setTitle(
 										getString(R.string.pref_homework_export))
@@ -177,7 +210,7 @@ public class Preferences extends PreferenceActivity {
 											@Override
 											public void onClick(
 													DialogInterface d, int i) {
-												Homework.exportIt(Preferences.this);
+												Homework.exportIt(c);
 											}
 
 										})
@@ -196,7 +229,7 @@ public class Preferences extends PreferenceActivity {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
 						AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-								Preferences.this);
+								c);
 						alertDialog
 								.setTitle(
 										getString(R.string.pref_homework_import))
@@ -209,7 +242,7 @@ public class Preferences extends PreferenceActivity {
 											@Override
 											public void onClick(
 													DialogInterface d, int i) {
-												Homework.importIt(Preferences.this);
+												Homework.importIt(c);
 											}
 
 										})
