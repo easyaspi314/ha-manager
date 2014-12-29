@@ -155,6 +155,7 @@ public class AddHomework extends Activity {
 			// Set Until
 			Button untilButton = (Button) findViewById(R.id.button_until);
 			untilButton.setText(extras.getString(Source.allColumns[4]));
+			until = extras.getString(Source.allColumns[4]);
 		}
 	}
 
