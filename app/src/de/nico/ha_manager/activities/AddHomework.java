@@ -78,7 +78,7 @@ public class AddHomework extends Activity {
 
 		// If Large or XLarge
 		if (screenLayout == 3 || screenLayout == 4)
-			return false;
+			return true;
 		return true;
 	}
 
