@@ -4,3 +4,4 @@ A project célja, hogy könnyen lehessen kezelni a házi feladatokat és ne nőj
 Az alkalmazás nyílt forráskódú, részt vehetsz benne akkor is ha nem vagy programozó. 
 
 A kódja itt található:
+https://github.com/AltNico/ha-manager

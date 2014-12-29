@@ -1,7 +1,7 @@
 Mit dem Hausaufgaben-Manager kannst du deinen Schulalltag vereinfachen und hast immer den Überblick über deine Hausaufgaben.
 Das Ziel dieses Projekt ist es, so einfach wie möglich Hausaufgaben verwalten zu können und dabei nicht überladen zu wirken wie manch andere Apps.
 
-Die App ist Open Source, du kannst dich also jederzeit beteiligen, egal ob du programmieren kannst oder nicht. Auch Übersetzungen in andere Sprachen helfen dem Projekt!
+Die App ist Open Source, du kannst dich also jederzeit beteiligen, egal ob du programmieren kannst oder nicht. 
 
 Den Quellcode findest du hier:
 GitHub/AltNico
