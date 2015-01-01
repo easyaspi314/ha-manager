@@ -1,5 +1,5 @@
                      LICENSE of 'HA-Manager':
-                       2013 - 2014 Nico Alt
+                       2013 - 2015 Nico Alt
                    
                    GNU GENERAL PUBLIC LICENSE
                      Version 3, 29 June 2007
