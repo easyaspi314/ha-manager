@@ -69,6 +69,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.nico.ha_manager.activities.Preferences" />
         </activity>
+
+        <!-- About -->
+        <activity
+            android:name="de.nico.ha_manager.activities.About"
+            android:label="@string/title_about" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.nico.ha_manager.activities.Preferences" />
+        </activity>
     </application>
 
 </manifest>

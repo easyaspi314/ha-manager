@@ -119,9 +119,8 @@ public class Preferences extends PreferenceActivity {
 											@Override
 											public void onClick(
 													DialogInterface d, int i) {
-												Subject.add(c,
-														input.getText()
-																.toString());
+												Subject.add(c, input.getText()
+														.toString());
 											}
 										})
 								.setNegativeButton(
@@ -136,8 +135,7 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						startActivity(new Intent(c,
-								Subjects.class));
+						startActivity(new Intent(c, Subjects.class));
 						return true;
 					}
 				});
@@ -147,8 +145,7 @@ public class Preferences extends PreferenceActivity {
 				.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 					@Override
 					public boolean onPreferenceClick(Preference preference) {
-						startActivity(new Intent(c,
-								SubjectOffers.class));
+						startActivity(new Intent(c, SubjectOffers.class));
 						return true;
 					}
 				});
@@ -254,5 +251,14 @@ public class Preferences extends PreferenceActivity {
 					}
 
 				});
+
+		Preference about = findPreference("pref_about");
+		about.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				startActivity(new Intent(c, About.class));
+				return true;
+			}
+		});
 	}
 }

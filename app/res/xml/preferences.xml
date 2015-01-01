@@ -5,12 +5,6 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="@string/app_name" >
-        <PreferenceScreen
-            android:key="pref_app_language"
-            android:title="@string/pref_language" >
-        </PreferenceScreen>
-    </PreferenceCategory>
     <PreferenceCategory android:title="@string/title_homework" >
         <PreferenceScreen
             android:key="pref_importexport_export"
@@ -70,14 +64,15 @@
             </intent>
         </PreferenceScreen>
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_about" >
+    <PreferenceCategory android:title="@string/app_name" >
         <PreferenceScreen
-            android:summary="@string/pref_about_credits_summary"
-            android:title="@string/pref_about_credits" >
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://altnico.github.io/projects.html#HW-Manager" />
+            android:key="pref_app_language"
+            android:title="@string/pref_language" >
         </PreferenceScreen>
+        <PreferenceScreen
+            android:key="pref_about"
+            android:summary="@string/about_us_copyright"
+            android:title="@string/pref_about_credits" />
         <PreferenceScreen
             android:key="pref_about_current_version"
             android:title="@string/pref_about_current_version" >
