@@ -1,0 +1,7 @@
+Con el HW-Manager puede hacer más fácil su día y mantener la visión general sobre sus deberes.
+El objetivo del proyecto es mantener el fácil de gestionar tus tareas y no ser hinchado como algunas otras aplicaciones.
+
+La aplicación es open source, así que puede participar, incluso si no eres un programador. 
+
+Usted puede encontrar el código aquí:
+https://github.com/AltNico/ha-manager

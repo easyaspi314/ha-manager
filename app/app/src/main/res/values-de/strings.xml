@@ -27,6 +27,7 @@
     <string name="pref_subjects_overview_summary">Eine Liste mit allen Fächern</string>
     <string name="pref_subjects_reset">Zurücksetzen</string>
     <string name="pref_subjects_reset_summary">Setze die Fächerliste auf den Ursprungszustand zurück</string>
+    <string name="pref_about">Über</string>
     <string name="pref_about_credits">Credits</string>
     <string name="pref_about_current_version">Aktuelle Version</string>
     <string name="pref_feedback">Feedback</string>

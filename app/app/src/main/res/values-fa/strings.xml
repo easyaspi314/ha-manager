@@ -27,6 +27,7 @@
     <string name="pref_subjects_overview_summary">فهرست دربردارنده‌ی همه‌ی عناوین</string>
     <string name="pref_subjects_reset">ریست</string>
     <string name="pref_subjects_reset_summary">ریست کردن فهرست عناوین به مقادیر پیش‌فرض</string>
+    <string name="pref_about">درباره</string>
     <string name="pref_about_credits">پدیدآورندگان</string>
     <string name="pref_about_current_version">نسخه‌ی جاری</string>
     <string name="pref_feedback">ارسال بازخورد</string>
