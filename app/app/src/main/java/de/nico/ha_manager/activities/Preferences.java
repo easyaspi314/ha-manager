@@ -131,26 +131,6 @@ public class Preferences extends PreferenceActivity {
                     }
                 });
 
-        Preference subjects_overview = findPreference("subjects_overview");
-        subjects_overview
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        startActivity(new Intent(c, Subjects.class));
-                        return true;
-                    }
-                });
-
-        Preference subjects_offers = findPreference("subjects_offers");
-        subjects_offers
-                .setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        startActivity(new Intent(c, SubjectOffers.class));
-                        return true;
-                    }
-                });
-
         Preference subjects_reset = findPreference("subjects_reset");
         subjects_reset
                 .setOnPreferenceClickListener(new OnPreferenceClickListener() {
@@ -252,14 +232,5 @@ public class Preferences extends PreferenceActivity {
                     }
 
                 });
-
-        Preference about = findPreference("pref_about");
-        about.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(c, About.class));
-                return true;
-            }
-        });
     }
 }

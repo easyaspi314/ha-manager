@@ -18,7 +18,11 @@
         <Preference
             android:key="subjects_overview"
             android:summary="@string/pref_subjects_overview_summary"
-            android:title="@string/pref_subjects_overview" />
+            android:title="@string/pref_subjects_overview">
+            <intent
+                android:targetClass="de.nico.ha_manager.activities.Subjects"
+                android:targetPackage="de.nico.ha_manager" />
+        </Preference>
         <Preference
             android:key="subjects_add"
             android:onClick="addsubject"
@@ -27,7 +31,11 @@
         <Preference
             android:key="subjects_offers"
             android:summary="@string/pref_offers_overview_summary"
-            android:title="@string/pref_offers_overview" />
+            android:title="@string/pref_offers_overview">
+            <intent
+                android:targetClass="de.nico.ha_manager.activities.SubjectOffers"
+                android:targetPackage="de.nico.ha_manager" />
+        </Preference>
         <Preference
             android:key="subjects_reset"
             android:summary="@string/pref_subjects_reset_summary"
@@ -68,7 +76,11 @@
         <PreferenceScreen
             android:key="pref_about"
             android:summary="@string/about_us_copyright"
-            android:title="@string/pref_about_credits" />
+            android:title="@string/pref_about_credits">
+            <intent
+                android:targetClass="de.nico.ha_manager.activities.About"
+                android:targetPackage="de.nico.ha_manager" />
+        </PreferenceScreen>
         <PreferenceScreen
             android:key="pref_about_current_version"
             android:title="@string/pref_about_current_version">
