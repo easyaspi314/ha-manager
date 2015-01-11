@@ -8,7 +8,6 @@ package de.nico.ha_manager.helper;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import java.util.Arrays;
 
@@ -56,7 +55,7 @@ public class Subject {
         editor.commit();
 
         String sAdded = c.getString(R.string.added);
-        Toast.makeText(c, subject + " " + sAdded, Toast.LENGTH_SHORT).show();
+        Utils.makeShortToast(c, subject + " " + sAdded);
     }
 
     public static void setDefault(Context c) {

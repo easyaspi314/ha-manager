@@ -32,6 +32,14 @@ import de.nico.ha_manager.database.Source;
 
 public class Utils {
 
+    public static void makeShortToast(Context c, String msg) {
+        Toast.makeText(c, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void makeLongToast(Context c, String msg) {
+        Toast.makeText(c, msg, Toast.LENGTH_LONG).show();
+    }
+
     public static ArrayList<HashMap<String, String>> tempArray(
             ArrayList<HashMap<String, String>> ArHa, int pos) {
 
@@ -140,7 +148,7 @@ public class Utils {
                     editor.putString("locale_override", langs[which - 1]);
                     editor.commit();
                 }
-                Toast.makeText(c, c.getString(R.string.restart), Toast.LENGTH_LONG).show();
+                makeLongToast(c, c.getString(R.string.restart));
             }
 
         });

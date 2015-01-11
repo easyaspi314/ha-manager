@@ -8,7 +8,6 @@ package de.nico.ha_manager.helper;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,11 +49,10 @@ public class Homework {
         File dir = new File(Environment.getExternalStorageDirectory() + "/"
                 + c.getString(R.string.app_name));
         if (!(dir.exists())) {
-            Toast.makeText(
+            Utils.makeLongToast(
                     c,
                     c.getString(R.string.toast_nobackup)
-                            + c.getString(R.string.app_name), Toast.LENGTH_LONG)
-                    .show();
+                            + c.getString(R.string.app_name));
             return;
         }
 
@@ -66,11 +64,10 @@ public class Homework {
 
         // Check if Database exists
         if (!(srcDB.exists())) {
-            Toast.makeText(
+            Utils.makeLongToast(
                     c,
                     c.getString(R.string.toast_nobackup)
-                            + c.getString(R.string.app_name), Toast.LENGTH_LONG)
-                    .show();
+                            + c.getString(R.string.app_name));
             return;
 
         }
@@ -87,19 +84,16 @@ public class Homework {
 
         } catch (FileNotFoundException e) {
             Log.e("FileNotFoundException", e.toString());
-            Toast.makeText(c, c.getString(R.string.toast_import_fail),
-                    Toast.LENGTH_SHORT).show();
+            Utils.makeShortToast(c, c.getString(R.string.toast_import_fail));
             return;
 
         } catch (IOException e) {
             Log.e("IOException", e.toString());
-            Toast.makeText(c, c.getString(R.string.toast_import_fail),
-                    Toast.LENGTH_SHORT).show();
+            Utils.makeShortToast(c, c.getString(R.string.toast_import_fail));
             return;
 
         }
-        Toast.makeText(c, c.getString(R.string.toast_import_success),
-                Toast.LENGTH_SHORT).show();
+        Utils.makeShortToast(c, c.getString(R.string.toast_import_success));
     }
 
     public static void exportIt(Context c) {
@@ -127,19 +121,16 @@ public class Homework {
 
         } catch (FileNotFoundException e) {
             Log.e("FileNotFoundException", e.toString());
-            Toast.makeText(c, c.getString(R.string.toast_export_fail),
-                    Toast.LENGTH_SHORT).show();
+            Utils.makeShortToast(c, c.getString(R.string.toast_export_fail));
             return;
 
         } catch (IOException e) {
             Log.e("IOException", e.toString());
-            Toast.makeText(c, c.getString(R.string.toast_export_fail),
-                    Toast.LENGTH_SHORT).show();
+            Utils.makeShortToast(c, c.getString(R.string.toast_export_fail));
             return;
 
         }
-        Toast.makeText(c, c.getString(R.string.toast_export_success),
-                Toast.LENGTH_SHORT).show();
+        Utils.makeShortToast(c, c.getString(R.string.toast_export_success));
     }
 
 }
