@@ -18,6 +18,7 @@ import android.content.pm.PackageInfo;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -139,20 +140,12 @@ public class Utils {
                     editor.putString("locale_override", langs[which - 1]);
                     editor.commit();
                 }
-                restart(c);
+                Toast.makeText(c, c.getString(R.string.restart), Toast.LENGTH_LONG).show();
             }
 
         });
 
         b.show();
-    }
-
-    private static void restart(Context c) {
-        Intent i = c.getPackageManager().getLaunchIntentForPackage(
-                c.getPackageName());
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        System.exit(0);
-        c.startActivity(i);
     }
 
 }
